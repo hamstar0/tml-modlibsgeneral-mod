@@ -1,0 +1,5 @@
+displayName = Mod Libs - Libraries (General)
+author = hamstar
+version = 1.0.0
+modReferences = ModLibsCore@1.0.0
+buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
