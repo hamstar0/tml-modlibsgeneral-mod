@@ -1,4 +1,4 @@
-displayName = Mod Libs - Libraries (General)
+displayName = Mod Libs - General Libraries & Services
 author = hamstar
 version = 1.0.0
 modReferences = ModLibsCore@1.0.0

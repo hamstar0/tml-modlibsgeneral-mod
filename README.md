@@ -1,4 +1,4 @@
-# Mod Libs - Libraries (General)
+# Mod Libs - General Libraries & Services
 
 Supplies a library of helpful methods (mostly `public static`) and "services" for general use.
 
