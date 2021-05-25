@@ -1,10 +1,11 @@
 ﻿using System;
 using Terraria;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Audio;
 using ModLibsCore.Classes.Loadable;
 using ModLibsCore.Services.Hooks.LoadHooks;
 using ModLibsCore.Services.Timers;
-using Terraria.ModLoader;
+
 
 namespace ModLibsGeneral.Libraries.Audio {
 	/// @private

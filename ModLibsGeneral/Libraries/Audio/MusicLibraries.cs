@@ -1,6 +1,7 @@
 ﻿using System;
 using Terraria.ModLoader;
 
+
 namespace ModLibsGeneral.Libraries.Audio {
 	/// <summary>
 	/// Assorted static "helper" functions pertaining to game music.
