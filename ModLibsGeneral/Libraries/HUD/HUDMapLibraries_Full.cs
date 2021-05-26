@@ -41,7 +41,7 @@ namespace ModLibsGeneral.Libraries.HUD {
 		/// boundaries.</returns>
 		public static (Vector2 ScreenPosition, bool IsOnScreen) GetFullMapPositionAsScreenPosition( Rectangle worldArea ) {    //Main.mapFullscreen
 			float mapScale = HUDMapLibraries.GetFullMapScale();
-			//var scrSize = UIHelpers.GetScreenSize();
+			//var scrSize = UILibraries.GetScreenSize();
 			var scrSize = UIZoomLibraries.GetScreenSize( null, false );
 
 			//float offscrLitX = 10f * mapScale;

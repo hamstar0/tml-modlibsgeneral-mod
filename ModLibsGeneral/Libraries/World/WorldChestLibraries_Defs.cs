@@ -116,7 +116,7 @@ namespace ModLibsGeneral.Libraries.World {
 
 	/// <summary></summary>
 	public struct ChestTypeDefinition {
-		/// <summary>See `TileFrameHelpers.VanillaChestTypeNamesByFrame` (value is `chestTile.frameX / 36`).</summary>
+		/// <summary>See `TileFrameLibraries.VanillaChestTypeNamesByFrame` (value is `chestTile.frameX / 36`).</summary>
 		public (int? TileType, int? TileFrame)[] Tiles;
 
 

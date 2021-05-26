@@ -73,7 +73,7 @@ namespace ModLibsGeneral.Libraries.HUD {
 			Vector2 screenOffset = Vector2.Zero;
 
 			if( applyGameZoom ) {
-				//var worldFrame = UIHelpers.GetWorldFrameOfScreen();
+				//var worldFrame = UILibraries.GetWorldFrameOfScreen();
 				var worldFrame = UIZoomLibraries.GetWorldFrameOfScreen( null, false );
 				screenOffset.X = worldFrame.X - Main.screenPosition.X;
 				screenOffset.Y = worldFrame.Y - Main.screenPosition.Y;

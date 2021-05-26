@@ -1,8 +1,8 @@
-﻿using ModLibsCore.Classes.Errors;
-using ModLibsCore.Libraries.Debug;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Terraria;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace ModLibsGeneral.Libraries.Recipes {
@@ -44,27 +44,6 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			if( !reqAcceptedGrps1.SetEquals( reqAcceptedGrps2 ) ) { return false; }
 
 			return true;
-		}
-
-
-		////////////////
-
-		/// @private
-		[Obsolete( "use RecipeFinderHelpers", true )]
-		public static ISet<int> GetRecipeIndexesOfItem( int itemNetID ) {
-			return RecipeFinderLibraries.GetRecipeIndexesOfItem( itemNetID );
-		}
-
-		/// @private
-		[Obsolete( "use RecipeFinderHelpers", true )]
-		public static IList<Recipe> GetRecipesOfItem( int itemNetID ) {
-			return RecipeFinderLibraries.GetRecipesOfItem( itemNetID );
-		}
-
-		/// @private
-		[Obsolete( "use RecipeFinderHelpers", true )]
-		public static ISet<int> GetRecipeIndexesUsingIngredient( int itemNetID ) {
-			return RecipeFinderLibraries.GetRecipeIndexesUsingIngredient( itemNetID );
 		}
 	}
 }

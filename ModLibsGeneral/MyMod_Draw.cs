@@ -10,7 +10,7 @@ using ModLibsGeneral.Services.Messages.Player;
 
 namespace ModLibsGeneral {
 	/// @private
-	partial class ModHelpersMod : Mod {
+	partial class ModLibsGeneralMod : Mod {
 		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
 			int idx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Mouse Text" ) );
 			if( idx == -1 ) { return; }

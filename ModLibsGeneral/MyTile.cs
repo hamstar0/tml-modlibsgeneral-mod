@@ -8,9 +8,9 @@ using ModLibsGeneral.Services.Hooks.ExtendedHooks;
 
 
 namespace ModLibsGeneral {
-	class ModHelpersTile : GlobalTile {
+	class ModLibsGeneralTile : GlobalTile {
 		public override void KillTile( int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem ) {
-//ModContent.GetInstance<ModHelpersMod>().Logger.Info( "KillTile1 "+type+" ("+i+","+j+") - "
+//ModContent.GetInstance<ModLibsGeneralMod>().Logger.Info( "KillTile1 "+type+" ("+i+","+j+") - "
 //	+"fail:"+fail+", effectOnly:"+effectOnly+", noItem:"+noItem);
 			var eth = TmlLibraries.SafelyGetInstance<ExtendedTileHooks>();
 
@@ -24,7 +24,7 @@ namespace ModLibsGeneral {
 
 
 
-	class ModHelpersWall : GlobalWall {
+	class ModLibsGeneralWall : GlobalWall {
 		public override void KillWall( int i, int j, int type, ref bool fail ) {
 			if( !Main.gameMenu || Main.netMode == NetmodeID.Server ) {
 				var eth = TmlLibraries.SafelyGetInstance<ExtendedTileHooks>();

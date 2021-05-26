@@ -1,6 +1,5 @@
 ﻿using System;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using ModLibsCore.Classes.Loadable;
 using ModLibsCore.Libraries.TModLoader;
@@ -10,8 +9,10 @@ namespace ModLibsGeneral.Libraries.World {
 	/// @private
 	public partial class WorldStateLibraries : ILoadable {
 		private bool IsDay;
-		private int HalfDaysElapsed;
+
 		private long TicksElapsed;
+
+		internal int HalfDaysElapsed;
 
 
 

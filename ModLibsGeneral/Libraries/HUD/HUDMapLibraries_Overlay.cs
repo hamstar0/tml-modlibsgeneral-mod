@@ -1,7 +1,7 @@
-﻿using ModLibsGeneral.Libraries.UI;
+﻿using System;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
+using ModLibsGeneral.Libraries.UI;
 
 
 namespace ModLibsGeneral.Libraries.HUD {
@@ -40,7 +40,7 @@ namespace ModLibsGeneral.Libraries.HUD {
 		/// boundaries.</returns>
 		public static (Vector2 ScreenPosition, bool IsOnScreen) GetOverlayMapPositionAsScreenPosition( Rectangle worldArea ) {    //Main.mapStyle == 2
 			float mapScale = Main.mapOverlayScale;
-			//var scrSize = UIHelpers.GetScreenSize();
+			//var scrSize = UILibraries.GetScreenSize();
 			var scrSize = UIZoomLibraries.GetScreenSize( null, false );
 
 			float offscrLitX = 10f * mapScale;

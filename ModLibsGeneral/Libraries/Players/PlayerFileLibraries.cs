@@ -1,9 +1,9 @@
-﻿using ModLibsCore.Libraries.Debug;
-using System;
+﻿using System;
 using System.IO;
 using Terraria;
 using Terraria.IO;
 using Terraria.Utilities;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace ModLibsGeneral.Libraries.Players {
@@ -36,7 +36,7 @@ namespace ModLibsGeneral.Libraries.Players {
 
 				LogLibraries.Log( "Player " + data.Name + " deleted." );
 			} catch( Exception e ) {
-				LogLibraries.Log( "PlayerFileHelpers.ErasePlayer - Path: " + data.Path + " - " + e.ToString() );
+				LogLibraries.Log( "PlayerFileLibraries.ErasePlayer - Path: " + data.Path + " - " + e.ToString() );
 			}
 		}
 	}

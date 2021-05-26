@@ -243,7 +243,7 @@ namespace ModLibsGeneral.Libraries.Items {
 		/// <param name="items"></param>
 		/// <param name="buyValue"></param>
 		/// <returns></returns>
-		public static ISet<int> FindPossiblePurchaseTypes( Item[] items, long buyValue ) {	// Use with NPCTownHelpers.GetCurrentShop()
+		public static ISet<int> FindPossiblePurchaseTypes( Item[] items, long buyValue ) {  // Use with NPCTownLibraries.GetCurrentShop()
 			ISet<int> possiblePurchases = new HashSet<int>();
 
 			for( int i = 0; i < items.Length; i++ ) {

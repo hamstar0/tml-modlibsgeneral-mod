@@ -108,7 +108,7 @@ namespace ModLibsGeneral.Libraries.Net {
 					}
 				} catch( Exception e ) {
 					onError?.Invoke( e );
-					//LogHelpers.Warn( e.ToString() );
+					//LogLibraries.Warn( e.ToString() );
 				}
 			} );
 		}
@@ -160,7 +160,7 @@ namespace ModLibsGeneral.Libraries.Net {
 					}
 				} catch( Exception e ) {
 					onError?.Invoke( e );
-						//LogHelpers.Warn( e.ToString() );
+					//LogLibraries.Warn( e.ToString() );
 				}
 			} );//, cts.Token );
 		}

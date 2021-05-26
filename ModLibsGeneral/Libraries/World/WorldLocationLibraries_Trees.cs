@@ -11,7 +11,7 @@ namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
 	/// Assorted static "helper" functions pertaining to locating things in the world.
 	/// </summary>
-	public partial class WorldLocationHelpers {
+	public partial class WorldLocationLibraries {
 		private static Rectangle GetGiantTreeAt( int tileX, int tileY ) {
 			int minY = 80;
 			int maxY = WorldLibraries.SurfaceLayerBottomTileY - 50;
@@ -105,7 +105,7 @@ namespace ModLibsGeneral.Libraries.World {
 						continue;
 					}
 					
-					Rectangle tree = WorldLocationHelpers.GetGiantTreeAt( x, y );
+					Rectangle tree = WorldLocationLibraries.GetGiantTreeAt( x, y );
 					trees[ tree.X ] = tree;
 
 					x = tree.X + tree.Width + 1;

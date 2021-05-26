@@ -1,7 +1,7 @@
-﻿using ModLibsGeneral.Libraries.UI;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using ModLibsGeneral.Libraries.UI;
 
 
 namespace ModLibsGeneral.Libraries.Projectiles {
@@ -37,7 +37,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 
 			Vector2 newpos;
 			if( applyZoom ) {
-				//newpos = UIHelpers.ConvertToScreenPosition( pos );
+				//newpos = UILibraries.ConvertToScreenPosition( pos );
 				newpos = UIZoomLibraries.ApplyZoomFromScreenCenter( pos - Main.screenPosition, null, false, null, null );
 			} else {
 				newpos = pos - Main.screenPosition;
@@ -296,7 +296,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 
 			float x = pos.X + texXOffset + (float)xOffset;
 			float y = pos.Y + (float)(proj.height / 2) + proj.gfxOffY;
-			Vector2 newpos = UIHelpers.UIHelpers.ConvertToScreenPosition( new Vector2( x, y ) );
+			Vector2 newpos = UILibraries.UILibraries.ConvertToScreenPosition( new Vector2( x, y ) );
 			Vector2 origin = new Vector2( texXOffset, (float)(proj.height / 2 + yOriginOffset) );
 
 			sb.Draw( tex, newpos, new Rectangle( 0, 0, tex.Width, tex.Height ), proj.GetAlpha( color ), rot, origin, scale, dir, 1.0f );

@@ -40,7 +40,7 @@ namespace ModLibsGeneral.Libraries.TModLoader.Configs {
 
 			if( Main.netMode == NetmodeID.Server ) {
 				requestChanges.Write( true );
-				requestChanges.Write( "ConfigHelpers.SyncConfig syncing..." );
+				requestChanges.Write( "ConfigLibraries.SyncConfig syncing..." );
 			}
 
 			requestChanges.Write( config.mod.Name );

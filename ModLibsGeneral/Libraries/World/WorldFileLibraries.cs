@@ -1,9 +1,9 @@
-﻿using ModLibsCore.Libraries.Debug;
-using System;
+﻿using System;
 using System.IO;
 using Terraria;
 using Terraria.IO;
 using Terraria.Social;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace ModLibsGeneral.Libraries.World {
@@ -63,9 +63,9 @@ namespace ModLibsGeneral.Libraries.World {
 					SocialAPI.Cloud.Delete( tPath );
 				}
 
-				LogLibraries.Log( "WorldFileHelpers.EraseWorld - World \"" + data.Name + "\" deleted. ("+data.Path+")" );
+				LogLibraries.Log( "WorldFileLibraries.EraseWorld - World \"" + data.Name + "\" deleted. ("+data.Path+")" );
 			} catch( Exception e ) {
-				LogLibraries.Log( "WorldFileHelpers.EraseWorld - Error (path: " + data.Path + ") - " + e.ToString() );
+				LogLibraries.Log( "WorldFileLibraries.EraseWorld - Error (path: " + data.Path + ") - " + e.ToString() );
 			}
 
 			Main.LoadWorlds();

@@ -8,8 +8,8 @@ using ModLibsGeneral.Libraries.World;
 
 namespace ModLibsGeneral {
 	/// @private
-	partial class ModHelpersMod : Mod {
-		public static ModHelpersMod Instance { get; private set; }
+	partial class ModLibsGeneralMod : Mod {
+		public static ModLibsGeneralMod Instance { get; private set; }
 
 
 
@@ -21,8 +21,8 @@ namespace ModLibsGeneral {
 
 		////////////////
 
-		public ModHelpersMod() {
-			ModHelpersMod.Instance = this;
+		public ModLibsGeneralMod() {
+			ModLibsGeneralMod.Instance = this;
 		}
 
 
@@ -36,7 +36,7 @@ namespace ModLibsGeneral {
 				LogLibraries.Alert( "Unloading mod..." );
 			} catch { }
 			
-			ModHelpersMod.Instance = null;
+			ModLibsGeneralMod.Instance = null;
 		}
 
 
@@ -54,7 +54,7 @@ namespace ModLibsGeneral {
 		////////////////
 
 		//public override void UpdateMusic( ref int music ) { //, ref MusicPriority priority
-		//	this.MusicHelpers.UpdateMusic();
+		//	this.MusicLibraries.UpdateMusic();
 		//}
 	}
 }

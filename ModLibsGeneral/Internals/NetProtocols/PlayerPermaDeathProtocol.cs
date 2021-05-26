@@ -6,6 +6,7 @@ using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Network.SimplePacket;
 using ModLibsGeneral.Libraries.Players;
 
+
 namespace ModLibsGeneral.Internals.NetProtocols {
 	[Serializable]
 	class PlayerPermaDeathProtocol : SimplePacketPayload {  //NetIOBroadcastPayload {
@@ -56,7 +57,7 @@ namespace ModLibsGeneral.Internals.NetProtocols {
 		public override void ReceiveOnServer( int fromWho ) {
 			//Player player = Main.player[ this.PlayerWho ];
 
-			//PlayerHelpers.ApplyPermaDeath( player, this.Msg );	?
+			//PlayerLibraries.ApplyPermaDeath( player, this.Msg );	?
 			PlayerPermaDeathProtocol.BroadcastFromServer( this.PlayerWho, this.Msg, true );
 		}
 

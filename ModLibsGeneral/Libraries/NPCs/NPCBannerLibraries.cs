@@ -46,9 +46,9 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// </summary>
 		/// <returns></returns>
 		public static ReadOnlySet<int> GetBannerItemTypes() {
-			var npcBannerHelpers = ModContent.GetInstance<NPCBannerLibraries>();
+			var npcBannerLibs = ModContent.GetInstance<NPCBannerLibraries>();
 
-			return new ReadOnlySet<int>( npcBannerHelpers.BannerItemTypes );
+			return new ReadOnlySet<int>( npcBannerLibs.BannerItemTypes );
 		}
 
 		/// <summary>
@@ -57,10 +57,10 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// <param name="npcType"></param>
 		/// <returns></returns>
 		public static int GetBannerItemTypeOfNpcType( int npcType ) {
-			var npcBannerHelpers = ModContent.GetInstance<NPCBannerLibraries>();
+			var npcBannerLibs = ModContent.GetInstance<NPCBannerLibraries>();
 
-			if( !npcBannerHelpers.NpcTypesToBannerItemTypes.ContainsKey(npcType) ) { return -1; }
-			return npcBannerHelpers.NpcTypesToBannerItemTypes[ npcType ];
+			if( !npcBannerLibs.NpcTypesToBannerItemTypes.ContainsKey(npcType) ) { return -1; }
+			return npcBannerLibs.NpcTypesToBannerItemTypes[ npcType ];
 		}
 
 		/// <summary>
@@ -69,10 +69,10 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// <param name="itemType"></param>
 		/// <returns></returns>
 		public static ReadOnlySet<int> GetNpcTypesOfBannerItemType( int itemType ) {
-			var npcBannerHelpers = ModContent.GetInstance<NPCBannerLibraries>();
+			var npcBannerLibs = ModContent.GetInstance<NPCBannerLibraries>();
 
-			if( !npcBannerHelpers.BannerItemTypesToNpcTypes.ContainsKey( itemType ) ) { return new ReadOnlySet<int>( new HashSet<int>() ); }
-			return new ReadOnlySet<int>( npcBannerHelpers.BannerItemTypesToNpcTypes[ itemType ] );
+			if( !npcBannerLibs.BannerItemTypesToNpcTypes.ContainsKey( itemType ) ) { return new ReadOnlySet<int>( new HashSet<int>() ); }
+			return new ReadOnlySet<int>( npcBannerLibs.BannerItemTypesToNpcTypes[ itemType ] );
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace ModLibsGeneral.Services.EntityControls {
 			//if( EntityControls.OldTarget != -1 ) {
 			//	throw new ModLibsException( "Cannot set target while an NPC is targetting." );
 			//}
-			var mynpc = npc.GetGlobalNPC<ModHelpersNPC>();
+			var mynpc = npc.GetGlobalNPC<ModLibsGeneralNPC>();
 			mynpc.FakeTargetPosition = position;
 			mynpc.FakeTarget = null;
 		}
@@ -35,7 +35,7 @@ namespace ModLibsGeneral.Services.EntityControls {
 		/// <param name="npc"></param>
 		/// <param name="target"></param>
 		public static void SetTarget( NPC npc, NPC target ) {
-			var mynpc = npc.GetGlobalNPC<ModHelpersNPC>();
+			var mynpc = npc.GetGlobalNPC<ModLibsGeneralNPC>();
 			mynpc.FakeTargetPosition = null;
 			mynpc.FakeTarget = target;
 		}
@@ -46,7 +46,7 @@ namespace ModLibsGeneral.Services.EntityControls {
 		/// <param name="npc"></param>
 		/// <param name="target"></param>
 		public static void SetTarget( NPC npc, Player target ) {
-			var mynpc = npc.GetGlobalNPC<ModHelpersNPC>();
+			var mynpc = npc.GetGlobalNPC<ModLibsGeneralNPC>();
 			mynpc.FakeTargetPosition = null;
 			mynpc.FakeTarget = target;
 		}
@@ -58,7 +58,7 @@ namespace ModLibsGeneral.Services.EntityControls {
 		/// </summary>
 		/// <param name="npc"></param>
 		public static void UnsetTarget( NPC npc ) {
-			var mynpc = npc.GetGlobalNPC<ModHelpersNPC>();
+			var mynpc = npc.GetGlobalNPC<ModLibsGeneralNPC>();
 			mynpc.FakeTarget = null;
 			mynpc.FakeTargetPosition = null;
 		}
@@ -75,7 +75,7 @@ namespace ModLibsGeneral.Services.EntityControls {
 		/// <param name="ai3"></param>
 		/// <param name="ai4"></param>
 		public static void LockAI( NPC npc, float? ai1, float? ai2, float? ai3, float? ai4 ) {
-			var mynpc = npc.GetGlobalNPC<ModHelpersNPC>();
+			var mynpc = npc.GetGlobalNPC<ModLibsGeneralNPC>();
 			mynpc.LockedAI0 = ai1;
 			mynpc.LockedAI1 = ai2;
 			mynpc.LockedAI2 = ai3;

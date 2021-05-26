@@ -30,7 +30,7 @@ namespace ModLibsGeneral.Services.AnimatedColor {
 		////////////////
 
 		internal AnimatedColorsManager() {
-			var mymod = ModHelpersMod.Instance;
+			var mymod = ModLibsGeneralMod.Instance;
 
 			this.Alert = AnimatedColors.Create( this, 16, new Color[] { Color.Yellow, Color.Gray } );
 			this.Ember = AnimatedColors.Create( this, 16, new Color[] { Color.Orange, Color.Orange * 0.65f } );

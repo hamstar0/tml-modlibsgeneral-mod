@@ -1,11 +1,12 @@
 ﻿using System;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.Debug;
 using ModLibsGeneral.Libraries.Entities;
 using ModLibsGeneral.Libraries.Items;
-using Terraria.ModLoader;
+
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
@@ -50,7 +51,7 @@ namespace ModLibsGeneral.Libraries.Players {
 					id = PlayerIdentityLibraries.GetUniqueId();
 					plrIdLibs.PlayerIds[ player.whoAmI ] = id;
 				} else {
-					//throw new HamstarException( "!ModHelpers.PlayerIdentityHelpers.GetProperUniqueId - Could not find player " + player.name + "'s id." );
+					//throw new ModLibsException( "!ModLibsGeneral.PlayerIdentityLibraries.GetProperUniqueId - Could not find player " + player.name + "'s id." );
 					return null;
 				}
 			}
@@ -68,7 +69,7 @@ namespace ModLibsGeneral.Libraries.Players {
 
 			for( int i=0; i<len; i++ ) {
 				Player plr = Main.player[ i ];
-//LogLibraries.Log( "GetPlayerByProperId: "+PlayerIdentityHelpers.GetProperUniqueId( plr )+" == "+uid+": "+plr.name+" ("+plr.whoAmI+")" );
+//LogLibraries.Log( "GetPlayerByProperId: "+PlayerIdentityLibraries.GetProperUniqueId( plr )+" == "+uid+": "+plr.name+" ("+plr.whoAmI+")" );
 				if( plr == null /*|| !plr.active*/ ) { continue; }	// <- This is WEIRD!
 				
 				if( PlayerIdentityLibraries.GetUniqueId(plr) == uid ) {

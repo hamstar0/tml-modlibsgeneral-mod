@@ -107,7 +107,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 
 			Vector2 pos = new Vector2(x, y) - Main.screenPosition;
 			if( applyZoom ) {
-				//pos = UIHelpers.ConvertToScreenPosition( pos );
+				//pos = UILibraries.ConvertToScreenPosition( pos );
 				pos = UIZoomLibraries.ApplyZoomFromScreenCenter( pos, null, false, null, null );
 			}
 

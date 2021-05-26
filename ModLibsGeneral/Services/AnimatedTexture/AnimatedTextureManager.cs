@@ -19,7 +19,7 @@ namespace ModLibsGeneral.Services.AnimatedTexture {
 		////////////////
 
 		internal AnimatedTextureManager() {
-			var mymod = ModHelpersMod.Instance;
+			var mymod = ModLibsGeneralMod.Instance;
 
 			if( !Main.dedServ ) {
 				this.OnTickGet = Timers.MainOnTickGet();

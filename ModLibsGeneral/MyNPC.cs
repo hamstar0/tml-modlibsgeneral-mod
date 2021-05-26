@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral {
 	/// @private
-	partial class ModHelpersNPC : GlobalNPC {
+	partial class ModLibsGeneralNPC : GlobalNPC {
 		internal Entity FakeTarget = null;
 		internal Vector2? FakeTargetPosition = null;
 
@@ -27,7 +27,7 @@ namespace ModLibsGeneral {
 		////////////////
 
 		/*public override void SetupShop( int type, Chest shop, ref int nextSlot ) {
-			if( ModHelpersConfig.Instance.GeoResonantOrbSoldByDryad ) {
+			if( ModLibsGeneralConfig.Instance.GeoResonantOrbSoldByDryad ) {
 				if( type == NPCID.Dryad ) {
 					var orbItem = new Item();
 					orbItem.SetDefaults( ModContent.ItemType<GeoResonantOrbItem>() );

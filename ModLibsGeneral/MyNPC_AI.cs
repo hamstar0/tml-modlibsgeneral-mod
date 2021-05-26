@@ -7,7 +7,7 @@ using ModLibsGeneral.Services.EntityControls;
 
 namespace ModLibsGeneral {
 	/// @private
-	partial class ModHelpersNPC : GlobalNPC {
+	partial class ModLibsGeneralNPC : GlobalNPC {
 		public override bool PreAI( NPC npc ) {
 			EntityControls.ApplyFakeTarget( npc, this.FakeTarget, this.FakeTargetPosition );
 

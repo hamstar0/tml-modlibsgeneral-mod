@@ -36,8 +36,8 @@ namespace ModLibsGeneral.Libraries.Info {
 			string[] worldProg = GameInfoLibraries.GetVanillaProgressList().ToArray();
 			int activeItems = ItemLibraries.GetActive().Count;
 			int activeNpcs = NPCLibraries.GetActive().Count;
-			//string[] playerInfos = InfoHelpers.GetCurrentPlayerInfo().ToArray();
-			//string[] playerEquips = InfoHelpers.GetCurrentPlayerEquipment().ToArray();
+			//string[] playerInfos = InfoLibraries.GetCurrentPlayerInfo().ToArray();
+			//string[] playerEquips = InfoLibraries.GetCurrentPlayerEquipment().ToArray();
 			int activePlayers = Main.ActivePlayersCount;
 			string netmode = Main.netMode == NetmodeID.SinglePlayer ? "single-player" : "multiplayer";
 			bool autopause = Main.autoPause;

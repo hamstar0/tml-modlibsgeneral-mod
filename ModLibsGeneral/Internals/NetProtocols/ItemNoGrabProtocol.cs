@@ -36,7 +36,7 @@ namespace ModLibsGeneral.Internals.NetProtocols {
 		public override void ReceiveOnServer( int fromWho ) {
 			Item item = Main.item[this.ItemWho];
 			if( item == null /*|| !item.active*/ ) {
-				//throw new HamstarException( "!ModHelpers.ItemNoGrabProtocol.ReceiveWithServer - Invalid item indexed at "+this.ItemWho );
+				//throw new ModLibsException( "!ModLibraries.ItemNoGrabProtocol.ReceiveWithServer - Invalid item indexed at "+this.ItemWho );
 				throw new ModLibsException( "Invalid item indexed at " + this.ItemWho );
 			}
 

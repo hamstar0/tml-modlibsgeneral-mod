@@ -6,7 +6,7 @@ namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
 	/// Assorted static "helper" functions pertaining to locating things in the world.
 	/// </summary>
-	public partial class WorldLocationHelpers {
+	public partial class WorldLocationLibraries {
 		private static bool CheckColumnForBeach( int x, out int atX, out int atY ) {
 			int y;
 
@@ -41,7 +41,7 @@ namespace ModLibsGeneral.Libraries.World {
 			int reach = 40;//340;
 
 			for( int x = reach; x < Main.dungeonX; x++ ) {
-				if( WorldLocationHelpers.CheckColumnForBeach( x, out tileX, out tileY ) ) {
+				if( WorldLocationLibraries.CheckColumnForBeach( x, out tileX, out tileY ) ) {
 					return true;
 				}
 			}
@@ -61,7 +61,7 @@ namespace ModLibsGeneral.Libraries.World {
 			int max = (Main.maxTilesX - reach) - Main.dungeonX;
 
 			for( int x = Main.maxTilesX - reach; x > Main.dungeonX; x-- ) {
-				if( WorldLocationHelpers.CheckColumnForBeach( x, out tileX, out tileY ) ) {
+				if( WorldLocationLibraries.CheckColumnForBeach( x, out tileX, out tileY ) ) {
 					return true;
 				}
 			}

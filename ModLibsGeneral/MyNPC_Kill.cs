@@ -8,7 +8,7 @@ using ModLibsGeneral.Services.Hooks.ExtendedHooks;
 
 namespace ModLibsGeneral {
 	/// @private
-	partial class ModHelpersNPC : GlobalNPC {
+	partial class ModLibsGeneralNPC : GlobalNPC {
 		public override bool PreNPCLoot( NPC npc ) {
 			ExtendedItemHooks.BeginScanningForLootDrops( npc );
 

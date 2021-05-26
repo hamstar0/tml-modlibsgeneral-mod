@@ -58,7 +58,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// <param name="announce"></param>
 		public static void Leave( NPC npc, bool announce = true ) {
 			if( Main.netMode == NetmodeID.MultiplayerClient ) {
-				LogLibraries.Warn( "NPCTownHelpers.Leave() called on client." );
+				LogLibraries.Warn( "NPCTownLibraries.Leave() called on client." );
 			}
 
 			int whoami = npc.whoAmI;
