@@ -1,6 +1,5 @@
 ﻿using System;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.Debug;
@@ -12,8 +11,6 @@ namespace ModLibsGeneral.Internals.NetProtocols {
 	[Serializable]
 	class WorldDataProtocol : SimplePacketPayload { //NetIOClientPayload {
 		public int HalfDays;
-		public bool HasObsoletedWorldId;
-		public string ObsoletedWorldId;
 
 
 
