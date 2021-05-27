@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ModLoader.IO;
 using ModLibsCore.Classes.Loadable;
 using ModLibsCore.Libraries.TModLoader;
+using ModLibsCore.Libraries.World;
 
 
 namespace ModLibsGeneral.Libraries.World {
@@ -28,7 +29,7 @@ namespace ModLibsGeneral.Libraries.World {
 		void ILoadable.OnPostModsLoad() { }
 
 		internal void Load( TagCompound tags ) {
-			string id = ModLibsCore.Libraries.World.WorldLibraries.GetUniqueIdForCurrentWorld( true );
+			string id = WorldIdentityLibraries.GetUniqueIdForCurrentWorld( true );
 
 			if( tags.ContainsKey("half_days_elapsed_" + id) ) {
 				this.HalfDaysElapsed = tags.GetInt( "half_days_elapsed_" + id );
@@ -36,7 +37,7 @@ namespace ModLibsGeneral.Libraries.World {
 		}
 
 		internal void Save( TagCompound tags ) {
-			string id = ModLibsCore.Libraries.World.WorldLibraries.GetUniqueIdForCurrentWorld( true );
+			string id = WorldIdentityLibraries.GetUniqueIdForCurrentWorld( true );
 
 			tags["half_days_elapsed_" + id] = (int)this.HalfDaysElapsed;
 		}
