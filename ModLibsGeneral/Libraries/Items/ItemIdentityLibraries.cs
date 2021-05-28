@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Entities;
 
 
 namespace ModLibsGeneral.Libraries.Items {
@@ -46,7 +47,7 @@ namespace ModLibsGeneral.Libraries.Items {
 
 			//
 
-			int hash = Entities.EntityLibraries.GetVanillaSnapshotHash( item, noContext );
+			int hash = EntityIdentityLibraries.GetVanillaSnapshotHash( item, noContext );
 
 			string id = ItemID.GetUniqueKey( item );
 

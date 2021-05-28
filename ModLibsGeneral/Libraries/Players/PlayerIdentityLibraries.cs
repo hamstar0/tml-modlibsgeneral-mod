@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.Debug;
-using ModLibsGeneral.Libraries.Entities;
+using ModLibsCore.Libraries.Entities;
 using ModLibsGeneral.Libraries.Items;
 
 
@@ -100,7 +100,7 @@ namespace ModLibsGeneral.Libraries.Players {
 
 			//
 
-			int hash = EntityLibraries.GetVanillaSnapshotHash( player, noContext );
+			int hash = EntityIdentityLibraries.GetVanillaSnapshotHash( player, noContext );
 			int itemHash;
 
 			hash += ( "statLifeMax" + player.statLifeMax ).GetHashCode() * Pow();
