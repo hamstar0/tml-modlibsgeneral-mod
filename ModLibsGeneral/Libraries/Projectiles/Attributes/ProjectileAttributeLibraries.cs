@@ -9,28 +9,6 @@ namespace ModLibsGeneral.Libraries.Projectiles.Attributes {
 	/// </summary>
 	public partial class ProjectileAttributeLibraries {
 		/// <summary>
-		/// Gets the "qualified" (human readable) name of a given projectile.
-		/// </summary>
-		/// <param name="proj"></param>
-		/// <returns></returns>
-		public static string GetQualifiedName( Projectile proj ) {
-			return ProjectileAttributeLibraries.GetQualifiedName( proj.type );
-		}
-
-		/// <summary>
-		/// Gets the "qualified" (human readable) name of a given projectile.
-		/// </summary>
-		/// <param name="projType"></param>
-		/// <returns></returns>
-		public static string GetQualifiedName( int projType ) {
-			string name = Lang.GetProjectileName( projType ).Value;
-			return name;
-		}
-
-
-		////////////////
-
-		/// <summary>
 		/// Gets the (vanilla) dimensions of a projectile, adjusted by specific projectile idiosyncracies or AIs.
 		/// </summary>
 		/// <param name="projectile"></param>

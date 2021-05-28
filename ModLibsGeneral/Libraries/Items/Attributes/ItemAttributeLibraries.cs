@@ -13,39 +13,6 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 		private static IDictionary<int, int> _ProjPene = new Dictionary<int, int>();
 
 
-		////////////////
-
-		/// <summary>
-		/// Table of item ids by qualified names.
-		/// </summary>
-		public static ReadOnlyDictionaryOfSets<string, int> DisplayNamesToIds {
-			get {
-				return ModContent.GetInstance<ItemAttributeLibraries>()._DisplayNamesToIds;
-			}
-		}
-
-
-
-		////////////////
-
-		/// <summary>
-		/// Gets an item's qualified (human readable) name.
-		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
-		public static string GetQualifiedName( Item item ) {
-			return Lang.GetItemNameValue( item.type );  // not netID?
-		}
-
-		/// <summary>
-		/// Gets an item's qualified (human readable) name.
-		/// </summary>
-		/// <param name="itemType"></param>
-		/// <returns></returns>
-		public static string GetQualifiedName( int itemType ) {
-			return Lang.GetItemNameValue( itemType );
-		}
-
 
 		////////////////
 
