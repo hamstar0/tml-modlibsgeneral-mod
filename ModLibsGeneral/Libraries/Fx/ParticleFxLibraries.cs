@@ -6,7 +6,7 @@ using ModLibsGeneral.Libraries.Dusts;
 
 namespace ModLibsGeneral.Libraries.Fx {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to visual particle and dust effects.
+	/// Assorted static library functions pertaining to visual particle and dust effects.
 	/// </summary>
 	public class ParticleFxLibraries {
 		/// <summary>

@@ -4,7 +4,7 @@ using Terraria.Graphics.Shaders;
 
 namespace ModLibsGeneral.Libraries.Misc {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to shaders.
+	/// Assorted static library functions pertaining to shaders.
 	/// </summary>
 	public class ShaderLibraries {
 		/// <summary>

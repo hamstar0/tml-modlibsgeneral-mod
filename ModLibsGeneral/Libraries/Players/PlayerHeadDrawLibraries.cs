@@ -6,7 +6,7 @@ using ModLibsCore.Libraries.DotNET.Reflection;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player head drawing (currently empty).
+	/// Assorted static library functions pertaining to player head drawing (currently empty).
 	/// </summary>
 	public class PlayerHeadDrawLibraries {
 		/// @private

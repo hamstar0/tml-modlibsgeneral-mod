@@ -9,7 +9,7 @@ using ModLibsGeneral.Internals.NetProtocols;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to players.
+	/// Assorted static library functions pertaining to players.
 	/// </summary>
 	public partial class PlayerLibraries {
 		/// <summary></summary>

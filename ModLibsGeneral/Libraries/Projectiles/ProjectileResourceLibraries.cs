@@ -4,7 +4,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Projectiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to players relative to projectile resources (e.g. textures).
+	/// Assorted static library functions pertaining to players relative to projectile resources (e.g. textures).
 	/// </summary>
 	public partial class ProjectileResourceLibraries {
 		/// <summary>

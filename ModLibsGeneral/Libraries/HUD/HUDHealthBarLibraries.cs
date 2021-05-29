@@ -7,7 +7,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.HUD {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the HUD health bar. 
+	/// Assorted static library functions pertaining to the HUD health bar. 
 	/// </summary>
 	public class HUDHealthBarLibraries {
 		/// <summary>

@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Collisions {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to general collision detecting and handling.
+	/// Assorted static library functions pertaining to general collision detecting and handling.
 	/// </summary>
 	public partial class CollisionLibraries {
 		/// <summary>

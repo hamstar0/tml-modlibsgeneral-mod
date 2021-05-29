@@ -9,7 +9,7 @@ using ModLibsCore.Libraries.DotNET.Extensions;
 
 namespace ModLibsGeneral.Libraries.Items {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to finding items in collections.
+	/// Assorted static library functions pertaining to finding items in collections.
 	/// </summary>
 	public partial class ItemFinderLibraries {
 		/// <summary>

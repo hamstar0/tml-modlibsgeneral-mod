@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Projectiles.Attributes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to projectile attributes.
+	/// Assorted static library functions pertaining to projectile attributes.
 	/// </summary>
 	public partial class ProjectileAttributeLibraries {
 		/// <summary>

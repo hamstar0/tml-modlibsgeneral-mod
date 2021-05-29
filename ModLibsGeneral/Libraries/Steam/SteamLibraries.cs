@@ -3,7 +3,7 @@
 
 namespace ModLibsGeneral.Libraries.Steam {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the Steam platform.
+	/// Assorted static library functions pertaining to the Steam platform.
 	/// </summary>
 	public class SteamLibraries {
 		/// <summary>

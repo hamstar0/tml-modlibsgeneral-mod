@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.Items.Attributes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to information attributes of items (e.g. tooltips).
+	/// Assorted static library functions pertaining to information attributes of items (e.g. tooltips).
 	/// </summary>
 	public partial class ItemInformationAttributeLibraries {
 		/// <summary>

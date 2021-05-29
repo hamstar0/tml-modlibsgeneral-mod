@@ -8,7 +8,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player file data (.plr, .tplr).
+	/// Assorted static library functions pertaining to player file data (.plr, .tplr).
 	/// </summary>
 	public class PlayerFileLibraries {
 		/// <summary>

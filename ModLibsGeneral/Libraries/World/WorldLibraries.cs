@@ -6,7 +6,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the current world.
+	/// Assorted static library functions pertaining to the current world.
 	/// </summary>
 	public partial class WorldLibraries {
 		/// <summary></summary>

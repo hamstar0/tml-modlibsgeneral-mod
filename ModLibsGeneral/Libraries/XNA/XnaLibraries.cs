@@ -6,7 +6,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.XNA {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to XNA. 
+	/// Assorted static library functions pertaining to XNA. 
 	/// </summary>
 	public partial class XnaLibraries {
 		/// <summary>

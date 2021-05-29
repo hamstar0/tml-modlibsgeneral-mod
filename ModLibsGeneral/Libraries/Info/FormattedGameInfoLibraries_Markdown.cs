@@ -8,7 +8,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Info {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to game information formatted for output.
+	/// Assorted static library functions pertaining to game information formatted for output.
 	/// </summary>
 	public partial class FormattedGameInfoLibraries {
 		/// <summary>

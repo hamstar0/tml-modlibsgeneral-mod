@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.Draw {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to drawing to the screen. 
+	/// Assorted static library functions pertaining to drawing to the screen. 
 	/// </summary>
 	public partial class DrawLibraries {
 		/// <summary>

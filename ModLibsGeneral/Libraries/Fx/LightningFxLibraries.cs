@@ -9,7 +9,7 @@ using ModLibsCore.Libraries.TModLoader;
 
 namespace ModLibsGeneral.Libraries.Fx {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to visual effects.
+	/// Assorted static library functions pertaining to visual effects.
 	/// </summary>
 	public partial class LightningFxLibraries {
 		/// <summary>

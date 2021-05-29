@@ -22,7 +22,7 @@ namespace ModLibsGeneral.Libraries.Players {
 
 
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player multiplayer teams.
+	/// Assorted static library functions pertaining to player multiplayer teams.
 	/// </summary>
 	public partial class PlayerTeamLibraries {
 		/// <summary>

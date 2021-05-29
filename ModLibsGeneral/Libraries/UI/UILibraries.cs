@@ -6,7 +6,7 @@ using Terraria.GameInput;
 
 namespace ModLibsGeneral.Libraries.UI {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the in-game UI (positions, interactions, etc.).
+	/// Assorted static library functions pertaining to the in-game UI (positions, interactions, etc.).
 	/// </summary>
 	public partial class UILibraries {
 		/// <summary></summary>

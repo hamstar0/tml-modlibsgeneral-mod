@@ -7,7 +7,7 @@ using ModLibsCore.Services.DataStore;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player warping/teleporting/spawn return.
+	/// Assorted static library functions pertaining to player warping/teleporting/spawn return.
 	/// </summary>
 	public partial class PlayerWarpLibraries {
 		private static object SpawnPointKey = new object();

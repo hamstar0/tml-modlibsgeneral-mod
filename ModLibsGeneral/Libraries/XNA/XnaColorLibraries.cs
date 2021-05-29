@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace ModLibsGeneral.Libraries.XNA {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to XNA's Color struct. 
+	/// Assorted static library functions pertaining to XNA's Color struct. 
 	/// </summary>
 	public static partial class XnaColorLibraries {
 		/// <summary>

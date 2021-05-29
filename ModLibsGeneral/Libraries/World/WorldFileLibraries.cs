@@ -8,7 +8,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to world files (.wld or .twld).
+	/// Assorted static library functions pertaining to world files (.wld or .twld).
 	/// </summary>
 	public class WorldFileLibraries {
 		/*public static void EraseWorld_WIN( int which ) {

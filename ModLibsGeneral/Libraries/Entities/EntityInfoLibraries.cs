@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Entities {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to entity info.
+	/// Assorted static library functions pertaining to entity info.
 	/// </summary>
 	public class EntityInfoLibraries {
 		/// <summary>

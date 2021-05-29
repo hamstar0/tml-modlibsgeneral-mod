@@ -9,7 +9,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to NPC townsfolk.
+	/// Assorted static library functions pertaining to NPC townsfolk.
 	/// </summary>
 	public class NPCTownLibraries {
 		/// <summary>

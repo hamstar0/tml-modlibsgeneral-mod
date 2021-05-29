@@ -15,7 +15,7 @@ using ModLibsCore.Libraries.DotNET.Reflection;
 
 namespace ModLibsGeneral.Libraries.TModLoader.Configs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to configs (ModConfig, primarily).
+	/// Assorted static library functions pertaining to configs (ModConfig, primarily).
 	/// </summary>
 	public partial class ConfigLibraries {
 		/// <summary>

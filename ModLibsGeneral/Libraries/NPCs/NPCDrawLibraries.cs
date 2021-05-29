@@ -7,7 +7,7 @@ using ModLibsGeneral.Libraries.UI;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to NPC drawing.
+	/// Assorted static library functions pertaining to NPC drawing.
 	/// </summary>
 	public partial class NPCDrawLibraries {
 		/// <summary>

@@ -9,7 +9,7 @@ using ModLibsGeneral.Internals.NetProtocols;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player inventory or equips.
+	/// Assorted static library functions pertaining to player inventory or equips.
 	/// </summary>
 	public partial class PlayerItemLibraries {
 		/// <summary></summary>

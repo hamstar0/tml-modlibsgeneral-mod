@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace ModLibsGeneral.Libraries.Misc {
 	/// <summary>
-	/// Assorted static "helper" misc. functions.
+	/// Assorted static library misc. functions.
 	/// </summary>
 	public partial class MiscLibraries {
 		/// <summary>

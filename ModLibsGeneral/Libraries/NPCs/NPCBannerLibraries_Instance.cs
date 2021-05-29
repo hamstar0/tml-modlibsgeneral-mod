@@ -6,7 +6,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to NPC-dropped banners.
+	/// Assorted static library functions pertaining to NPC-dropped banners.
 	/// </summary>
 	public partial class NPCBannerLibraries : ILoadable {
 		private IDictionary<int, int> NpcTypesToBannerItemTypes;

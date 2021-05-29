@@ -4,7 +4,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to locating things in the world.
+	/// Assorted static library functions pertaining to locating things in the world.
 	/// </summary>
 	public partial class WorldLocationLibraries {
 		private static bool CheckColumnForBeach( int x, out int atX, out int atY ) {

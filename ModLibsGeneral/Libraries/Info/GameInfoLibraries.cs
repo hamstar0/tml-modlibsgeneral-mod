@@ -12,7 +12,7 @@ using ModLibsGeneral.Libraries.Players;
 
 namespace ModLibsGeneral.Libraries.Info {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to game information.
+	/// Assorted static library functions pertaining to game information.
 	/// </summary>
 	public partial class GameInfoLibraries {
 		/// <summary>

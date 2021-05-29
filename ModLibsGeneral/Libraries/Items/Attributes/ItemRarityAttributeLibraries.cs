@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.Items.Attributes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the "rarity" attribute of items.
+	/// Assorted static library functions pertaining to the "rarity" attribute of items.
 	/// </summary>
 	public partial class ItemRarityAttributeLibraries {
 		/// <summary></summary>

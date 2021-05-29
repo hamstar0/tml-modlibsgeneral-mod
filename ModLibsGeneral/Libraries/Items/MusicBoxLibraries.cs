@@ -4,7 +4,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.Items {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to music box items.
+	/// Assorted static library functions pertaining to music box items.
 	/// </summary>
 	public class MusicBoxLibraries {
 		/// <summary>

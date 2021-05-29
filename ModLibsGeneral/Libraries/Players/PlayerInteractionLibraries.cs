@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player interactions with game things.
+	/// Assorted static library functions pertaining to player interactions with game things.
 	/// </summary>
 	public class PlayerInteractionLibraries {
 		/// <summary>

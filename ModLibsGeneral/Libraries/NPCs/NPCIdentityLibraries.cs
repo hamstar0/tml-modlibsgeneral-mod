@@ -7,7 +7,7 @@ using Terraria.ModLoader.Config;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to NPC identification.
+	/// Assorted static library functions pertaining to NPC identification.
 	/// </summary>
 	public partial class NPCIdentityLibraries {
 		/// <summary>

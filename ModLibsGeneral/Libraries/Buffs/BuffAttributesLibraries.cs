@@ -7,7 +7,7 @@ using ModLibsCore.Classes.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Buffs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to buff attributes.
+	/// Assorted static library functions pertaining to buff attributes.
 	/// </summary>
 	public partial class BuffAttributesLibraries {
 		/// <summary>

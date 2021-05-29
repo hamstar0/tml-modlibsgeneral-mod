@@ -5,7 +5,7 @@ using Terraria.Localization;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to players relative to NPCs.
+	/// Assorted static library functions pertaining to players relative to NPCs.
 	/// </summary>
 	public class PlayerNPCLibraries {
 		/// <summary>

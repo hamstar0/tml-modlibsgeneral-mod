@@ -8,7 +8,7 @@ using ModLibsGeneral.Libraries.UI;
 
 namespace ModLibsGeneral.Libraries.HUD {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to in-game HUD elements. 
+	/// Assorted static library functions pertaining to in-game HUD elements. 
 	/// </summary>
 	public class HUDElementLibraries {
 		/// <summary>

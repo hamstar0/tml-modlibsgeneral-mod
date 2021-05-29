@@ -4,7 +4,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.HUD {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to general HUD. 
+	/// Assorted static library functions pertaining to general HUD. 
 	/// </summary>
 	public partial class HUDLibraries {
 		/// <summary>

@@ -6,7 +6,7 @@ using Terraria.ObjectData;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tile objects.
+	/// Assorted static library functions pertaining to tile objects.
 	/// </summary>
 	public class TileObjectLibraries {
 		/// <summary>

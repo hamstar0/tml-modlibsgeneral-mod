@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.Entities {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to `Entity`s (parent class of Item, NPC, Player, and Projectile).
+	/// Assorted static library functions pertaining to `Entity`s (parent class of Item, NPC, Player, and Projectile).
 	/// </summary>
 	public class EntityLibraries {
 		/// <summary>

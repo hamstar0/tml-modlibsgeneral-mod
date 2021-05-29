@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to stream IO for tiles.
+	/// Assorted static library functions pertaining to stream IO for tiles.
 	/// </summary>
 	public partial class TileStreamLibraries {
 		/// <summary></summary>

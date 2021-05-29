@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.DotNET.Threading;
 
 namespace ModLibsGeneral.Libraries.Net {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to connecting to the web.
+	/// Assorted static library functions pertaining to connecting to the web.
 	/// </summary>
 	public partial class WebConnectionLibraries {
 		private static void HandleResponse(

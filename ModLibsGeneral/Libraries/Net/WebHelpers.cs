@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ModLibsGeneral.Libraries.Net {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the web.
+	/// Assorted static library functions pertaining to the web.
 	/// </summary>
 	public class WebLibraries {
 		/// <summary>

@@ -6,7 +6,7 @@ using Terraria.Graphics.Shaders;
 
 namespace ModLibsGeneral.Libraries.Dusts {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to dusts.
+	/// Assorted static library functions pertaining to dusts.
 	/// </summary>
 	public class DustLibraries {
 		/// <summary></summary>

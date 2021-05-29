@@ -37,7 +37,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 
 
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to NPC invasions
+	/// Assorted static library functions pertaining to NPC invasions
 	/// </summary>
 	public partial class NPCInvasionLibraries {
 		/// <summary>

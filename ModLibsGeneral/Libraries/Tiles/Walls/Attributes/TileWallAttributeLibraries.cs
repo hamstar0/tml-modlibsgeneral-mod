@@ -7,7 +7,7 @@ using ModLibsCore.Classes.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Tiles.Walls.Attributes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tile walls.
+	/// Assorted static library functions pertaining to tile walls.
 	/// </summary>
 	public class TileWallAttributeLibraries {
 		/// <summary></summary>

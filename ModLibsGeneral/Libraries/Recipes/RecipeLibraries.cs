@@ -29,7 +29,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to recipes.
+	/// Assorted static library functions pertaining to recipes.
 	/// </summary>
 	public partial class RecipeLibraries {
 		/// <summary>

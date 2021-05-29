@@ -23,7 +23,7 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 
 
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tile attributes.
+	/// Assorted static library functions pertaining to tile attributes.
 	/// </summary>
 	public partial class TileAttributeLibraries {
 		/// <summary>

@@ -4,7 +4,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Tiles.Walls {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to players relative to tile Wall resources (e.g. textures).
+	/// Assorted static library functions pertaining to players relative to tile Wall resources (e.g. textures).
 	/// </summary>
 	public partial class TileWallResourceLibraries {
 		/// <summary>

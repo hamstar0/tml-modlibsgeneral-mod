@@ -7,7 +7,7 @@ using ModLibsGeneral.Internals.NetProtocols;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tiles relative to the world.
+	/// Assorted static library functions pertaining to tiles relative to the world.
 	/// </summary>
 	public static class TileWorldLibraries {
 		/// <summary>

@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.Entities;
 
 namespace ModLibsGeneral.Libraries.Items {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to item identification.
+	/// Assorted static library functions pertaining to item identification.
 	/// </summary>
 	public partial class ItemIdentityLibraries {
 		/// <summary>

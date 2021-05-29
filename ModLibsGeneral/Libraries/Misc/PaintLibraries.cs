@@ -7,7 +7,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Misc {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to game music.
+	/// Assorted static library functions pertaining to game music.
 	/// </summary>
 	public class PaintLibraries {
 		private static IDictionary<int, byte> CachedMatches = new Dictionary<int, byte>();  // Static; shouldn't expect to change

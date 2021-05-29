@@ -6,7 +6,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tiles.
+	/// Assorted static library functions pertaining to tiles.
 	/// </summary>
 	public partial class TileLibraries {
 		/// <summary>

@@ -3,7 +3,7 @@
 
 namespace ModLibsGeneral.Libraries.Misc {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to math.
+	/// Assorted static library functions pertaining to math.
 	/// </summary>
 	public class MathLibraries {
 		/// <summary>

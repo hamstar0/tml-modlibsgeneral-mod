@@ -7,7 +7,7 @@ using ModLibsCore.Classes.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Items.Attributes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to gameplay attributes of items.
+	/// Assorted static library functions pertaining to gameplay attributes of items.
 	/// </summary>
 	public partial class ItemAttributeLibraries {
 		private static IDictionary<int, int> _ProjPene = new Dictionary<int, int>();

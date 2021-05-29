@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to NPCs.
+	/// Assorted static library functions pertaining to NPCs.
 	/// </summary>
 	public partial class NPCLibraries {
 		/// <summary>

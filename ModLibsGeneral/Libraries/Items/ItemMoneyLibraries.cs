@@ -10,7 +10,7 @@ using ModLibsGeneral.Libraries.XNA;
 
 namespace ModLibsGeneral.Libraries.Items {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to money items.
+	/// Assorted static library functions pertaining to money items.
 	/// </summary>
 	public partial class ItemMoneyLibraries {
 		/// <summary></summary>

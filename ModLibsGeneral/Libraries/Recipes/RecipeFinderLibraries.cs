@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace ModLibsGeneral.Libraries.Recipes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to recipe finding.
+	/// Assorted static library functions pertaining to recipe finding.
 	/// </summary>
 	public partial class RecipeFinderLibraries {
 		/// <summary>

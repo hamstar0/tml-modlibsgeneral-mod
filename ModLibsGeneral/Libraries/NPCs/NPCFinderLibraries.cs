@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to finding world NPCs.
+	/// Assorted static library functions pertaining to finding world NPCs.
 	/// </summary>
 	public class NPCFinderLibraries {
 		private static IDictionary<int, int> AnyWhoOfType = new Dictionary<int, int>();

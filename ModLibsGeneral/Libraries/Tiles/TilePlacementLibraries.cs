@@ -5,7 +5,7 @@ using Terraria.ObjectData;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tile placement (convenience bindings for WorldGen).
+	/// Assorted static library functions pertaining to tile placement (convenience bindings for WorldGen).
 	/// </summary>
 	public partial class TilePlacementLibraries {
 		/// <summary>

@@ -4,7 +4,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.Projectiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to players relative to projectiles.
+	/// Assorted static library functions pertaining to players relative to projectiles.
 	/// </summary>
 	public partial class ProjectileLibraries {
 		/// <summary>

@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player movement.
+	/// Assorted static library functions pertaining to player movement.
 	/// </summary>
 	public class PlayerMovementLibraries {
 		/// <summary>

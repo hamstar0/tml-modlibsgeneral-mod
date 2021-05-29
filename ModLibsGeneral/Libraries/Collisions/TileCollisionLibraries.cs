@@ -6,7 +6,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Collisions {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to collisions between objects and/or tiles.
+	/// Assorted static library functions pertaining to collisions between objects and/or tiles.
 	/// </summary>
 	public class TileCollisionLibraries {
 		/// <summary>

@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace ModLibsGeneral.Libraries.Audio {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to game music.
+	/// Assorted static library functions pertaining to game music.
 	/// </summary>
 	public partial class MusicLibraries {
 		/// <summary>

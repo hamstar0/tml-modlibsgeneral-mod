@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.UI {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the in-game UI zoom and positions.
+	/// Assorted static library functions pertaining to the in-game UI zoom and positions.
 	/// </summary>
 	public class UIZoomLibraries {
 		/// <summary>

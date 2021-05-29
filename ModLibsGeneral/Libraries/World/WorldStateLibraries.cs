@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the current world's state.
+	/// Assorted static library functions pertaining to the current world's state.
 	/// </summary>
 	public partial class WorldStateLibraries {
 		/// <summary>

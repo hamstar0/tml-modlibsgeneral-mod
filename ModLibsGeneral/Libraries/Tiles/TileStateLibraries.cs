@@ -99,7 +99,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 
 
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tile state (slope, actuation, etc.).
+	/// Assorted static library functions pertaining to tile state (slope, actuation, etc.).
 	/// </summary>
 	public class TileStateLibraries {
 		/// <summary></summary>

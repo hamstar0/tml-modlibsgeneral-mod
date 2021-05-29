@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tile frames.
+	/// Assorted static library functions pertaining to tile frames.
 	/// </summary>
 	public class TileFrameLibraries {
 		/// <summary></summary>

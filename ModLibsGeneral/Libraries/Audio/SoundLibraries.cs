@@ -11,7 +11,7 @@ using ModLibsCore.Classes.Loadable;
 
 namespace ModLibsGeneral.Libraries.Audio {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to sounds.
+	/// Assorted static library functions pertaining to sounds.
 	/// </summary>
 	public class SoundLibraries : ILoadable {
 		/// <summary>

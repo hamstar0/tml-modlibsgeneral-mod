@@ -5,7 +5,7 @@ using ModLibsCore.Classes.Errors;
 
 namespace ModLibsGeneral.Libraries.ModHelpers {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to Mod Helpers features.
+	/// Assorted static library functions pertaining to Mod Helpers features.
 	/// </summary>
 	public partial class ModFeaturesLibraries {
 		private static PropertyInfo GetGithubUserNameProp( Mod mod ) {

@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.DotNET.Reflection;
 
 namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to world generation.
+	/// Assorted static library functions pertaining to world generation.
 	/// </summary>
 	public class WorldGenLibraries {
 		/*public static readonly string[] VanillaWorldGenTaskNames = new string[] {

@@ -7,7 +7,7 @@ using ModLibsCore.Libraries.Debug;
 
 namespace ModLibsGeneral.Libraries.Net {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to network play.
+	/// Assorted static library functions pertaining to network play.
 	/// </summary>
 	public partial class NetPlayLibraries {
 		/// <summary>

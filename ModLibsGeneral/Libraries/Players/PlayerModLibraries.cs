@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to mod compatibility for players.
+	/// Assorted static library functions pertaining to mod compatibility for players.
 	/// </summary>
 	public class PlayerModLibraries {
 		/// <summary>

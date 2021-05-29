@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to unique player identification.
+	/// Assorted static library functions pertaining to unique player identification.
 	/// </summary>
 	public class PlayerItemFinderLibraries {
 		/// <summary>

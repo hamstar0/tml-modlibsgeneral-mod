@@ -5,7 +5,7 @@ using ModLibsCore.Classes.Loadable;
 
 namespace ModLibsGeneral.Libraries.Items.Attributes {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to gameplay attributes of items.
+	/// Assorted static library functions pertaining to gameplay attributes of items.
 	/// </summary>
 	public partial class ItemAttributeLibraries : ILoadable {
 		private IDictionary<long, ISet<int>> PurchasableItems = new Dictionary<long, ISet<int>>();

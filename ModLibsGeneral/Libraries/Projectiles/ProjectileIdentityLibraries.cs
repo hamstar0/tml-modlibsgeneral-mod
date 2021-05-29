@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace ModLibsGeneral.Libraries.Projectiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to players relative to projectile identification
+	/// Assorted static library functions pertaining to players relative to projectile identification
 	/// </summary>
 	public partial class ProjectileIdentityLibraries {
 		/// <summary>

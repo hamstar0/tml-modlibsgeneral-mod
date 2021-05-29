@@ -6,7 +6,7 @@ using ModLibsGeneral.Libraries.HUD;
 
 namespace ModLibsGeneral.Libraries.Buffs {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to buff HUD interface.
+	/// Assorted static library functions pertaining to buff HUD interface.
 	/// </summary>
 	public class BuffHUDLibraries {
 		/// <summary>

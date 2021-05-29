@@ -10,7 +10,7 @@ using ModLibsCore.Libraries.DotNET;
 
 namespace ModLibsGeneral.Libraries.Misc {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to file IO for mod custom data.
+	/// Assorted static library functions pertaining to file IO for mod custom data.
 	/// </summary>
 	public partial class ModCustomDataFileLibraries {
 		/// <summary>

@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to player's appearance.
+	/// Assorted static library functions pertaining to player's appearance.
 	/// </summary>
 	public class PlayerAppearanceLibraries {
 		/// <summary>

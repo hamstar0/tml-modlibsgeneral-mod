@@ -6,7 +6,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.HUD {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the HUD map.
+	/// Assorted static library functions pertaining to the HUD map.
 	/// </summary>
 	public partial class HUDMapLibraries {
 		/// <summary>

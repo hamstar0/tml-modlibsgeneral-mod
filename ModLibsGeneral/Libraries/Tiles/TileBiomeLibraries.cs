@@ -9,7 +9,7 @@ using ModLibsGeneral.Libraries.World;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to tiles as relevant to biomes.
+	/// Assorted static library functions pertaining to tiles as relevant to biomes.
 	/// </summary>
 	public class TileBiomeLibraries {
 		/// <summary></summary>

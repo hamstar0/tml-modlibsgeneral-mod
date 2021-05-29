@@ -6,7 +6,7 @@ using Terraria;
 
 namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
-	/// Assorted static "helper" functions pertaining to the current world's chests.
+	/// Assorted static library functions pertaining to the current world's chests.
 	/// </summary>
 	public partial class WorldChestLibraries {
 		/// <summary>
