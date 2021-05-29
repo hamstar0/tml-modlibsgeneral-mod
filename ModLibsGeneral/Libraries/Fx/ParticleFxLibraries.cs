@@ -53,7 +53,7 @@ namespace ModLibsGeneral.Libraries.Fx {
 					int height=30,
 					float scale = 1f ) {
 			void makeDust( int type, int num ) {
-				DrawLibraries.CreateMany(
+				DustLibraries.CreateMany(
 					dustType: type,
 					position: position,
 					quantity: num,
@@ -79,7 +79,7 @@ namespace ModLibsGeneral.Libraries.Fx {
 		/// <param name="scale"></param>
 		public static void MakeTeleportFx( Vector2 position, int quantity, int width=30, int height=30, float scale = 1f ) {
 			void makeDust( int type, int num ) {
-				DrawLibraries.CreateMany(
+				DustLibraries.CreateMany(
 					dustType: type,
 					position: position,
 					quantity: num,
@@ -89,7 +89,7 @@ namespace ModLibsGeneral.Libraries.Fx {
 				);
 			}
 
-			makeDust( DrawLibraries.TeleportSparkleTypeID, quantity );
+			makeDust( DustLibraries.TeleportSparkleTypeID, quantity );
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace ModLibsGeneral.Libraries.Fx {
 		/// <param name="scale"></param>
 		public static void MakeGoldGlitter( Vector2 position, int quantity, int width=30, int height=30, float scale = 1f ) {
 			void makeDust( int type, int num ) {
-				DrawLibraries.CreateMany(
+				DustLibraries.CreateMany(
 					dustType: type,
 					position: position,
 					quantity: num,
@@ -112,7 +112,7 @@ namespace ModLibsGeneral.Libraries.Fx {
 				);
 			}
 
-			makeDust( DrawLibraries.GoldGlitterTypeID, quantity );
+			makeDust( DustLibraries.GoldGlitterTypeID, quantity );
 		}
 
 

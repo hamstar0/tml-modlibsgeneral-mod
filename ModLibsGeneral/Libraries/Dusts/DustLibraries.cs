@@ -8,7 +8,7 @@ namespace ModLibsGeneral.Libraries.Dusts {
 	/// <summary>
 	/// Assorted static "helper" functions pertaining to dusts.
 	/// </summary>
-	public class DrawLibraries {
+	public class DustLibraries {
 		/// <summary></summary>
 		public const int TeleportSparkleTypeID = 15;
 		
