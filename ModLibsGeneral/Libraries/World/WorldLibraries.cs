@@ -8,7 +8,7 @@ namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
 	/// Assorted static library functions pertaining to the current world.
 	/// </summary>
-	public partial class WorldLocationLibraries {
+	public partial class WorldLibraries {
 		/// <summary></summary>
 		public static Point WorldSizeSmall => new Point( 4200, 1200 );
 		/// <summary></summary>
