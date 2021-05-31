@@ -9,7 +9,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
 	/// Assorted static library functions pertaining to tiles relative to the world.
 	/// </summary>
-	public static class TileWorldLibraries {
+	public static partial class TileWorldLibraries {
 		/// <summary>
 		/// Indicates if a given tiles is within the visible player-accessible world's boundaries.
 		/// </summary>

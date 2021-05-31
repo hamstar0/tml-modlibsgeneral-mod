@@ -10,6 +10,35 @@ namespace ModLibsGeneral.Libraries.Collisions {
 	/// </summary>
 	public class TileCollisionLibraries {
 		/// <summary>
+		/// Indicates if a give tile permits a ray cast ("sight").
+		/// </summary>
+		/// <param name="tileX"></param>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public delegate bool IsSightClear( int tileX, int tileY );
+
+
+
+		////////////////
+
+		/// <summary>
+		/// Attempts a basic trace to see if a given point is encountered from another point by line of sight (no obstructing tiles).
+		/// </summary>
+		/// <param name="start"></param>
+		/// <param name="end"></param>
+		/// <param name="isSightClear"></param>
+		/// <returns></returns>
+		public static bool SimpleLineOfSight( Vector2 start, Vector2 end, IsSightClear isSightClear ) {
+			var trace = new Utils.PerLinePoint( delegate ( int tileX, int tileY ) {
+				return !isSightClear( tileX, tileY );
+			} );
+			return Utils.PlotTileLine( start, end, 1, trace );
+		}
+
+
+		////////////////
+
+		/// <summary>
 		/// Measures world distance to the nearest tile from a given point and heading.
 		/// </summary>
 		/// <param name="position"></param>

@@ -8,7 +8,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
 	/// Assorted static library functions pertaining to tile group identification.
 	/// </summary>
-	public class TileGroupIdentityLibraries {
+	public class TileCommonGroupsLibraries {
 		/// <summary>
 		/// Tile types that typically comprise "earth" (now includes underworld ash).
 		/// </summary>
