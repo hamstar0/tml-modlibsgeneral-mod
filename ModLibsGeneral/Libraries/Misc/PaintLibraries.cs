@@ -35,8 +35,8 @@ namespace ModLibsGeneral.Libraries.Misc {
 
 			for( int i=1; i<=30; i++ ) {
 				Color compare = WorldGen.paintColor( i );
-				Color dist = XnaColorLibraries.DistanceRGB( color, compare );
-				float distAmt = Math.Abs( XnaColorLibraries.SumRGB( dist ) );
+				Color dist = XNAColorLibraries.DistanceRGB( color, compare );
+				float distAmt = Math.Abs( XNAColorLibraries.SumRGB( dist ) );
 
 				if( minVal > distAmt ) {
 					minVal = distAmt;

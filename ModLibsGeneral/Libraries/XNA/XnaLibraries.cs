@@ -8,7 +8,7 @@ namespace ModLibsGeneral.Libraries.XNA {
 	/// <summary>
 	/// Assorted static library functions pertaining to XNA. 
 	/// </summary>
-	public partial class XnaLibraries {
+	public partial class XNALibraries {
 		/// <summary>
 		/// "Scans" a rectangle with a provided custom function, returning on the function reporting success. Skips over
 		/// another given rectangle, if overlapping.

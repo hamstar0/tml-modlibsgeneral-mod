@@ -7,7 +7,7 @@ namespace ModLibsGeneral.Libraries.XNA {
 	/// <summary>
 	/// Assorted static library functions pertaining to XNA's Color struct. 
 	/// </summary>
-	public static partial class XnaColorLibraries {
+	public static partial class XNAColorLibraries {
 		/// <summary>
 		/// Adds to the RGB(A) of a color by a fixed amount.
 		/// </summary>
@@ -203,7 +203,7 @@ namespace ModLibsGeneral.Libraries.XNA {
 		/// <param name="c"></param>
 		/// <returns></returns>
 		public static float AvgRGBA( Color c ) {
-			return (float)XnaColorLibraries.SumRGBA(c) * 0.25f;
+			return (float)XNAColorLibraries.SumRGBA(c) * 0.25f;
 		}
 		/// <summary>
 		/// Gets the averaged value of a color's RGB.
@@ -211,7 +211,7 @@ namespace ModLibsGeneral.Libraries.XNA {
 		/// <param name="c"></param>
 		/// <returns></returns>
 		public static float AvgRGB( Color c ) {
-			return (float)XnaColorLibraries.SumRGB( c ) / 3f;
+			return (float)XNAColorLibraries.SumRGB( c ) / 3f;
 		}
 
 		

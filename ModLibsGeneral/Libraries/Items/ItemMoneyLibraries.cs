@@ -96,7 +96,7 @@ namespace ModLibsGeneral.Libraries.Items {
 					render += " " + Language.GetTextValue( "Currency.Platinum" );    //Lang.inter[15];
 				}
 				if( addColors ) {
-					Color color = XnaColorLibraries.Mul( ItemMoneyLibraries.PlatinumCoinColor, tint );
+					Color color = XNAColorLibraries.Mul( ItemMoneyLibraries.PlatinumCoinColor, tint );
 					string colorHex = MiscLibraries.RenderColorHex( color );
 					render = "[c/"+colorHex+":"+render+"]";
 				}
@@ -108,7 +108,7 @@ namespace ModLibsGeneral.Libraries.Items {
 					render += " " + Language.GetTextValue( "Currency.Gold" );    //Lang.inter[16];
 				}
 				if( addColors ) {
-					Color color = XnaColorLibraries.Mul( ItemMoneyLibraries.GoldCoinColor, tint );
+					Color color = XNAColorLibraries.Mul( ItemMoneyLibraries.GoldCoinColor, tint );
 					string colorHex = MiscLibraries.RenderColorHex( color );
 					render = "[c/"+colorHex+":"+render+"]";
 				}
@@ -120,7 +120,7 @@ namespace ModLibsGeneral.Libraries.Items {
 					render += " " + Language.GetTextValue( "Currency.Silver" );    //Lang.inter[17];
 				}
 				if( addColors ) {
-					Color color = XnaColorLibraries.Mul( ItemMoneyLibraries.SilverCoinColor, tint );
+					Color color = XNAColorLibraries.Mul( ItemMoneyLibraries.SilverCoinColor, tint );
 					string colorHex = MiscLibraries.RenderColorHex( color );
 					render = "[c/"+colorHex+":"+render+"]";
 				}
@@ -132,7 +132,7 @@ namespace ModLibsGeneral.Libraries.Items {
 					render += " " + Language.GetTextValue( "Currency.Copper" );    //Lang.inter[18];
 				}
 				if( addColors ) {
-					Color color = XnaColorLibraries.Mul( ItemMoneyLibraries.CopperCoinColor, tint );
+					Color color = XNAColorLibraries.Mul( ItemMoneyLibraries.CopperCoinColor, tint );
 					string colorHex = MiscLibraries.RenderColorHex( color );
 					render = "[c/"+colorHex+":"+render+"]";
 				}
