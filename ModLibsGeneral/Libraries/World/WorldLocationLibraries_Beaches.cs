@@ -10,7 +10,7 @@ namespace ModLibsGeneral.Libraries.World {
 		private static bool CheckColumnForBeach( int x, out int atX, out int atY ) {
 			int y;
 
-			for( y = WorldLibraries.SkyLayerBottomTileY; y < WorldLibraries.SurfaceLayerBottomTileY; y++ ) {
+			for( y = WorldLocationLibraries.SkyLayerBottomTileY; y < WorldLocationLibraries.SurfaceLayerBottomTileY; y++ ) {
 				Tile tile = Framing.GetTileSafely( x, y );
 				if( tile == null || !tile.active() ) {
 					continue;

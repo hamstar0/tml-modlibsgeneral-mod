@@ -14,7 +14,7 @@ namespace ModLibsGeneral.Libraries.World {
 	public partial class WorldLocationLibraries {
 		private static Rectangle GetGiantTreeAt( int tileX, int tileY ) {
 			int minY = 80;
-			int maxY = WorldLibraries.SurfaceLayerBottomTileY - 50;
+			int maxY = WorldLocationLibraries.SurfaceLayerBottomTileY - 50;
 
 			Tile tile;
 			int xLeft = tileX, xRight = tileX + 1;
@@ -85,7 +85,7 @@ namespace ModLibsGeneral.Libraries.World {
 			int minX = 300;
 			int maxX = Main.maxTilesX - 300;
 			int minY = 80;
-			int maxY = WorldLibraries.SurfaceLayerBottomTileY - 50;
+			int maxY = WorldLocationLibraries.SurfaceLayerBottomTileY - 50;
 			int midX1 = ( Main.maxTilesX / 2 ) - 100;
 			int midX2 = ( Main.maxTilesX / 2 ) + 100;
 			Tile tile;

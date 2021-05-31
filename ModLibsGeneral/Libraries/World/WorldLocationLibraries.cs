@@ -8,9 +8,9 @@ namespace ModLibsGeneral.Libraries.World {
 	/// <summary>
 	/// Assorted static library functions pertaining to locating things in the world.
 	/// </summary>
-	public partial class WorldLibraries {
+	public partial class WorldLocationLibraries {
 		/// <summary></summary>
-		public static int SurfaceLayerTopTileY => WorldLibraries.SkyLayerBottomTileY;
+		public static int SurfaceLayerTopTileY => WorldLocationLibraries.SkyLayerBottomTileY;
 
 		/// <summary></summary>
 		public static int SurfaceLayerBottomTileY => (int)Main.worldSurface;
@@ -27,7 +27,7 @@ namespace ModLibsGeneral.Libraries.World {
 		public static int RockLayerTopTileY => (int)Main.rockLayer;
 
 		/// <summary></summary>
-		public static int RockLayerBottomTileY => WorldLibraries.UnderworldLayerTopTileY;
+		public static int RockLayerBottomTileY => WorldLocationLibraries.UnderworldLayerTopTileY;
 
 
 		/// <summary></summary>
@@ -62,29 +62,29 @@ namespace ModLibsGeneral.Libraries.World {
 		public static WorldRegionFlags GetRegion( Vector2 worldPos ) {
 			WorldRegionFlags where = 0;
 
-			if( WorldLibraries.IsSky(worldPos) ) {
+			if( WorldLocationLibraries.IsSky(worldPos) ) {
 				where |= WorldRegionFlags.Sky;
-			} else if( WorldLibraries.IsWithinUnderworld(worldPos) ) {
+			} else if( WorldLocationLibraries.IsWithinUnderworld(worldPos) ) {
 				where |= WorldRegionFlags.Hell;
-			} else if( WorldLibraries.IsAboveWorldSurface(worldPos) ) {
+			} else if( WorldLocationLibraries.IsAboveWorldSurface(worldPos) ) {
 				where |= WorldRegionFlags.Overworld;
 
-				if( WorldLibraries.BeachEastTileX < (worldPos.X/16) ) {
+				if( WorldLocationLibraries.BeachEastTileX < (worldPos.X/16) ) {
 					where |= WorldRegionFlags.OceanEast;
-				} else if( WorldLibraries.BeachWestTileX > (worldPos.X/16) ) {
+				} else if( WorldLocationLibraries.BeachWestTileX > (worldPos.X/16) ) {
 					where |= WorldRegionFlags.OceanWest;
 				}
 			} else {
-				if( WorldLibraries.IsDirtLayer( worldPos ) ) {
+				if( WorldLocationLibraries.IsDirtLayer( worldPos ) ) {
 					where |= WorldRegionFlags.CaveDirt;
 				} else {
-					if( WorldLibraries.IsPreRockLayer( worldPos ) ) {
+					if( WorldLocationLibraries.IsPreRockLayer( worldPos ) ) {
 						where |= WorldRegionFlags.CavePreRock;
 					}
-					if( WorldLibraries.IsRockLayer( worldPos ) ) {
+					if( WorldLocationLibraries.IsRockLayer( worldPos ) ) {
 						where |= WorldRegionFlags.CaveRock;
 
-						if( WorldLibraries.IsLavaLayer( worldPos ) ) {
+						if( WorldLocationLibraries.IsLavaLayer( worldPos ) ) {
 							where |= WorldRegionFlags.CaveLava;
 						}
 					}
@@ -186,7 +186,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsBeach( Vector2 worldPos ) {
-			if( !WorldLibraries.IsOverworld( worldPos ) ) {
+			if( !WorldLocationLibraries.IsOverworld( worldPos ) ) {
 				return false;
 			}
 			return IsBeachRegion( worldPos );
