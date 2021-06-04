@@ -39,14 +39,14 @@ namespace ModLibsGeneral.Libraries.Items {
 		/// </summary>
 		/// <returns>Group names mapped to group description and a set of item ids.</returns>
 		public static IDictionary<string, ItemGroupDefinition> GetCommonItemGroups() {
-			IEnumerable<PropertyInfo> itemGrpFields = typeof( ItemCommonGroupsLibraries )
+			IEnumerable<PropertyInfo> itemGrpProps = typeof( ItemCommonGroupsLibraries )
 					.GetProperties( ReflectionLibraries.MostAccess );
-
-			itemGrpFields = itemGrpFields.Where( field => {
-				return field.PropertyType == typeof( ItemGroupDefinition );
+			
+			itemGrpProps = itemGrpProps.Where( prop => {
+				return prop.PropertyType == typeof( ItemGroupDefinition );
 			} );
 
-			var groups = itemGrpFields.ToDictionary(
+			var groups = itemGrpProps.ToDictionary(
 				prop => prop.Name,
 				prop => (ItemGroupDefinition)prop.GetValue( null )
 			);

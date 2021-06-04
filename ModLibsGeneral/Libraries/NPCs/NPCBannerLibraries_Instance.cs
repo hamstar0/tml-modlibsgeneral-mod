@@ -21,17 +21,12 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		void ILoadable.OnModsLoad() { }
 
 		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
-
-		internal void InitializeBanners() {
+		void ILoadable.OnPostModsLoad() {
 			this.BannerItemTypesToNpcTypes = new Dictionary<int, ISet<int>>();
 			this.NpcTypesToBannerItemTypes = NPCBannerLibraries.GetNpcToBannerItemTypes();
 
 			foreach( var kv in this.NpcTypesToBannerItemTypes ) {
-				if( !this.BannerItemTypesToNpcTypes.ContainsKey(kv.Value) ) {
+				if( !this.BannerItemTypesToNpcTypes.ContainsKey( kv.Value ) ) {
 					this.BannerItemTypesToNpcTypes[kv.Value] = new HashSet<int>();
 				}
 				this.BannerItemTypesToNpcTypes[kv.Value].Add( kv.Key );
@@ -39,5 +34,8 @@ namespace ModLibsGeneral.Libraries.NPCs {
 
 			this.BannerItemTypes = new HashSet<int>( this.BannerItemTypesToNpcTypes.Keys );
 		}
+
+		/// @private
+		void ILoadable.OnModsUnload() { }
 	}
 }
