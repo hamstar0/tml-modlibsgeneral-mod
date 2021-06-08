@@ -178,22 +178,30 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// tile requirements.
 		/// </summary>
 		/// <param name="itemType">Item type to find recipes for.</param>
-		/// <param name="ingredients">Ingredient item types and their stack sizes.</param>
+		/// <param name="minimumIngredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns></returns>
-		public static bool ItemHasIngredients( int itemType, IDictionary<int, int> ingredients ) {
+		public static bool ItemHasIngredients( int itemType, IDictionary<int, (int min, int max)> minimumIngredients ) {
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
 				Recipe recipe = Main.recipe[i];
-				if( recipe.createItem.type != itemType ) { continue; }
+				if( recipe.createItem.type != itemType ) {
+					continue;
+				}
+
+				var minIngreds = new HashSet<int>( minimumIngredients.Keys );
 
 				for( int j = 0; j < recipe.requiredItem.Length; j++ ) {
 					Item reqitem = recipe.requiredItem[j];
+					if( !minIngreds.Contains(reqitem.type) ) {
+						continue;
+					}
 
-					//if( reqitem.stack < minStack ) { continue; }
-					if( ingredients.ContainsKey( reqitem.type ) ) {
-						if( reqitem.stack < ingredients[reqitem.type] ) {
-							continue;
-						}
+					(int min, int max) ingredAmt = minimumIngredients[reqitem.type];
+					if( reqitem.stack < ingredAmt.min || reqitem.stack >= ingredAmt.max ) {	// Not an acceptable amount
+						break;
+					}
 
+					minIngreds.Remove( reqitem.type );
+					if( minIngreds.Count == 0 ) {	// All ingredients accounted for
 						return true;
 					}
 				}
