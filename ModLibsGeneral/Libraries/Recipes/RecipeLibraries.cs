@@ -181,31 +181,54 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// <param name="minimumIngredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns></returns>
 		public static bool ItemHasIngredients( int itemType, IDictionary<int, (int min, int max)> minimumIngredients ) {
+/*void OutputShit( bool found ) {
+	if( !minimumIngredients.Keys.Contains( ItemID.CopperBar ) ) {
+		return;
+	}
+	IEnumerable<Recipe> recipes = Main.recipe.Where( r => r.createItem.type == itemType && r.createItem.stack >= 1 );
+	if( recipes.Count() == 0 ) {
+		return;
+	}
+
+	LogLibraries.Log( "Checking recipes for "+ItemNameAttributeLibraries.GetQualifiedName(itemType)+" ("+itemType+")"
+		+" for Copper Bar (found? "+found+"):" );
+
+	foreach( Recipe recipe in recipes ) {
+		LogLibraries.Log( "  " + string.Join( ", ",
+				recipe.requiredItem
+					.Where( item=>item.type != ItemID.None && item.stack > 0 )
+					.Select( item=>item.Name+" ("+item.stack+")" )
+			)
+		);
+	}
+}*/
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
 				Recipe recipe = Main.recipe[i];
-				if( recipe.createItem.type != itemType ) {
+				if( recipe.createItem.type != itemType || recipe.createItem.stack <= 0 ) {
 					continue;
 				}
 
 				var minIngreds = new HashSet<int>( minimumIngredients.Keys );
 
 				for( int j = 0; j < recipe.requiredItem.Length; j++ ) {
-					Item reqitem = recipe.requiredItem[j];
-					if( !minIngreds.Contains(reqitem.type) ) {
+					Item reqItem = recipe.requiredItem[j];
+					if( !minIngreds.Contains(reqItem.type) ) {
 						continue;
 					}
 
-					(int min, int max) ingredAmt = minimumIngredients[reqitem.type];
-					if( reqitem.stack < ingredAmt.min || reqitem.stack >= ingredAmt.max ) {	// Not an acceptable amount
+					(int min, int max) ingredAmt = minimumIngredients[reqItem.type];
+					if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) {	// Not an acceptable amount
 						break;
 					}
 
-					minIngreds.Remove( reqitem.type );
+					minIngreds.Remove( reqItem.type );
 					if( minIngreds.Count == 0 ) {	// All ingredients accounted for
+//OutputShit( true );
 						return true;
 					}
 				}
 			}
+//OutputShit( false );
 			return false;
 		}
 	}

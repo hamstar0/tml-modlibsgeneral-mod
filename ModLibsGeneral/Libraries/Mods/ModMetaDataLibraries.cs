@@ -3,11 +3,11 @@ using Terraria.ModLoader;
 using ModLibsCore.Classes.Errors;
 
 
-namespace ModLibsGeneral.Libraries.ModHelpers {
+namespace ModLibsGeneral.Libraries.Mods {
 	/// <summary>
-	/// Assorted static library functions pertaining to Mod Helpers features.
+	/// Assorted static library functions pertaining to mod meta data features.
 	/// </summary>
-	public partial class ModFeaturesLibraries {
+	public partial class ModMetaDataLibraries {
 		private static PropertyInfo GetGithubUserNameProp( Mod mod ) {
 			return mod.GetType().GetProperty( "GithubUserName", BindingFlags.Static | BindingFlags.Public );
 		}
@@ -19,8 +19,8 @@ namespace ModLibsGeneral.Libraries.ModHelpers {
 		////
 
 		private static bool DetectGithub( Mod mod ) {
-			if( ModFeaturesLibraries.GetGithubUserNameProp( mod ) == null ) { return false; }
-			if( ModFeaturesLibraries.GetGitubProjectNameProp( mod ) == null ) { return false; }
+			if( ModMetaDataLibraries.GetGithubUserNameProp( mod ) == null ) { return false; }
+			if( ModMetaDataLibraries.GetGitubProjectNameProp( mod ) == null ) { return false; }
 			return true;
 		}
 
@@ -33,7 +33,7 @@ namespace ModLibsGeneral.Libraries.ModHelpers {
 		/// <param name="mod"></param>
 		/// <returns></returns>
 		public static bool HasGithub( Mod mod ) {
-			var self = ModContent.GetInstance<ModFeaturesLibraries>();
+			var self = ModContent.GetInstance<ModMetaDataLibraries>();
 			return self.GithubMods.ContainsKey( mod.Name );
 		}
 
@@ -45,10 +45,10 @@ namespace ModLibsGeneral.Libraries.ModHelpers {
 		/// <param name="mod"></param>
 		/// <returns></returns>
 		public static string GetGithubUserName( Mod mod ) {
-			var self = ModContent.GetInstance<ModFeaturesLibraries>();
+			var self = ModContent.GetInstance<ModMetaDataLibraries>();
 			if( !self.GithubMods.ContainsKey( mod.Name ) ) { return null; }
 
-			PropertyInfo gitUserProp = ModFeaturesLibraries.GetGithubUserNameProp( mod );
+			PropertyInfo gitUserProp = ModMetaDataLibraries.GetGithubUserNameProp( mod );
 			return (string)gitUserProp.GetValue( null );
 		}
 
@@ -58,10 +58,10 @@ namespace ModLibsGeneral.Libraries.ModHelpers {
 		/// <param name="mod"></param>
 		/// <returns></returns>
 		public static string GetGithubProjectName( Mod mod ) {
-			var self = ModContent.GetInstance<ModFeaturesLibraries>();
+			var self = ModContent.GetInstance<ModMetaDataLibraries>();
 			if( !self.GithubMods.ContainsKey( mod.Name ) ) { return null; }
 
-			PropertyInfo gitProjProp = ModFeaturesLibraries.GetGitubProjectNameProp( mod );
+			PropertyInfo gitProjProp = ModMetaDataLibraries.GetGitubProjectNameProp( mod );
 			return (string)gitProjProp.GetValue( null );
 		}
 	}
