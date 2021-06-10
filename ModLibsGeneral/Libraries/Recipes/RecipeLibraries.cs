@@ -177,10 +177,13 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// Indicates if a given item type has the ingredients it needs to be crafted from any of its recipes. Does not check
 		/// tile requirements.
 		/// </summary>
-		/// <param name="itemType">Item type to find recipes for.</param>
-		/// <param name="minimumIngredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
-		/// <returns></returns>
-		public static bool ItemHasIngredients( int itemType, IDictionary<int, (int min, int max)> minimumIngredients ) {
+		/// <param name="filterItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
+		/// ingredients.</param>
+		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
+		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
+		public static ISet<int> GetItemRecipesWithIngredients(
+					ISet<int> filterItemTypes,
+					IDictionary<int, (int min, int max)> ingredients ) {
 /*void OutputShit( bool found ) {
 	if( !minimumIngredients.Keys.Contains( ItemID.CopperBar ) ) {
 		return;
@@ -202,13 +205,18 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		);
 	}
 }*/
+			var recipeIdxs = new HashSet<int>();
+
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
 				Recipe recipe = Main.recipe[i];
-				if( recipe.createItem.type != itemType || recipe.createItem.stack <= 0 ) {
+				if( recipe.createItem.stack <= 0 ) {
+					continue;
+				}
+				if( filterItemTypes.Count > 0 && filterItemTypes.Contains(recipe.createItem.type) ) {
 					continue;
 				}
 
-				var minIngreds = new HashSet<int>( minimumIngredients.Keys );
+				var minIngreds = new HashSet<int>( ingredients.Keys );
 
 				for( int j = 0; j < recipe.requiredItem.Length; j++ ) {
 					Item reqItem = recipe.requiredItem[j];
@@ -216,20 +224,21 @@ namespace ModLibsGeneral.Libraries.Recipes {
 						continue;
 					}
 
-					(int min, int max) ingredAmt = minimumIngredients[reqItem.type];
+					(int min, int max) ingredAmt = ingredients[ reqItem.type ];
 					if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) {	// Not an acceptable amount
 						break;
 					}
 
 					minIngreds.Remove( reqItem.type );
+
 					if( minIngreds.Count == 0 ) {	// All ingredients accounted for
-//OutputShit( true );
-						return true;
+						recipeIdxs.Add( i );
+						break;
 					}
 				}
 			}
-//OutputShit( false );
-			return false;
+
+			return recipeIdxs;
 		}
 	}
 }
