@@ -174,16 +174,13 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		////////////////
 
 		/// <summary>
-		/// Indicates if a given item type has the ingredients it needs to be crafted from any of its recipes. Does not check
-		/// tile requirements.
+		/// Indicates if any given item types have recipes with the given ingredients. Does not check tile requirements.
 		/// </summary>
 		/// <param name="filterItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
 		/// ingredients.</param>
 		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
-		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
-		public static bool HasItemRecipeWithIngredients(
-					ISet<int> filterItemTypes,
-					IDictionary<int, (int min, int max)> ingredients ) {
+		/// <returns>`true` if recipe exists.</returns>
+		public static bool ItemHasRecipe( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
 /*void OutputShit( bool found ) {
 	if( !minimumIngredients.Keys.Contains( ItemID.CopperBar ) ) {
 		return;
@@ -239,16 +236,13 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		}
 
 		/// <summary>
-		/// Indicates if a given item type has the ingredients it needs to be crafted from any of its recipes. Does not check
-		/// tile requirements.
+		/// Gets all recipes of the given item types with the given ingredients. Does not check tile requirements.
 		/// </summary>
 		/// <param name="filterItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
 		/// ingredients.</param>
 		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
-		public static ISet<int> GetItemRecipesWithIngredients(
-					ISet<int> filterItemTypes,
-					IDictionary<int, (int min, int max)> ingredients ) {
+		public static ISet<int> GetRecipes( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
 			var recipeIdxs = new HashSet<int>();
 
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
