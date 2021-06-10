@@ -180,7 +180,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// ingredients.</param>
 		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns>`true` if recipe exists.</returns>
-		public static bool ItemHasRecipe( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
+		public static bool RecipeExists( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
 /*void OutputShit( bool found ) {
 	if( !minimumIngredients.Keys.Contains( ItemID.CopperBar ) ) {
 		return;
@@ -207,7 +207,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 				if( recipe.createItem.stack <= 0 ) {
 					continue;
 				}
-				if( filterItemTypes.Count > 0 && filterItemTypes.Contains(recipe.createItem.type) ) {
+				if( filterItemTypes.Count > 0 && !filterItemTypes.Contains(recipe.createItem.type) ) {
 					continue;
 				}
 
@@ -250,7 +250,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 				if( recipe.createItem.stack <= 0 ) {
 					continue;
 				}
-				if( filterItemTypes.Count > 0 && filterItemTypes.Contains(recipe.createItem.type) ) {
+				if( filterItemTypes.Count > 0 && !filterItemTypes.Contains(recipe.createItem.type) ) {
 					continue;
 				}
 
