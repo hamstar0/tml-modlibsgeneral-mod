@@ -204,7 +204,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 }*/
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
 				Recipe recipe = Main.recipe[i];
-				if( recipe.createItem.stack <= 0 ) {
+				if( recipe.createItem.type == ItemID.None || recipe.createItem.stack <= 0 ) {
 					continue;
 				}
 				if( filterItemTypes.Count > 0 && !filterItemTypes.Contains(recipe.createItem.type) ) {
@@ -215,16 +215,22 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 				for( int j = 0; j < recipe.requiredItem.Length; j++ ) {
 					Item reqItem = recipe.requiredItem[j];
-					if( !minIngreds.Contains(reqItem.type) ) {
+					if( reqItem.IsAir ) {
 						continue;
 					}
 
-					(int min, int max) ingredAmt = ingredients[ reqItem.type ];
-					if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) {	// Not an acceptable amount
-						break;
-					}
+					if( minIngreds.Count > 0 ) {
+						if( !minIngreds.Contains(reqItem.type) ) {
+							continue;
+						}
 
-					minIngreds.Remove( reqItem.type );
+						(int min, int max) ingredAmt = ingredients[reqItem.type];
+						if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) { // Not an acceptable amount
+							break;
+						}
+
+						minIngreds.Remove( reqItem.type );
+					}
 
 					if( minIngreds.Count == 0 ) {	// All ingredients accounted for
 						return true;
@@ -247,7 +253,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
 				Recipe recipe = Main.recipe[i];
-				if( recipe.createItem.stack <= 0 ) {
+				if( recipe.createItem.type == ItemID.None || recipe.createItem.stack <= 0 ) {
 					continue;
 				}
 				if( filterItemTypes.Count > 0 && !filterItemTypes.Contains(recipe.createItem.type) ) {
@@ -258,16 +264,22 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 				for( int j = 0; j < recipe.requiredItem.Length; j++ ) {
 					Item reqItem = recipe.requiredItem[j];
-					if( !minIngreds.Contains(reqItem.type) ) {
+					if( reqItem.IsAir ) {
 						continue;
 					}
 
-					(int min, int max) ingredAmt = ingredients[ reqItem.type ];
-					if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) {	// Not an acceptable amount
-						break;
-					}
+					if( minIngreds.Count > 0 ) {
+						if( !minIngreds.Contains(reqItem.type) ) {
+							continue;
+						}
 
-					minIngreds.Remove( reqItem.type );
+						(int min, int max) ingredAmt = ingredients[reqItem.type];
+						if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) { // Not an acceptable amount
+							break;
+						}
+
+						minIngreds.Remove( reqItem.type );
+					}
 
 					if( minIngreds.Count == 0 ) {	// All ingredients accounted for
 						recipeIdxs.Add( i );
