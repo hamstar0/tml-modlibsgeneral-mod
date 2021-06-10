@@ -181,7 +181,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// ingredients.</param>
 		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
-		public static ISet<int> GetItemRecipesWithIngredients(
+		public static bool HasItemRecipeWithIngredients(
 					ISet<int> filterItemTypes,
 					IDictionary<int, (int min, int max)> ingredients ) {
 /*void OutputShit( bool found ) {
@@ -205,6 +205,50 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		);
 	}
 }*/
+			for( int i = 0; i < Main.recipe.Length; i++ ) {
+				Recipe recipe = Main.recipe[i];
+				if( recipe.createItem.stack <= 0 ) {
+					continue;
+				}
+				if( filterItemTypes.Count > 0 && filterItemTypes.Contains(recipe.createItem.type) ) {
+					continue;
+				}
+
+				var minIngreds = new HashSet<int>( ingredients.Keys );
+
+				for( int j = 0; j < recipe.requiredItem.Length; j++ ) {
+					Item reqItem = recipe.requiredItem[j];
+					if( !minIngreds.Contains(reqItem.type) ) {
+						continue;
+					}
+
+					(int min, int max) ingredAmt = ingredients[ reqItem.type ];
+					if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) {	// Not an acceptable amount
+						break;
+					}
+
+					minIngreds.Remove( reqItem.type );
+
+					if( minIngreds.Count == 0 ) {	// All ingredients accounted for
+						return true;
+					}
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Indicates if a given item type has the ingredients it needs to be crafted from any of its recipes. Does not check
+		/// tile requirements.
+		/// </summary>
+		/// <param name="filterItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
+		/// ingredients.</param>
+		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
+		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
+		public static ISet<int> GetItemRecipesWithIngredients(
+					ISet<int> filterItemTypes,
+					IDictionary<int, (int min, int max)> ingredients ) {
 			var recipeIdxs = new HashSet<int>();
 
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
