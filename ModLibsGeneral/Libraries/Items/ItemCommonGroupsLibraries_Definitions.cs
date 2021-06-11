@@ -280,14 +280,5 @@ namespace ModLibsGeneral.Libraries.Items {
 					ItemID.GrimDye, ItemID.LokisDye, ItemID.ShadowflameHadesDye
 				} )
 			);
-
-		/// <summary>
-		/// All banner types.
-		/// </summary>
-		public static ItemGroupDefinition Banners =>
-			new ItemGroupDefinition(
-				"Banners",
-				new HashSet<int>( NPCBannerLibraries.GetBannerItemTypes() )
-			);
 	}
 }

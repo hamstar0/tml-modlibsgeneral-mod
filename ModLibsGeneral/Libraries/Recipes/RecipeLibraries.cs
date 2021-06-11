@@ -181,27 +181,6 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns>`true` if recipe exists.</returns>
 		public static bool RecipeExists( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
-/*void OutputShit( bool found ) {
-	if( !minimumIngredients.Keys.Contains( ItemID.CopperBar ) ) {
-		return;
-	}
-	IEnumerable<Recipe> recipes = Main.recipe.Where( r => r.createItem.type == itemType && r.createItem.stack >= 1 );
-	if( recipes.Count() == 0 ) {
-		return;
-	}
-
-	LogLibraries.Log( "Checking recipes for "+ItemNameAttributeLibraries.GetQualifiedName(itemType)+" ("+itemType+")"
-		+" for Copper Bar (found? "+found+"):" );
-
-	foreach( Recipe recipe in recipes ) {
-		LogLibraries.Log( "  " + string.Join( ", ",
-				recipe.requiredItem
-					.Where( item=>item.type != ItemID.None && item.stack > 0 )
-					.Select( item=>item.Name+" ("+item.stack+")" )
-			)
-		);
-	}
-}*/
 			for( int i = 0; i < Main.recipe.Length; i++ ) {
 				Recipe recipe = Main.recipe[i];
 				if( recipe.createItem.type == ItemID.None || recipe.createItem.stack <= 0 ) {
