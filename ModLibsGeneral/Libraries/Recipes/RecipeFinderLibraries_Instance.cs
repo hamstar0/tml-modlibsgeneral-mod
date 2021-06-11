@@ -16,8 +16,8 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 		////////////////
 		
-		private IDictionary<int, ISet<int>> RecipeIndexesByItemNetID = new Dictionary<int, ISet<int>>();
-		private IDictionary<int, ISet<int>> RecipeIndexesOfIngredientNetIDs = new Dictionary<int, ISet<int>>();
+		private IDictionary<int, ISet<int>> RecipeIndexesByItemType = new Dictionary<int, ISet<int>>();
+		private IDictionary<int, ISet<int>> RecipeIndexesOfIngredientItemTypes = new Dictionary<int, ISet<int>>();
 
 
 
@@ -44,7 +44,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 						break;
 					}
 					
-					this.RecipeIndexesByItemNetID.Append2D( recipeItemType, i );
+					this.RecipeIndexesByItemType.Append2D( recipeItemType, i );
 				}
 			}
 		}
@@ -64,7 +64,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 							break;
 						}
 
-						this.RecipeIndexesOfIngredientNetIDs.Append2D( item.netID, i );
+						this.RecipeIndexesOfIngredientItemTypes.Append2D( item.type, i );
 					}
 				}
 			}
