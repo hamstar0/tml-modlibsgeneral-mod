@@ -109,9 +109,6 @@ namespace ModLibsGeneral.Libraries.Recipes {
 				if( recipe.createItem.type == ItemID.None || recipe.createItem.stack <= 0 ) {
 					continue;
 				}
-				if( createItemTypes.Count > 0 && !createItemTypes.Contains(recipe.createItem.type) ) {
-					continue;
-				}
 
 				var minIngreds = new HashSet<int>( ingredients.Keys );
 

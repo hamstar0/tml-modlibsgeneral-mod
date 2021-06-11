@@ -39,12 +39,10 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			lock( RecipeFinderLibraries.MyLock ) {
 				for( int i = 0; i < Main.recipe.Length; i++ ) {
 					Recipe recipe = Main.recipe[i];
-					int recipeItemType = recipe.createItem.type;
-					if( recipeItemType == 0 ) {
-						break;
+
+					if( !recipe.createItem.IsAir ) {
+						this.RecipeIndexesByItemType.Append2D( recipe.createItem.type, i );
 					}
-					
-					this.RecipeIndexesByItemType.Append2D( recipeItemType, i );
 				}
 			}
 		}
@@ -54,8 +52,8 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			lock( RecipeFinderLibraries.MyLock ) {
 				for( int i = 0; i < Main.recipe.Length; i++ ) {
 					Recipe recipe = Main.recipe[i];
-					if( recipe.createItem.type == ItemID.None ) {
-						break;
+					if( recipe.createItem.IsAir ) {
+						continue;
 					}
 
 					for( int j=0; j<recipe.requiredItem.Length; j++ ) {
