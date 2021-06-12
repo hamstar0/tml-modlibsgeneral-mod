@@ -2,8 +2,10 @@
 using Terraria;
 using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.DotNET.Extensions;
 using ModLibsCore.Libraries.TModLoader;
 using ModLibsGeneral.Libraries.World;
+using ModLibsGeneral.Libraries.Recipes;
 
 
 namespace ModLibsGeneral {
@@ -37,6 +39,15 @@ namespace ModLibsGeneral {
 			} catch { }
 			
 			ModLibsGeneralMod.Instance = null;
+		}
+
+
+		////////////////
+
+		public override void AddRecipeGroups() {
+			foreach( (string grpName, RecipeGroup grp) in RecipeCommonGroupsLibraries.Groups ) {
+				RecipeGroup.RegisterGroup( grpName, grp );
+			}
 		}
 
 
