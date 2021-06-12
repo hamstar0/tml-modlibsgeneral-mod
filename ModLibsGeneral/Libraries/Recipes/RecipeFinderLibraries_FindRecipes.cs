@@ -116,7 +116,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 					return false;
 				}
 			}
-
+			
 			return anyIngredients != null
 				? RecipeFinderLibraries.MatchRecipeAny( recipe, anyIngredients )
 				: true;
@@ -144,7 +144,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 					}
 
 					(int min, int max) ingredAmt = allIngredients[reqItem.type];
-					if( reqItem.stack > ingredAmt.min && reqItem.stack < ingredAmt.max ) {
+					if( reqItem.stack >= ingredAmt.min && reqItem.stack <= ingredAmt.max ) {
 						minIngreds.Remove( reqItem.type );
 					}
 				}
@@ -168,7 +168,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 				}
 
 				(int min, int max) ingredAmt = anyIngredients[ reqItem.type ];
-				if( reqItem.stack > ingredAmt.min && reqItem.stack < ingredAmt.max ) {
+				if( reqItem.stack >= ingredAmt.min && reqItem.stack <= ingredAmt.max ) {
 					return true;
 				}
 			}
