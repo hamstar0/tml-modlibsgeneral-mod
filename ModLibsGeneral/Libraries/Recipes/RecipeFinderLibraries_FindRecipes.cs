@@ -15,16 +15,16 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// </summary>
 		/// <param name="createItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
 		/// ingredients.</param>
-		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All are
-		/// required.</param>
-		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will
-		/// suffice.</param>
+		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All required.
+		/// Accepts `null`.</param>
+		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will suffice.
+		/// Accepts `null`.</param>
 		/// <param name="until">Maximum number of recipes to return.</param>
 		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
 		public static ISet<int> FindRecipes_Cached(
 					ISet<int> createItemTypes,
-					IDictionary<int, (int min, int max)> allIngredients = null,
-					IDictionary<int, (int min, int max)> anyIngredients = null,
+					IDictionary<int, (int min, int max)> allIngredients,
+					IDictionary<int, (int min, int max)> anyIngredients,
 					int until = Int32.MaxValue ) {
 			Func<IEnumerable<int>> GetNextRecipeIdx;
 
@@ -70,16 +70,16 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// Filters a given set of recipes upon the given ingredients. Does not check tile requirements.
 		/// </summary>
 		/// <param name="recipeSource">Enumerates the set of `Main.recipe` indexes of the given recipes to filter upon.</param>
-		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All are
-		/// required.</param>
-		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will
-		/// suffice.</param>
+		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All required.
+		/// Accepts `null`.</param>
+		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will suffice.
+		/// Accepts `null`.</param>
 		/// <param name="until">Maximum number of recipes to return.</param>
 		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
 		public static ISet<int> FilterRecipes(
 					Func<IEnumerable<int>> recipeSource,
-					IDictionary<int, (int min, int max)> allIngredients = null,
-					IDictionary<int, (int min, int max)> anyIngredients = null,
+					IDictionary<int, (int min, int max)> allIngredients,
+					IDictionary<int, (int min, int max)> anyIngredients,
 					int until = Int32.MaxValue ) {
 			int counted = 0;
 			var matchRecipeIdxs = new HashSet<int>();
@@ -118,7 +118,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			}
 
 			return anyIngredients != null
-				? RecipeFinderLibraries.MatchRecipeAny( recipe, allIngredients )
+				? RecipeFinderLibraries.MatchRecipeAny( recipe, anyIngredients )
 				: true;
 		}
 
