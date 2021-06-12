@@ -19,15 +19,20 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// </summary>
 		/// <param name="itemType"></param>
 		/// <returns></returns>
-		public static ISet<int> GetRecipeIndexesOfItem( int itemType ) {
+		public static ISet<int> GetRecipeIndexesOfItem_Cached( int itemType ) {
 			var rfLib = ModContent.GetInstance<RecipeFinderLibraries>();
 			IDictionary<int, ISet<int>> recipeIdxLists = rfLib.RecipeIndexesByItemType;
-			
-			lock( RecipeFinderLibraries.MyLock ) {
-				if( recipeIdxLists.Count == 0 ) {
-					rfLib.CacheItemRecipes();
-				}
+			int recipeIdxCount = 0;
 
+			lock( RecipeFinderLibraries.MyLock ) {
+				recipeIdxCount = recipeIdxLists.Count;
+			}
+
+			if( recipeIdxCount == 0 ) {
+				rfLib.CacheItemRecipes();
+			}
+
+			lock( RecipeFinderLibraries.MyLock ) {
 				return recipeIdxLists.GetOrDefault( itemType )
 					?? new HashSet<int>();
 			}
@@ -38,8 +43,8 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// </summary>
 		/// <param name="itemType"></param>
 		/// <returns></returns>
-		public static IList<Recipe> GetRecipesOfItem( int itemType ) {
-			return RecipeFinderLibraries.GetRecipeIndexesOfItem( itemType )
+		public static IList<Recipe> GetRecipesOfItem_Cached( int itemType ) {
+			return RecipeFinderLibraries.GetRecipeIndexesOfItem_Cached( itemType )
 				.Select( idx=>Main.recipe[idx] )
 				.ToList();
 		}
@@ -54,8 +59,8 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// ingredients.</param>
 		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
 		/// <returns>`true` if recipe exists.</returns>
-		public static bool RecipeExists( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
-			return RecipeFinderLibraries.GetRecipes( filterItemTypes, ingredients, 1 ).Count > 0;
+		public static bool RecipeExists_Cached( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
+			return RecipeFinderLibraries.GetRecipes_Cached( filterItemTypes, ingredients, 1 ).Count > 0;
 		}
 
 
@@ -64,10 +69,10 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// </summary>
 		/// <param name="createItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
 		/// ingredients.</param>
-		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
+		/// <param name="ingredients">Minimum (<) and maximum (>) quantities of ingredient item types.</param>
 		/// <param name="until">Maximum number of recipes to return.</param>
 		/// <returns>Indexes (indices?) of matching recipes in `Main.recipe`.</returns>
-		public static ISet<int> GetRecipes(
+		public static ISet<int> GetRecipes_Cached(
 					ISet<int> createItemTypes,
 					IDictionary<int, (int min, int max)> ingredients,
 					int until = Int32.MaxValue ) {
@@ -90,7 +95,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 				var itemRecipeIdxs = new HashSet<int>();
 
 				foreach( int itemType in createItemTypes ) {
-					itemRecipeIdxs.UnionWith( RecipeFinderLibraries.GetRecipeIndexesOfItem(itemType) );
+					itemRecipeIdxs.UnionWith( RecipeFinderLibraries.GetRecipeIndexesOfItem_Cached(itemType) );
 				}
 
 				IEnumerable<int> _GetNextRecipeIdx() {
@@ -124,7 +129,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 						}
 
 						(int min, int max) ingredAmt = ingredients[reqItem.type];
-						if( reqItem.stack < ingredAmt.min || reqItem.stack >= ingredAmt.max ) { // Not an acceptable amount
+						if( reqItem.stack < ingredAmt.min || reqItem.stack > ingredAmt.max ) { // Not an acceptable amount
 							break;
 						}
 
@@ -145,6 +150,21 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			}
 
 			return matchRecipeIdxs;
+		}
+
+
+		////////////////
+
+		/// <summary>
+		/// Clears cached recipes.
+		/// </summary>
+		public static void ClearCache() {
+			var rfLib = ModContent.GetInstance<RecipeFinderLibraries>();
+
+			lock( RecipeFinderLibraries.MyLock ) {
+				rfLib.RecipeIndexesByItemType.Clear();
+				rfLib.RecipeIndexesOfIngredientItemTypes.Clear();
+			}
 		}
 	}
 }
