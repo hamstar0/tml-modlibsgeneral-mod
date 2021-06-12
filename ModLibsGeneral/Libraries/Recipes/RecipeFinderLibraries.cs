@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.Debug;
@@ -51,16 +50,20 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 
 		////////////////
-		
+
 		/// <summary>
 		/// Indicates if any given item types have recipes with the given ingredients. Does not check tile requirements.
 		/// </summary>
 		/// <param name="filterItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
 		/// ingredients.</param>
-		/// <param name="ingredients">Minimum (<) and maximum (>=) quantities of ingredient item types.</param>
+		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All required.</param>
+		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will suffice.</param>
 		/// <returns>`true` if recipe exists.</returns>
-		public static bool RecipeExists_Cached( ISet<int> filterItemTypes, IDictionary<int, (int min, int max)> ingredients ) {
-			return RecipeFinderLibraries.GetRecipes_Cached( filterItemTypes, ingredients, 1 ).Count > 0;
+		public static bool RecipeExists_Cached(
+					ISet<int> filterItemTypes,
+					IDictionary<int, (int min, int max)> allIngredients=null,
+					IDictionary<int, (int min, int max)> anyIngredients=null ) {
+			return RecipeFinderLibraries.FindRecipes_Cached( filterItemTypes, allIngredients, anyIngredients, 1 ).Count > 0;
 		}
 
 
@@ -73,9 +76,10 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// <param name="min"></param>
 		/// <param name="max"></param>
 		/// <returns>`true` if recipe exists.</returns>
-		public static ISet<int> GetRecipesWithIngredient_Cached( int ingredientItemType, int min, int max ) {
-			return RecipeFinderLibraries.GetRecipes_Cached(
+		public static ISet<int> GetRecipesWithIngredient_Cached( int ingredientItemType, int min=1, int max=Int32.MaxValue ) {
+			return RecipeFinderLibraries.FindRecipes_Cached(
 				new HashSet<int>(),
+				null,
 				new Dictionary<int, (int, int)> { { ingredientItemType, (min, max) } }
 			);
 		}
