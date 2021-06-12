@@ -54,16 +54,30 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// <summary>
 		/// Indicates if any given item types have recipes with the given ingredients. Does not check tile requirements.
 		/// </summary>
-		/// <param name="filterItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
+		/// <param name="createItemTypes">Item types to find recipes for. If empty, all recipes are matched against the given
 		/// ingredients.</param>
 		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All required.</param>
 		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will suffice.</param>
 		/// <returns>`true` if recipe exists.</returns>
 		public static bool RecipeExists_Cached(
-					ISet<int> filterItemTypes,
+					ISet<int> createItemTypes,
 					IDictionary<int, (int min, int max)> allIngredients=null,
 					IDictionary<int, (int min, int max)> anyIngredients=null ) {
-			return RecipeFinderLibraries.FindRecipes_Cached( filterItemTypes, allIngredients, anyIngredients, 1 ).Count > 0;
+			return RecipeFinderLibraries.FindRecipes_Cached( createItemTypes, allIngredients, anyIngredients, 1 ).Count > 0;
+		}
+
+		/// <summary>
+		/// Indicates if any given recipes exist with the given ingredients. Does not check tile requirements.
+		/// </summary>
+		/// <param name="recipeIdxSource">Provides an enumerator of `Main.recipe` indexes to check.</param>
+		/// <param name="allIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. All required.</param>
+		/// <param name="anyIngredients">Minimum (<) and maximum (>) quantities of ingredient item types. Any will suffice.</param>
+		/// <returns>`true` if recipe exists.</returns>
+		public static bool RecipeExists_Cached(
+					Func<IEnumerable<int>> recipeIdxSource,
+					IDictionary<int, (int min, int max)> allIngredients=null,
+					IDictionary<int, (int min, int max)> anyIngredients=null ) {
+			return RecipeFinderLibraries.FilterRecipes( recipeIdxSource, allIngredients, anyIngredients, 1 ).Count > 0;
 		}
 
 
