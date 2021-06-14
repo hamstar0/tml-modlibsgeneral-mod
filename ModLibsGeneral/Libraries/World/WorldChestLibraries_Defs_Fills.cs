@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Terraria;
+using Terraria.ID;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace ModLibsGeneral.Libraries.World {
@@ -34,8 +36,10 @@ namespace ModLibsGeneral.Libraries.World {
 
 		private (bool IsModified, bool Completed) FillWith( Chest chest, bool removeOnly ) {
 			if( WorldGen.genRand.NextFloat() >= this.PercentChance ) {
+//if( !removeOnly ) LogLibraries.LogOnce("1a "+this.PercentChance);
 				return (false, false);
 			}
+//if( !removeOnly ) LogLibraries.LogOnce("1b "+this.PercentChance);
 
 			bool isModified = false;
 			ChestFillDefinition self = this;
@@ -53,6 +57,7 @@ namespace ModLibsGeneral.Libraries.World {
 				}
 
 				if( !this.EditNextItem(chest, def, removeOnly) ) {
+//if( !removeOnly ) LogLibraries.LogOnce("2 "+isModified);
 					return (isModified, false);
 				}
 				isModified = true;
@@ -61,11 +66,13 @@ namespace ModLibsGeneral.Libraries.World {
 
 			foreach( ChestFillItemDefinition def in this.All ) {
 				if( !this.EditNextItem(chest, def, removeOnly) ) {
+//if( !removeOnly ) LogLibraries.LogOnce("3 "+isModified);
 					return (isModified, false);
 				}
 				isModified = true;
 			}
-
+			
+//if( !removeOnly ) LogLibraries.LogOnce("4 "+isModified);
 			return (isModified, true);
 		}
 
@@ -76,31 +83,45 @@ namespace ModLibsGeneral.Libraries.World {
 			int findItemType = removeOnly
 				? -1
 				: def.ItemType;
-			int slot = this.GetSlotIdx( chest, findItemType );
+
+			int slot = removeOnly
+				? this.GetNonEmptySlotIdx( chest, findItemType )
+				: this.GetEmptySlotIdx( chest );
 			if( slot == -1 ) {
 				return false;
 			}
 
-			Item editItem = removeOnly
+			chest.item[slot] = removeOnly
 				? new Item()
 				: def.CreateItem();
 
-			chest.item[slot] = editItem;
 			return true;
 		}
 
-		private int GetSlotIdx( Chest chest, int itemType ) {
-			bool isActive = itemType >= 0;
+		////
 
+		private int GetEmptySlotIdx( Chest chest ) {
 			for( int i = 0; i < chest.item.Length; i++ ) {
 				Item item = chest.item[i];
-				if( (item?.active ?? false) == isActive ) {
-					if( isActive && item.type != itemType ) {
-						continue;
-					}
+				if( item?.IsAir != false ) {
 					return i;
 				}
 			}
+
+			return -1;
+		}
+
+		private int GetNonEmptySlotIdx( Chest chest, int itemType = -1 ) {
+			for( int i = 0; i < chest.item.Length; i++ ) {
+				Item item = chest.item[i];
+
+				if( item?.IsAir == false ) {
+					if( itemType == -1 || item.type == itemType ) {
+						return i;
+					}
+				}
+			}
+
 			return -1;
 		}
 	}

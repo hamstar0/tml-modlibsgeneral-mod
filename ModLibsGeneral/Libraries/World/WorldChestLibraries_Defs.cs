@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using ModLibsCore.Libraries.DotNET.Extensions;
+using ModLibsCore.Libraries.Debug;
 using ModLibsGeneral.Libraries.Tiles;
 
 
@@ -117,7 +118,9 @@ namespace ModLibsGeneral.Libraries.World {
 	/// <summary></summary>
 	public struct ChestTypeDefinition {
 		/// <summary>See `TileFrameLibraries.VanillaChestTypeNamesByFrame` (value is `chestTile.frameX / 36`).</summary>
-		public (int? TileType, int? TileFrame)[] Tiles;
+		public (int? TileType, int? TileFrame)[] AnyOfTiles;
+
+		public bool AnyUndergroundChest;
 
 
 
@@ -125,16 +128,13 @@ namespace ModLibsGeneral.Libraries.World {
 
 		/// <summary></summary>
 		public ChestTypeDefinition(
-					(int? tileType, int? tileFrame)[] tiles,
+					(int? tileType, int? tileFrame)[] anyOfTiles,
 					bool alsoUndergroundChests=false,
 					bool alsoDungeonAndTempleChests=false ) {
-			this.Tiles = tiles;
+			this.AnyOfTiles = anyOfTiles;
+			this.AnyUndergroundChest = alsoUndergroundChests;
 
-			if( alsoUndergroundChests ) {
-				return;
-			}
-
-			var addTiles = new List<(int?, int?)>( tiles );
+			var addTiles = new List<(int? tileType, int? tileFrame)>( anyOfTiles );
 
 			foreach( (string name, int frame) in TileFrameLibraries.VanillaChestFramesByTypeName ) {
 				switch( name ) {
@@ -161,42 +161,56 @@ namespace ModLibsGeneral.Libraries.World {
 				}
 			}
 
-			this.Tiles = addTiles.ToArray();
+			this.AnyOfTiles = addTiles.ToArray();
 		}
 
 		/// <summary></summary>
 		public ChestTypeDefinition( int? tileType, int? tileFrame ) {
-			this.Tiles = new (int?, int?)[] { (tileType, tileFrame) };
+			this.AnyOfTiles = new (int?, int?)[] { (tileType, tileFrame) };
+			this.AnyUndergroundChest = false;
 		}
 
 
 		////////////////
 		
 		/// <summary>
-		/// Validates if the given coordinates refactor 
+		/// Validates if the given coordinates represent a valid chest. 
 		/// </summary>
 		/// <param name="tileX"></param>
 		/// <param name="tileY"></param>
 		/// <returns></returns>
 		public bool Validate( int tileX, int tileY ) {
 			Tile tile = Main.tile[tileX, tileY];
-			if( tile?.active() != true ) {
+			if( tile?.active() != true ) {	// TODO: Check if even a chest?
 				return false;
 			}
 
-			foreach( (int? tileType, int? frame) in this.Tiles ) {
+			// If no specific chests are defined, allow any chest
+			if( this.AnyOfTiles.Length == 0 ) {
+				return true;
+			}
+
+			if( this.AnyUndergroundChest ) {
+				if( tileY > WorldLocationLibraries.DirtLayerBottomTileY ) {
+					return true;
+				}
+			}
+
+			foreach( (int? tileType, int? frame) in this.AnyOfTiles ) {
 				if( tileType.HasValue ) {
 					if( tile.type != tileType.Value ) {
 						return false;
 					}
 				}
+
 				if( frame.HasValue ) {
 					if( (tile.frameX / 36) == frame.Value ) {
-						return false;
+						return true;
 					}
 				}
 			}
-			return true;
+
+			return false;
 		}
 
 

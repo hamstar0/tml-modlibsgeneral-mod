@@ -21,9 +21,11 @@ namespace ModLibsGeneral.Libraries.World {
 					ChestTypeDefinition chestDef = new ChestTypeDefinition(),
 					Rectangle? within=null ) {
 			var modifiedChestIndexes = new List<Chest>();
+			IEnumerable<Chest> matchingChests = chestDef.GetMatchingWorldChests( within );
 			
-			foreach( Chest chest in chestDef.GetMatchingWorldChests(within) ) {
-				(bool isModified, bool completed) status = fillDef.Fill( chest);
+			foreach( Chest chest in matchingChests ) {
+				(bool isModified, bool completed) status = fillDef.Fill( chest );
+
 				if( status.isModified ) {
 					modifiedChestIndexes.Add( chest );
 				}
