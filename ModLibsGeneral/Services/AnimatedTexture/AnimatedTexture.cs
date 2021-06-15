@@ -17,8 +17,8 @@ namespace ModLibsGeneral.Services.AnimatedTexture {
 		/// <param name="animator">Number of frames to cycle through.</param>
 		/// <returns></returns>
 		public static AnimatedTexture Create( Texture2D frames,
-				int maxFrames,
-				Func<AnimatedTexture, (int NextFrame, int TickDelay)> animator ) {
+					int maxFrames,
+					Func<AnimatedTexture, (int NextFrame, int TickDelay)> animator ) {
 			var mngr = ModContent.GetInstance<AnimatedTextureManager>();
 			var def = new AnimatedTexture( frames, maxFrames, animator );
 
