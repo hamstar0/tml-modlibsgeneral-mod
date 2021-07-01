@@ -21,7 +21,13 @@ namespace ModLibsGeneral.Libraries.Entities {
 			ent.velocity += forceVector;
 
 			if( sync && Main.netMode != NetmodeID.SinglePlayer ) {
-				NetMessage.SendData( MessageID.SyncNPC, -1, ( Main.netMode == NetmodeID.Server ? -1 : Main.myPlayer ), null, ent.whoAmI );
+				if( ent is NPC ) {
+					NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, ent.whoAmI );
+				} else if( ent is Player ) {
+					NetMessage.SendData( MessageID.SyncPlayer, -1, -1, null, ent.whoAmI );
+				} else if( ent is Projectile ) {
+					NetMessage.SendData( MessageID.SyncProjectile, -1, -1, null, ent.whoAmI );	// is this `whoAmI` meaningful?
+				}
 			}
 		}
 	}
