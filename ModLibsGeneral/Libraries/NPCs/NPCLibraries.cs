@@ -28,18 +28,19 @@ namespace ModLibsGeneral.Libraries.NPCs {
 
 
 		////////////////
-		
+
 		/// <summary>
 		/// Applies damage to an NPC, killing it if need be. Synced.
 		/// </summary>
 		/// <param name="npc"></param>
 		/// <param name="damage"></param>
-		public static void RawHurt( NPC npc, int damage ) {
+		/// <param name="sync"></param>
+		public static void RawHurt( NPC npc, int damage, bool sync ) {
 			if( damage >= npc.life ) {
-				NPCLibraries.Kill( npc );
+				NPCLibraries.Kill( npc, sync );
 			} else {
 				npc.life -= damage;
-				if( Main.netMode != NetmodeID.SinglePlayer ) {
+				if( sync && Main.netMode != NetmodeID.SinglePlayer ) {
 					NetMessage.SendData( MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0f, 0f, 0, 0, 0 );
 				}
 			}
@@ -50,11 +51,13 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// Kills an NPC. Synced.
 		/// </summary>
 		/// <param name="npc"></param>
-		public static void Kill( NPC npc ) {
+		/// <param name="sync"></param>
+		public static void Kill( NPC npc, bool sync ) {
 			npc.life = 0;
 			npc.checkDead();
 			npc.active = false;
-			if( Main.netMode != NetmodeID.SinglePlayer ) {
+
+			if( sync && Main.netMode != NetmodeID.SinglePlayer ) {
 				NetMessage.SendData( MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0f, 0f, 0, 0, 0 );
 			}
 		}
@@ -63,10 +66,11 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// Removes a given NPC. Synced.
 		/// </summary>
 		/// <param name="npc"></param>
-		public static void Remove( NPC npc ) {
+		/// <param name="sync"></param>
+		public static void Remove( NPC npc, bool sync ) {
 			npc.active = false;
 
-			if( Main.netMode != NetmodeID.SinglePlayer ) {   // == 2 only?
+			if( sync && Main.netMode != NetmodeID.SinglePlayer ) {   // == 2 only?
 				npc.netSkip = -1;
 				npc.life = 0;
 				NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, npc.whoAmI, 0f, 0f, 0f, 0, 0, 0 );
