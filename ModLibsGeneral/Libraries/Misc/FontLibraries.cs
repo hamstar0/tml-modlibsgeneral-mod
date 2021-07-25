@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using ReLogic.Graphics;
 using Terraria;
@@ -24,7 +25,6 @@ namespace ModLibsGeneral.Libraries.Misc {
 
 			var fittedLines = new List<string>();
 
-			float spaceWidth = font.MeasureString( " " ).X;
 			string[] lines = text.Split( '\n' );
 
 			foreach( string line in lines ) {
@@ -33,7 +33,7 @@ namespace ModLibsGeneral.Libraries.Misc {
 				if( dim.X <= width ) {
 					fittedLines.Add( line );
 				} else {
-					IList<string> subLines = FontLibraries._FitTextLine( font, line, width, spaceWidth );
+					IList<string> subLines = FontLibraries._FitTextLine( font, line, width );
 					fittedLines.AddRange( subLines );
 				}
 			}
@@ -41,41 +41,31 @@ namespace ModLibsGeneral.Libraries.Misc {
 			return fittedLines;
 		}
 
-		private static IList<string> _FitTextLine( DynamicSpriteFont font, string line, int width, float spaceWidth ) {
+		private static IList<string> _FitTextLine( DynamicSpriteFont font, string line, int width ) {
 			var fittedLines = new List<string>();
 
 			string[] words = line.Split( ' ' );
-			string newLine = "";
-			string prevLine = "";
-
-			bool firstWord = true;
+			string ahead = "";
+			string before = words.FirstOrDefault() ?? "";
 
 			foreach( string word in words ) {
-				newLine += word;
+				ahead += word;
 
-				if( string.IsNullOrEmpty(prevLine) ) {
-					prevLine = newLine;
-				}
-
-				Vector2 dim = font.MeasureString( newLine );
-				if( !firstWord ) {
-					dim.X += spaceWidth;
-				} else {
-					firstWord = false;
-				}
-
+				Vector2 dim = font.MeasureString( ahead );
 				if( dim.X <= width ) {
-					prevLine = newLine;
+					before = ahead;
 				} else {
-					fittedLines.Add( prevLine );
+					fittedLines.Add( before );
 
-					prevLine = word;
-					newLine = word;
+					before = word;
+					ahead = word;
 				}
+
+				ahead += " ";
 			}
 
-			if( !string.IsNullOrEmpty(prevLine) ) {
-				fittedLines.Add( prevLine );
+			if( !string.IsNullOrEmpty(before) ) {
+				fittedLines.Add( before );
 			}
 
 			return fittedLines;
