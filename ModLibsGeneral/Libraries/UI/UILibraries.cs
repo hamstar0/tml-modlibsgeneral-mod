@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.UI;
+
 
 namespace ModLibsGeneral.Libraries.UI {
 	/// <summary>
@@ -134,6 +137,42 @@ if( !(!notShowingMouseIcon || !plr.showItemIcon) ) { Main.NewText( "showItemIcon
 				}
 			}
 			return false;
+		}
+
+
+		////////////////
+
+		/// <summary>
+		/// Gets dimension (screen space rectangle) data for an element and all elements of its hierarchy.
+		/// </summary>
+		/// <param name="elem"></param>
+		/// <param name="getInnerDimension">Indicates whether to get the outer dimension (`false`; margin-only),
+		/// inner dimension (`true`; padding+margin), or plain dimension (`false`; neither).</param>
+		/// <returns>List of element data, ascending. First element represents `UserInterface.ActiveInstance`
+		/// (if one is set), which sets `Element` to `null`.</returns>
+		public static IList<(UIElement Element, string Dimension)> GetHierarchyData(
+					UIElement elem,
+					bool? getInnerDimension=true ) {
+			var list = new List<(UIElement Element, string Dimensions)>();
+
+			for( UIElement curr=elem; curr!=null; curr=curr.Parent ) {
+				if( !getInnerDimension.HasValue ) {
+					list.Add( (curr, curr.GetDimensions().ToRectangle().ToString()) );
+				} else if( getInnerDimension == true ) {
+					list.Add( (curr, curr.GetInnerDimensions().ToRectangle().ToString()) );
+				} else if( getInnerDimension == false ) {
+					list.Add( (curr, curr.GetOuterDimensions().ToRectangle().ToString()) );
+				}
+			}
+
+			if( UserInterface.ActiveInstance != null ) {
+				list.Add( (
+					null,
+					UserInterface.ActiveInstance.GetDimensions().ToRectangle().ToString()
+				) );
+			}
+
+			return list;
 		}
 	}
 }
