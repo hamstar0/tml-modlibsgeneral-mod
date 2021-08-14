@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using ModLibsCore.Libraries.DotNET.Extensions;
 using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.Items.Attributes;
 using ModLibsGeneral.Libraries.Tiles;
 
 
@@ -45,7 +47,9 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <summary></summary>
 		/// <param name="any"></param>
 		/// <param name="percentChance"></param>
-		public ChestFillDefinition( (float Weight, ChestFillItemDefinition ItemDef)[] any, float percentChance=1f ) {
+		public ChestFillDefinition(
+					(float Weight, ChestFillItemDefinition ItemDef)[] any,
+					float percentChance=1f ) {
 			this.Any = any;
 			this.All = new ChestFillItemDefinition[ 0 ];
 			this.PercentChance = percentChance;
@@ -54,7 +58,9 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <summary></summary>
 		/// <param name="all"></param>
 		/// <param name="percentChance"></param>
-		public ChestFillDefinition( ChestFillItemDefinition[] all, float percentChance=1f ) {
+		public ChestFillDefinition(
+					ChestFillItemDefinition[] all,
+					float percentChance=1f ) {
 			this.Any = new (float, ChestFillItemDefinition)[ 0 ];
 			this.All = all;
 			this.PercentChance = percentChance;
@@ -63,10 +69,34 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <summary></summary>
 		/// <param name="single"></param>
 		/// <param name="percentChance"></param>
-		public ChestFillDefinition( ChestFillItemDefinition single, float percentChance=1f ) {
+		public ChestFillDefinition(
+					ChestFillItemDefinition single,
+					float percentChance=1f ) {
 			this.Any = new (float, ChestFillItemDefinition)[ 0 ];
 			this.All = new ChestFillItemDefinition[] { single };
 			this.PercentChance = percentChance;
+		}
+
+
+		////////////////
+
+		public override string ToString() {
+			return this.ToString( "\n " );
+		}
+
+		public string ToString( string delim ) {
+			string str = "ChestFill - %:" + this.PercentChance;
+			if( this.Any.Length >= 1 ) {
+				str += delim+" Any: "+this.Any
+					.Select( def=>def.ItemDef.ToString()+":"+def.Weight )
+					.ToStringJoined(", "+delim);
+			}
+			if( this.All.Length >= 1 ) {
+				str += delim+" All: "+this.All
+					.ToStringJoined(", "+delim);
+			}
+
+			return str;
 		}
 	}
 
@@ -109,6 +139,14 @@ namespace ModLibsGeneral.Libraries.World {
 			item.SetDefaults( this.ItemType, true );
 			item.stack = WorldGen.genRand.Next( this.MinQuantity, this.MaxQuantity );
 			return item;
+		}
+
+
+		////////////////
+
+		public override string ToString() {
+			return "ChestFillItem - "+ItemNameAttributeLibraries.GetQualifiedName(this.ItemType)
+				+" "+this.MinQuantity+"-"+this.MaxQuantity+"qt";
 		}
 	}
 
@@ -238,6 +276,14 @@ namespace ModLibsGeneral.Libraries.World {
 
 				yield return chest;
 			}
+		}
+
+
+		////////////////
+
+		public override string ToString() {
+			return "Chest types: "+this.AnyOfTiles.ToStringJoined(", ")
+				+" (any ug? "+this.AnyUndergroundChest+")";
 		}
 	}
 }

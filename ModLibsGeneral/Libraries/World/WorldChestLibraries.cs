@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
+using ModLibsCore.Libraries.Debug;
 using Terraria;
 
 
@@ -47,6 +49,11 @@ namespace ModLibsGeneral.Libraries.World {
 					ChestTypeDefinition chestDef = new ChestTypeDefinition(),
 					Rectangle? within = null ) {
 			var modifiedChestIndexes = new List<Chest>();
+			IEnumerable<Chest> chests = chestDef.GetMatchingWorldChests( within );
+/*LogLibraries.Log( "RemoveFromWorldChests - CHEST: "+chestDef.ToString()
+	+", FOUND: "+chests.Count()
+	+", WITHIN: "+(within?.ToString() ?? "-")
+	+", FILL: "+fillDef.ToString() );*/
 
 			foreach( Chest chest in chestDef.GetMatchingWorldChests( within ) ) {
 				(bool isModified, bool completed) status = fillDef.Unfill( chest );

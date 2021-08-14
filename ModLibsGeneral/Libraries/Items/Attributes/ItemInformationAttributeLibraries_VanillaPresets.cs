@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.ModLoader;
-using ModLibsCore.Libraries.Debug;
 
 
 namespace ModLibsGeneral.Libraries.Items.Attributes {
