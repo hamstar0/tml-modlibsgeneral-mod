@@ -35,10 +35,8 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 
 		private (bool IsModified, bool Completed) FillWith( Chest chest, bool removeOnly ) {
 			if( WorldGen.genRand.NextFloat() >= this.PercentChance ) {
-//if( !removeOnly ) LogLibraries.LogOnce("1a "+this.PercentChance);
-				return (false, false);
+				return (false, true);
 			}
-//if( !removeOnly ) LogLibraries.LogOnce("1b "+this.PercentChance);
 
 			bool isModified = false;
 			ChestFillDefinition self = this;
@@ -55,53 +53,69 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 					continue;
 				}
 
-				if( !this.EditNextItem(chest, def, removeOnly) ) {
-//if( !removeOnly ) LogLibraries.LogOnce("2 "+isModified);
-					return (isModified, false);
+				if( removeOnly ) {
+					if( !this.RemoveNextFoundItem( chest, def ) ) {
+						return (isModified, false);
+					}
+				} else {
+					if( !this.AddNextItem( chest, def ) ) {
+						return (isModified, false);
+					}
 				}
 				isModified = true;
 				break;
 			}
 
 			foreach( ChestFillItemDefinition def in this.All ) {
-				if( !this.EditNextItem(chest, def, removeOnly) ) {
-//if( !removeOnly ) LogLibraries.LogOnce("3 "+isModified);
-					return (isModified, false);
+				if( removeOnly ) {
+					if( !this.RemoveNextFoundItem( chest, def ) ) {
+						return (isModified, false);
+					}
+				} else {
+					if( !this.AddNextItem( chest, def ) ) {
+						return (isModified, false);
+					}
 				}
 				isModified = true;
 			}
 			
-//if( !removeOnly ) LogLibraries.LogOnce("4 "+isModified);
 			return (isModified, true);
 		}
 
 
 		////////////////
 
-		private bool EditNextItem( Chest chest, ChestFillItemDefinition def, bool removeOnly ) {
-			int findItemType = removeOnly
-				? -1
-				: def.ItemType;
-
-			int slot = removeOnly
-				? this.GetNonEmptySlotIdx( chest, findItemType )
-				: this.GetEmptySlotIdx( chest );
+		private bool AddNextItem( Chest chest, ChestFillItemDefinition def ) {
+			int slot = this.GetEmptySlotIdx( chest );
 			if( slot == -1 ) {
 				return false;
 			}
 
-			chest.item[slot] = removeOnly
-				? new Item()
-				: def.CreateItem();
-
+			chest.item[slot] = def.CreateItem();
 			return true;
 		}
 
-		////
+		private bool RemoveNextFoundItem( Chest chest, ChestFillItemDefinition def ) {
+			int slot = this.GetNonEmptySlotIdx( chest, def.ItemType );
+			if( slot == -1 ) {
+				return false;
+			}
+
+			Item item = chest.item[slot];
+			if( item.stack < def.MinQuantity || item.stack > def.MaxQuantity ) {
+				return false;
+			}
+
+			chest.item[slot] = new Item();
+			return true;
+		}
+
+		////////////////
 
 		private int GetEmptySlotIdx( Chest chest ) {
 			for( int i = 0; i < chest.item.Length; i++ ) {
 				Item item = chest.item[i];
+
 				if( item?.IsAir != false ) {
 					return i;
 				}
