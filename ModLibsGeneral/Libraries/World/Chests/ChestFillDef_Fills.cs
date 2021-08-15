@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Terraria;
-using Terraria.ID;
 using ModLibsCore.Libraries.Debug;
 
 
-namespace ModLibsGeneral.Libraries.World {
+namespace ModLibsGeneral.Libraries.World.Chests {
 	/// <summary>
 	/// Definition for how to add filling to a given chest.
 	/// </summary>

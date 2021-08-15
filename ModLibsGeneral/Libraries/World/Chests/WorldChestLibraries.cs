@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using ModLibsCore.Libraries.Debug;
 using Terraria;
 
 
-namespace ModLibsGeneral.Libraries.World {
+namespace ModLibsGeneral.Libraries.World.Chests {
 	/// <summary>
 	/// Assorted static library functions pertaining to the current world's chests.
 	/// </summary>
