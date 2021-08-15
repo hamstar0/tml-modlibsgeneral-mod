@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
+using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.DotNET.Extensions;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Libraries.Items.Attributes;
@@ -165,6 +166,9 @@ namespace ModLibsGeneral.Libraries.World {
 		////////////////
 
 		/// <summary></summary>
+		/// <param name="anyOfTiles"></param>
+		/// <param name="alsoUndergroundChests"></param>
+		/// <param name="alsoDungeonAndTempleChests"></param>
 		public ChestTypeDefinition(
 					(int? tileType, int? tileFrame)[] anyOfTiles,
 					bool alsoUndergroundChests=false,
@@ -203,8 +207,12 @@ namespace ModLibsGeneral.Libraries.World {
 		}
 
 		/// <summary></summary>
+		/// <param name="tileType"></param>
+		/// <param name="tileFrame"></param>
 		public ChestTypeDefinition( int? tileType, int? tileFrame ) {
-			this.AnyOfTiles = new (int?, int?)[] { (tileType, tileFrame) };
+			this.AnyOfTiles = new (int?, int?)[] {
+				(tileType, tileFrame)
+			};
 			this.AnyUndergroundChest = false;
 		}
 
@@ -218,13 +226,17 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="tileY"></param>
 		/// <returns></returns>
 		public bool Validate( int tileX, int tileY ) {
+			if( !WorldGen.InWorld(tileX, tileY) ) {
+				throw new ModLibsException( "Tile OoB: "+tileX+", "+tileY );
+			}
+
 			Tile tile = Main.tile[tileX, tileY];
 			if( tile?.active() != true ) {	// TODO: Check if even a chest?
 				return false;
 			}
 
 			// If no specific chests are defined, allow any chest
-			if( this.AnyOfTiles.Length == 0 ) {
+			if( this.AnyOfTiles == null || this.AnyOfTiles.Length == 0 ) {
 				return true;
 			}
 
@@ -281,9 +293,15 @@ namespace ModLibsGeneral.Libraries.World {
 
 		////////////////
 
+		/// <summary></summary>
+		/// <returns></returns>
 		public override string ToString() {
-			return "Chest types: "+this.AnyOfTiles.ToStringJoined(", ")
-				+" (any ug? "+this.AnyUndergroundChest+")";
+			string tiles = this.AnyOfTiles != null
+				? this.AnyOfTiles?
+					.Select( t => "("+(t.TileType?.ToString() ?? "null")+", "+(t.TileFrame?.ToString() ?? "null")+")" )
+					.ToStringJoined(", ")
+				: "any";
+			return "Chest types: "+tiles+" (any ug? "+this.AnyUndergroundChest+")";
 		}
 	}
 }

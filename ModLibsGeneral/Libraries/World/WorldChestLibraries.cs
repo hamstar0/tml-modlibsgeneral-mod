@@ -55,7 +55,7 @@ namespace ModLibsGeneral.Libraries.World {
 	+", WITHIN: "+(within?.ToString() ?? "-")
 	+", FILL: "+fillDef.ToString() );*/
 
-			foreach( Chest chest in chestDef.GetMatchingWorldChests( within ) ) {
+			foreach( Chest chest in chests ) {
 				(bool isModified, bool completed) status = fillDef.Unfill( chest );
 				if( status.isModified ) {
 					modifiedChestIndexes.Add( chest );
