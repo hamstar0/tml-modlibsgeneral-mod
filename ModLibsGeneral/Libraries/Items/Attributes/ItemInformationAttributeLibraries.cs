@@ -17,7 +17,7 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 		/// <param name="tooltips"></param>
 		/// <param name="tip"></param>
 		/// <returns>`true` if tooltip added.</returns>
-		public static bool AppendTooltipToFurthest( IList<TooltipLine> tooltips, TooltipLine tip ) {
+		public static bool AppendTooltipAtEnd( IList<TooltipLine> tooltips, TooltipLine tip ) {
 			return ItemInformationAttributeLibraries.ApplyTooltipAtFurthest(
 				tooltips,
 				tip,
@@ -34,11 +34,11 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 		}
 
 
-		////
+		////////////////
 
 		/// <summary>
-		/// Convenience function (meant to be called in any ModifyTooltips hook) to show a tooltip for an item at a specific
-		/// list position. Adapts to item context.
+		/// Convenience function (meant to be called in any ModifyTooltips hook) to show a tooltip for an item at
+		/// a specific list position. Adapts to item context.
 		/// </summary>
 		/// <param name="tooltips"></param>
 		/// <param name="tip"></param>
@@ -68,6 +68,7 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 					} else {
 						tooltips.Insert( i, tip );
 					}
+
 					return true;
 				}
 
@@ -86,8 +87,8 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 
 
 		/// <summary>
-		/// Convenience function (meant to be called in any ModifyTooltips hook) to show a tooltip for an item at a specific
-		/// list position. Adapts to item context.
+		/// Convenience function (meant to be called in any ModifyTooltips hook) to show a tooltip for an item at
+		/// a specific list position. Adapts to item context.
 		/// </summary>
 		/// <param name="tooltips"></param>
 		/// <param name="tip"></param>
@@ -119,6 +120,8 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 			return false;
 		}
 
+		
+		////////////////
 
 		/// <summary>
 		/// Convenience function (meant to be called in any ModifyTooltips hook) to show a tooltip for an item at

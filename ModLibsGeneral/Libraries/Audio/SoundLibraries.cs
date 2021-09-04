@@ -63,11 +63,11 @@ namespace ModLibsGeneral.Libraries.Audio {
 			if( Main.netMode == NetmodeID.Server ) { return; }
 
 			LegacySoundStyle sound;
-			var sndHelp = ModContent.GetInstance<SoundLibraries>();
+			var sndLibs = ModContent.GetInstance<SoundLibraries>();
 
-			if( sndHelp.Sounds.ContainsKey( soundPath ) ) {
-				sound = sndHelp.Sounds[soundPath];
-				sndHelp.Sounds[soundPath] = sound.WithVolume( volume );
+			if( sndLibs.Sounds.ContainsKey( soundPath ) ) {
+				sound = sndLibs.Sounds[soundPath];
+				sndLibs.Sounds[soundPath] = sound.WithVolume( volume );
 			} else {
 				try {
 					sound = mod.GetLegacySoundSlot(
@@ -75,7 +75,7 @@ namespace ModLibsGeneral.Libraries.Audio {
 						"Sounds/Custom/" + soundPath
 					).WithVolume( volume );
 
-					sndHelp.Sounds[soundPath] = sound;
+					sndLibs.Sounds[soundPath] = sound;
 				} catch( Exception e ) {
 					throw new ModLibsException( "Sound load issue.", e );
 				}
@@ -94,15 +94,15 @@ namespace ModLibsGeneral.Libraries.Audio {
 		public static void PlaySound( string name, LegacySoundStyle sound, Vector2 position, float volume = 1f ) {
 			if( Main.netMode == NetmodeID.Server ) { return; }
 
-			var sndHelp = ModContent.GetInstance<SoundLibraries>();
+			var sndLibs = ModContent.GetInstance<SoundLibraries>();
 
-			if( sndHelp.Sounds.ContainsKey(name) ) {
-				sound = sndHelp.Sounds[name];
+			if( sndLibs.Sounds.ContainsKey(name) ) {
+				sound = sndLibs.Sounds[name];
 			}
 
 			try {
 				sound = sound.WithVolume( volume );
-				sndHelp.Sounds[ name ] = sound;
+				sndLibs.Sounds[ name ] = sound;
 			} catch( Exception e ) {
 				throw new ModLibsException( "Sound load issue.", e );
 			}
