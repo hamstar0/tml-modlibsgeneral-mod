@@ -106,7 +106,13 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 				return false;
 			}
 
-			chest.item[slot] = new Item();
+			//chest.item[slot] = new Item();
+
+			for( int i=slot; i<chest.item.Length - 1; i++ ) {
+				chest.item[i] = chest.item[i + 1];
+			}
+			chest.item[chest.item.Length - 1] = new Item();
+
 			return true;
 		}
 
