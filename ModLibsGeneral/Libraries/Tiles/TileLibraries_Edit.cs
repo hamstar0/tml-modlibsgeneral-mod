@@ -74,31 +74,40 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <param name="effectOnly">Only a visual effect; tile is not actually killed (nothing to sync).</param>
 		/// <param name="dropsItem"></param>
 		/// <param name="forceSyncIfUnchanged"></param>
+		/// <param name="syncIfClient"></param>
+		/// <param name="syncIfServer"></param>
 		/// <param name="suppressErrors"></param>
 		/// <returns>`true` when no complications occurred during removal. Does not force tile to be removed, if
 		/// complications occur.</returns>
-		public static bool KillTileSynced(
+		public static bool KillTile(
 					int tileX,
 					int tileY,
 					bool effectOnly,
 					bool dropsItem,
 					bool forceSyncIfUnchanged,
+					bool syncIfClient=false,
+					bool syncIfServer=true,
 					bool suppressErrors=true ) {
+			bool sync = (syncIfClient && Main.netMode == NetmodeID.MultiplayerClient)
+				|| (syncIfServer && Main.netMode == NetmodeID.Server);
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
 
 			if( !tile.active() ) {
-				if( forceSyncIfUnchanged && Main.netMode != NetmodeID.SinglePlayer ) {
+				if( forceSyncIfUnchanged && sync ) {
 					NetMessage.SendData( MessageID.TileChange, -1, -1, null, 4, (float)tileX, (float)tileY, 0f, 0, 0, 0 );
 				}
+
 				return false;
 			}
+
+			//
 
 			bool isTileKilled = false;
 			bool isContainer = tile.type == TileID.Containers || tile.type == TileID.Containers2;
 
 			try {
 				if( isContainer ) {
-					isTileKilled = TileLibraries.KillContainerTileSynced( tileX, tileY, effectOnly, dropsItem );
+					isTileKilled = TileLibraries.KillContainerTile( tileX, tileY, effectOnly, dropsItem, syncIfClient, syncIfServer );
 				} else {
 					WorldGen.KillTile( tileX, tileY, false, effectOnly, !dropsItem );
 					isTileKilled = effectOnly || !Main.tile[ tileX, tileY ].active();
@@ -113,8 +122,10 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				return false;
 			}
 
+			//
+
 			if( !isContainer && !effectOnly ) {
-				if( Main.netMode != NetmodeID.SinglePlayer ) {
+				if( sync ) {
 					NetMessage.SendData(
 						msgType: MessageID.TileChange,
 						remoteClient: -1,
@@ -142,13 +153,24 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <param name="tileY"></param>
 		/// <param name="effectOnly">Only a visual effect; tile is not actually killed (nothing to sync).</param>
 		/// <param name="dropsItem"></param>
+		/// <param name="syncIfClient"></param>
+		/// <param name="syncIfServer"></param>
 		/// <returns>`true` when no complications occurred during removal. Does not force tile to be removed, if
 		/// complications occur.</returns>
-		public static bool KillContainerTileSynced( int tileX, int tileY, bool effectOnly, bool dropsItem ) {
+		public static bool KillContainerTile(
+					int tileX,
+					int tileY,
+					bool effectOnly,
+					bool dropsItem,
+					bool syncIfClient = false,
+					bool syncIfServer = true ) {
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
 			if( tile.type != TileID.Containers && tile.type != TileID.Containers2 ) {
 				return false;
 			}
+
+			bool sync = ( syncIfClient && Main.netMode == NetmodeID.MultiplayerClient )
+				|| ( syncIfServer && Main.netMode == NetmodeID.Server );
 
 			int chestIdx = Chest.FindChest( tileX, tileY );
 			int chestType = tile.type == TileID.Containers2 ? 5 : 1;
@@ -158,7 +180,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				//	number2 = 101;
 				//}
 
-				if( Main.netMode != NetmodeID.SinglePlayer ) {
+				if( sync ) {
 					NetMessage.SendData(
 						msgType: MessageID.ChestUpdates,
 						remoteClient: -1,
@@ -191,14 +213,21 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <param name="preserveWall"></param>
 		/// <param name="preserveWire"></param>
 		/// <param name="preserveLiquid"></param>
-		public static void Swap1x1Synced(
-				int fromTileX,
-				int fromTileY,
-				int toTileX,
-				int toTileY,
-				bool preserveWall = false,
-				bool preserveWire = false,
-				bool preserveLiquid = false ) {
+		/// <param name="syncIfClient"></param>
+		/// <param name="syncIfServer"></param>
+		public static void Swap1x1(
+					int fromTileX,
+					int fromTileY,
+					int toTileX,
+					int toTileY,
+					bool preserveWall = false,
+					bool preserveWire = false,
+					bool preserveLiquid = false,
+					bool syncIfClient = false,
+					bool syncIfServer = true ) {
+			bool sync = ( syncIfClient && Main.netMode == NetmodeID.MultiplayerClient )
+				|| ( syncIfServer && Main.netMode == NetmodeID.Server );
+
 			Tile fromTile = Framing.GetTileSafely( fromTileX, fromTileY );
 			Tile fromTileCopy = (Tile)fromTile.Clone();
 			Tile toTile = Framing.GetTileSafely( toTileX, toTileY );
@@ -244,7 +273,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				toTile.lava( oldToLava );
 			}
 
-			if( Main.netMode != NetmodeID.SinglePlayer ) {
+			if( sync ) {
 				NetMessage.SendData( MessageID.TileChange, -1, -1, null, 4, (float)fromTileX, (float)fromTileY, 0f, 0, 0, 0 );
 				NetMessage.SendData( MessageID.TileChange, -1, -1, null, 4, (float)toTileX, (float)toTileY, 0f, 0, 0, 0 );
 			}
