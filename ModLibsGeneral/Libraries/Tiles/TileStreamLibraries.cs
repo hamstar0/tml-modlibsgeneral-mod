@@ -100,58 +100,71 @@ namespace ModLibsGeneral.Libraries.Tiles {
 					bool forceFrames = false,
 					bool forceWallFrames = false,
 					bool forceLiquids = false ) {
-			BitsByte bits1 = 0;
-			BitsByte bits2 = 0;
+			BitsByte bits1 = reader.ReadByte();
+			BitsByte bits2 = reader.ReadByte();
+
+			//
+
+			bool isActive = bits1[2];
+			bool hasWall = bits1[2];
+			bool hasLiquid = bits1[3];
+			bool isHalfBrick = bits1[5];
+			bool isActuator = bits1[6];
+			bool isActuated = bits1[7];
+			bool wire1 = bits1[4];
+			bool wire2 = bits2[0];
+			bool wire3 = bits2[1];
+			bool wire4 = bits2[7];
+			bool hasColor = bits2[2];
+			bool hasWallColor = bits2[3];
+			bool hasSlope1 = bits2[4];
+			bool hasSlope2 = bits2[5];
+			bool hasSlope3 = bits2[6];
+
+			//
 
 			bool wasActive = tile.active();
-			bits1 = reader.ReadByte();
-			bits2 = reader.ReadByte();
 
-			tile.active( bits1[0] );
-			tile.wall = (byte)(bits1[2] ? 1 : 0);
+			tile.active( isActive );
+			tile.wall = (byte)(hasWall ? 1 : 0);
 
-			bool isLiquid = bits1[3];
-			if( forceLiquids || Main.netMode != NetmodeID.Server ) {
-				tile.liquid = (byte)(isLiquid ? 1 : 0);
-			}
+			tile.halfBrick( isHalfBrick );
+			tile.actuator( isActuator );
+			tile.inActive( isActuated );
 
-			tile.halfBrick( bits1[5] );
-			tile.actuator( bits1[6] );
-			tile.inActive( bits1[7] );
+			tile.wire( wire1 );
+			tile.wire2( wire2 );
+			tile.wire3( wire3 );
+			tile.wire4( wire4 );
 
-			tile.wire( bits1[4] );
-			tile.wire2( bits2[0] );
-			tile.wire3( bits2[1] );
-			tile.wire4( bits2[7] );
-
-			if( bits2[2] ) {
+			if( hasColor ) {
 				tile.color( reader.ReadByte() );
 			}
-			if( bits2[3] ) {
+			if( hasWallColor ) {
 				tile.wallColor( reader.ReadByte() );
 			}
 
 			if( tile.active() ) {
-				int oldTileType = (int)tile.type;
+				ushort oldTileType = tile.type;
 
 				tile.type = reader.ReadUInt16();
 
 				if( forceFrames || Main.tileFrameImportant[(int)tile.type] ) {
 					tile.frameX = reader.ReadInt16();
 					tile.frameY = reader.ReadInt16();
-				} else if( !wasActive || (int)tile.type != oldTileType ) {
+				} else if( !wasActive || tile.type != oldTileType ) {
 					tile.frameX = -1;
 					tile.frameY = -1;
 				}
 
 				byte slope = 0;
-				if( bits2[4] ) {
+				if( hasSlope1 ) {
 					slope += 1;
 				}
-				if( bits2[5] ) {
+				if( hasSlope2 ) {
 					slope += 2;
 				}
-				if( bits2[6] ) {
+				if( hasSlope3 ) {
 					slope += 4;
 				}
 				tile.slope( slope );
@@ -168,9 +181,13 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				}
 			}
 
-			if( isLiquid ) {
+			if( hasLiquid ) {
 				tile.liquid = reader.ReadByte();
 				tile.liquidType( (int)reader.ReadByte() );
+			} else {
+				if( forceLiquids || Main.netMode != NetmodeID.Server ) {    // liquids are only 'real' on the server
+					tile.liquid = 0;
+				}
 			}
 		}
 	}
