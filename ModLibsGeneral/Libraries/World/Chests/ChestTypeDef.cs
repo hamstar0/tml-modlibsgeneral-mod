@@ -87,13 +87,13 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 			}
 
 			Tile tile = Main.tile[tileX, tileY];
-			if( tile?.active() != true ) {	// TODO: Check if even a chest?
+			if( tile?.active() != true ) {
 				return false;
 			}
 
 			// If no specific chests are defined, allow any chest
 			if( this.AnyOfTiles == null || this.AnyOfTiles.Length == 0 ) {
-				return true;
+				return true;	// TODO: Check if even a chest?
 			}
 
 			if( this.AnyUndergroundChest ) {
@@ -138,7 +138,7 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 					continue;
 				}
 
-				if( !this.Validate( chest.x, chest.y ) ) {
+				if( !this.Validate(chest.x, chest.y) ) {
 					continue;
 				}
 

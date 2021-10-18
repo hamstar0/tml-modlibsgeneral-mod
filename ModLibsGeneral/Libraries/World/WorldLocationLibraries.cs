@@ -103,8 +103,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsSky( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return tilePos.Y <= ( Main.worldSurface * 0.35 );   //0.34999999403953552?
+			return WorldLocationLibraries.IsSky( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -113,8 +112,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsOverworld( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return (double)tilePos.Y <= Main.worldSurface && (double)tilePos.Y > Main.worldSurface * 0.35;
+			return WorldLocationLibraries.IsOverworld( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -123,8 +121,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsAboveWorldSurface( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return tilePos.Y < Main.worldSurface;
+			return WorldLocationLibraries.IsAboveWorldSurface( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -133,8 +130,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsDirtLayer( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return (double)tilePos.Y > Main.worldSurface && (double)tilePos.Y <= Main.rockLayer;
+			return WorldLocationLibraries.IsDirtLayer( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -144,8 +140,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsPreRockLayer( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;    //between 33 and 37
-			return (double)tilePos.Y > Main.rockLayer && (double)tilePos.Y <= Main.rockLayer + 34;
+			return WorldLocationLibraries.IsPreRockLayer( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -154,8 +149,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsRockLayer( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return (double)tilePos.Y > Main.rockLayer && tilePos.Y <= Main.maxTilesY - 200;
+			return WorldLocationLibraries.IsRockLayer( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -164,8 +158,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsLavaLayer( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return tilePos.Y <= Main.maxTilesY - 200 && (double)tilePos.Y > (Main.rockLayer + 601);
+			return WorldLocationLibraries.IsLavaLayer( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -174,8 +167,7 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <param name="worldPos"></param>
 		/// <returns></returns>
 		public static bool IsWithinUnderworld( Vector2 worldPos ) {
-			Vector2 tilePos = worldPos / 16;
-			return tilePos.Y > (Main.maxTilesY - 200);
+			return WorldLocationLibraries.IsWithinUnderworld( (int)worldPos.Y / 16 );
 		}
 
 		////
@@ -200,6 +192,87 @@ namespace ModLibsGeneral.Libraries.World {
 		public static bool IsBeachRegion( Vector2 worldPos ) {
 			Vector2 tilePos = worldPos / 16;
 			return tilePos.X < 380 || tilePos.X > (Main.maxTilesX - 380);
+		}
+
+
+		////////////////
+
+		/// <summary>
+		/// Indicates if the given position is in the sky/space.
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsSky( int tileY ) {
+			return tileY <= ( Main.worldSurface * 0.35 );   //0.34999999403953552?
+		}
+
+		/// <summary>
+		/// Indicates if the given position is above the world's surface, but not in the sky.
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsOverworld( int tileY ) {
+			return (double)tileY <= Main.worldSurface
+				&& (double)tileY > Main.worldSurface * 0.35;
+		}
+
+		/// <summary>
+		/// Indicates if the given position is above the world's surface.
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsAboveWorldSurface( int tileY ) {
+			return tileY < Main.worldSurface;
+		}
+
+		/// <summary>
+		/// Indicates if the given position is within the underground dirt layer (beneath elevation 0, above the rock layer).
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsDirtLayer( int tileY ) {
+			return (double)tileY > Main.worldSurface
+				&& (double)tileY <= Main.rockLayer;
+		}
+		
+		/// <summary>
+		/// Indicates if the given position is within the underground pre-rock layer (background appears like dirt,
+		/// but the game recognizes the 'rockLayer' depth).
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsPreRockLayer( int tileY ) {
+			return (double)tileY > Main.rockLayer
+				&& (double)tileY <= Main.rockLayer + 34;	//between 33 and 37
+		}
+
+		/// <summary>
+		/// Indicates if the given position is within the underground rock layer.
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsRockLayer( int tileY ) {
+			return (double)tileY > Main.rockLayer
+				&& tileY <= Main.maxTilesY - 200;
+		}
+
+		/// <summary>
+		/// Indicates if the given position is within the underground lava layer.
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsLavaLayer( int tileY ) {
+			return tileY <= Main.maxTilesY - 200
+				&& tileY > ((int)Main.rockLayer + 601);
+		}
+
+		/// <summary>
+		/// Indicates if the given position is within the underworld (hell).
+		/// </summary>
+		/// <param name="tileY"></param>
+		/// <returns></returns>
+		public static bool IsWithinUnderworld( int tileY ) {
+			return tileY > (Main.maxTilesY - 200);
 		}
 	}
 }
