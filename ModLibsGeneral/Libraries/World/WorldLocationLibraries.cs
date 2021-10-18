@@ -43,6 +43,25 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <summary></summary>
 		public static int UnderworldLayerBottomTileY => Main.maxTilesY;
 
+		////
+
+		//WorldGen.waterLine = (int) (Main.rockLayer + (double) Main.maxTilesY ) / 2;
+		//WorldGen.waterLine += WorldGen.genRand.Next( -100, 20 );
+		//WorldGen.lavaLine = WorldGen.waterLine + WorldGen.genRand.Next( 50, 80 );
+
+		/// <summary></summary>
+		public static int WaterLineHighestTileY => (((int)Main.rockLayer + Main.maxTilesY) / 2) - 100;
+
+		/// <summary></summary>
+		public static int WaterLineLowestTileY => (((int)Main.rockLayer + Main.maxTilesY) / 2) + 20;
+
+		/// <summary></summary>
+		public static int LavaLineHighestTileY => WorldLocationLibraries.WaterLineHighestTileY + 50;
+
+		/// <summary></summary>
+		public static int LavaLineLowestTileY => WorldLocationLibraries.WaterLineLowestTileY + 100;
+
+		////
 
 		/// <summary></summary>
 		public static int BeachWestTileX => 380;
@@ -58,33 +77,42 @@ namespace ModLibsGeneral.Libraries.World {
 		/// Gets the identifiable region of a given point in the world.
 		/// </summary>
 		/// <param name="worldPos"></param>
+		/// <param name="percentWithinRNGLavaRange">Percent within an "RNG" (guess-only) range of the lava layer.</param>
 		/// <returns></returns>
-		public static WorldRegionFlags GetRegion( Vector2 worldPos ) {
-			WorldRegionFlags where = 0;
+		public static WorldRegionFlags GetRegion( Vector2 worldPos, out float percentWithinRNGLavaRange ) {
+			percentWithinRNGLavaRange = 0f;
 
-			if( WorldLocationLibraries.IsSky(worldPos) ) {
+			//
+
+			WorldRegionFlags where = 0;
+			int tileX = (int)worldPos.X / 16;
+			int tileY = (int)worldPos.Y / 16;
+
+			//
+
+			if( WorldLocationLibraries.IsSky(tileY) ) {
 				where |= WorldRegionFlags.Sky;
-			} else if( WorldLocationLibraries.IsWithinUnderworld(worldPos) ) {
+			} else if( WorldLocationLibraries.IsWithinUnderworld(tileY) ) {
 				where |= WorldRegionFlags.Hell;
-			} else if( WorldLocationLibraries.IsAboveWorldSurface(worldPos) ) {
+			} else if( WorldLocationLibraries.IsAboveWorldSurface(tileY) ) {
 				where |= WorldRegionFlags.Overworld;
 
-				if( WorldLocationLibraries.BeachEastTileX < (worldPos.X/16) ) {
+				if( WorldLocationLibraries.BeachEastTileX < tileX ) {
 					where |= WorldRegionFlags.OceanEast;
-				} else if( WorldLocationLibraries.BeachWestTileX > (worldPos.X/16) ) {
+				} else if( WorldLocationLibraries.BeachWestTileX > tileX ) {
 					where |= WorldRegionFlags.OceanWest;
 				}
 			} else {
-				if( WorldLocationLibraries.IsDirtLayer( worldPos ) ) {
+				if( WorldLocationLibraries.IsDirtLayer(tileY) ) {
 					where |= WorldRegionFlags.CaveDirt;
 				} else {
-					if( WorldLocationLibraries.IsPreRockLayer( worldPos ) ) {
+					if( WorldLocationLibraries.IsPreRockLayer(tileY) ) {
 						where |= WorldRegionFlags.CavePreRock;
 					}
-					if( WorldLocationLibraries.IsRockLayer( worldPos ) ) {
+					if( WorldLocationLibraries.IsRockLayer(tileY) ) {
 						where |= WorldRegionFlags.CaveRock;
 
-						if( WorldLocationLibraries.IsLavaLayer( worldPos ) ) {
+						if( WorldLocationLibraries.IsLavaLayer(tileY, out percentWithinRNGLavaRange) ) {
 							where |= WorldRegionFlags.CaveLava;
 						}
 					}
@@ -150,15 +178,6 @@ namespace ModLibsGeneral.Libraries.World {
 		/// <returns></returns>
 		public static bool IsRockLayer( Vector2 worldPos ) {
 			return WorldLocationLibraries.IsRockLayer( (int)worldPos.Y / 16 );
-		}
-
-		/// <summary>
-		/// Indicates if the given position is within the underground lava layer.
-		/// </summary>
-		/// <param name="worldPos"></param>
-		/// <returns></returns>
-		public static bool IsLavaLayer( Vector2 worldPos ) {
-			return WorldLocationLibraries.IsLavaLayer( (int)worldPos.Y / 16 );
 		}
 
 		/// <summary>
@@ -260,10 +279,25 @@ namespace ModLibsGeneral.Libraries.World {
 		/// Indicates if the given position is within the underground lava layer.
 		/// </summary>
 		/// <param name="tileY"></param>
+		/// <param name="percentWithinRNGRange">What percent amount into the world gen's RNG</param>
 		/// <returns></returns>
-		public static bool IsLavaLayer( int tileY ) {
-			return tileY <= Main.maxTilesY - 200
-				&& tileY > ((int)Main.rockLayer + 601);
+		public static bool IsLavaLayer( int tileY, out float percentWithinRNGRange ) {
+			if( tileY > Main.maxTilesY - 200 ) {
+				percentWithinRNGRange = 0f;
+
+				return false;
+			}
+
+			int minY = WorldLocationLibraries.LavaLineHighestTileY;
+			int maxY = WorldLocationLibraries.LavaLineHighestTileY;
+
+			percentWithinRNGRange = (float)(tileY - minY) / (float)(maxY - minY);
+			if( percentWithinRNGRange > 1f ) {
+				percentWithinRNGRange = 1f;
+			}
+
+			return tileY >= minY;
+			//&& tileY > ((int)Main.rockLayer + 37);  //601 world units?
 		}
 
 		/// <summary>
