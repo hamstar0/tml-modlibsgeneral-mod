@@ -36,9 +36,9 @@ namespace ModLibsGeneral.Libraries.UI {
 			float height = UIZoomLibraries.ApplyZoom( Main.screenHeight, uiZoomState, gameZoomState );
 
 			int scrX = (int)Main.screenPosition.X;
-			scrX += (int)( ( (float)Main.screenWidth - width ) * 0.5f );
+			scrX += (int)( ((float)Main.screenWidth - width) * 0.5f );
 			int scrY = (int)Main.screenPosition.Y;
-			scrY += (int)( ( (float)Main.screenHeight - height ) * 0.5f );
+			scrY += (int)( ((float)Main.screenHeight - height) * 0.5f );
 
 			return new Rectangle( scrX, scrY, (int)width, (int)height );
 		}
