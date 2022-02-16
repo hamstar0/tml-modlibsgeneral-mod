@@ -187,5 +187,14 @@ namespace ModLibsGeneral.Libraries.NPCs {
 			if( npcBannerType >= NPC.killCount.Length ) { return -1; }
 			return NPC.killCount[npcBannerType];
 		}
+
+		////////////////
+		
+		/// <summary></summary>
+		/// <param name="npc"></param>
+		/// <returns></returns>
+		public static bool CanTakeDamage( NPC npc ) {
+			return !npc.immortal && !npc.dontTakeDamage;
+		}
 	}
 }
