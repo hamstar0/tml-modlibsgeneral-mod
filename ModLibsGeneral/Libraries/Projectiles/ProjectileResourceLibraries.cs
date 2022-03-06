@@ -14,6 +14,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 		/// <returns></returns>
 		public static Texture2D SafelyGetTexture( int type ) {
 			Main.instance.LoadProjectile( type );
+
 			return Main.projectileTexture[type];
 		}
 	}

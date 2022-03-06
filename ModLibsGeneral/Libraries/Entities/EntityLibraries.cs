@@ -26,7 +26,10 @@ namespace ModLibsGeneral.Libraries.Entities {
 				} else if( ent is Player ) {
 					NetMessage.SendData( MessageID.SyncPlayer, -1, -1, null, ent.whoAmI );
 				} else if( ent is Projectile ) {
-					NetMessage.SendData( MessageID.SyncProjectile, -1, -1, null, ent.whoAmI );	// is this `whoAmI` meaningful?
+					var proj = ent as Projectile;
+					int projWho = Main.projectileIdentity[ proj.owner, proj.projUUID ];
+
+					NetMessage.SendData( MessageID.SyncProjectile, -1, -1, null, projWho );
 				}
 			}
 		}

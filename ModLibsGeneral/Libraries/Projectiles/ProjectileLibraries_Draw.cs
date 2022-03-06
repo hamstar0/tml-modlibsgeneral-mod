@@ -19,7 +19,13 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 		/// <param name="color"></param>
 		/// <param name="scale"></param>
 		/// <param name="applyZoom">Whether to convert to current zoom amount of the screen.</param>
-		public static void DrawSimple( SpriteBatch sb, Projectile proj, Vector2 pos, float rot, Color color, float scale,
+		public static void DrawSimple(
+					SpriteBatch sb,
+					Projectile proj,
+					Vector2 pos,
+					float rot,
+					Color color,
+					float scale,
 					bool applyZoom = false ) {
 			Texture2D tex = Main.projectileTexture[proj.type];
 			int texHeight = tex.Height / Main.projFrames[proj.type];

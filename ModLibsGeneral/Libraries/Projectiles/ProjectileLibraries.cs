@@ -11,7 +11,8 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 		/// Applies projectile "hits", as if to make the effect of impacting something (including consuming penetrations).
 		/// </summary>
 		/// <param name="projectile"></param>
-		public static void Hit( Projectile projectile ) {
+		/// <param name="syncs"></param>
+		public static void Hit( Projectile projectile, bool syncs ) {
 			if( projectile.penetrate <= 0 ) {
 				projectile.Kill();
 			} else {
@@ -19,8 +20,14 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 				projectile.netUpdate = true;
 			}
 
-			if( Main.netMode != NetmodeID.SinglePlayer ) {
-				NetMessage.SendData( MessageID.SyncProjectile, -1, -1, null, projectile.whoAmI );
+			if( syncs && Main.netMode != NetmodeID.SinglePlayer ) {
+				NetMessage.SendData(
+					msgType: MessageID.SyncProjectile,
+					remoteClient: -1,
+					ignoreClient: -1,
+					text: null,
+					number: Main.projectileIdentity[ projectile.owner, projectile.projUUID ]
+				);
 			}
 		}
 	}
