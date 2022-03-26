@@ -1,9 +1,9 @@
-﻿using ModLibsCore.Libraries.Debug;
-using ModLibsCore.Libraries.DotNET.Reflection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.DotNET.Reflection;
 
 
 namespace ModLibsGeneral.Libraries.Players {
@@ -68,10 +68,10 @@ namespace ModLibsGeneral.Libraries.Players {
 		private static void RemoveWingSlotProperty( ModPlayer mywingplayer, string propName ) {
 			object wingEquipSlot;
 
-			if( ReflectionLibraries.Get( mywingplayer, propName, out wingEquipSlot ) && wingEquipSlot != null ) {
+			if( ReflectionLibraries.Get(mywingplayer, propName, out wingEquipSlot) && wingEquipSlot != null ) {
 				Item wingItem;
 
-				if( ReflectionLibraries.Get( wingEquipSlot, "Item", out wingItem ) ) {
+				if( ReflectionLibraries.Get(wingEquipSlot, "Item", out wingItem) ) {
 					if( wingItem != null && !wingItem.IsAir ) {
 						ReflectionLibraries.Set( wingEquipSlot, "Item", new Item() );
 						ReflectionLibraries.Set( mywingplayer, propName, wingEquipSlot );

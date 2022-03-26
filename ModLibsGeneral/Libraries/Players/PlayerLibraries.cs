@@ -1,4 +1,6 @@
-﻿using Terraria;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -199,7 +201,7 @@ namespace ModLibsGeneral.Libraries.Players {
 		////
 
 		/// <summary>
-		/// Resets a player back to (vanilla) factory defaults.
+		/// Resets a player back to (vanilla) defaults.
 		/// </summary>
 		/// <param name="player"></param>
 		public static void FullVanillaReset( Player player ) {
@@ -262,6 +264,100 @@ namespace ModLibsGeneral.Libraries.Players {
 			player.stoned = true;
 			player.immune = true;
 			player.immuneTime = 2;
+		}
+
+
+		/// <summary>
+		/// Standardized test for a player's condition being 'default'.
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="ignoreBuffs"></param>
+		/// <param name="ignoreLife"></param>
+		/// <param name="ignoreMana"></param>
+		/// <param name="ignoreInventory"></param>
+		/// <param name="ignoreEquips"></param>
+		/// <param name="ignoreBanks"></param>
+		/// <param name="inventorySlotExceptions"></param>
+		/// <param name="equipSlotExceptions"></param>
+		/// <returns></returns>
+		public static bool IsPlayerVanillaFresh(
+					Player player,
+					bool ignoreBuffs=true,
+					bool ignoreLife=false,
+					bool ignoreMana=false,
+					bool ignoreInventory=false,
+					bool ignoreEquips=false,
+					bool ignoreBanks=false,
+					ISet<int> inventorySlotExceptions=null,
+					ISet<int> equipSlotExceptions=null ) {
+			if( !ignoreBuffs ) {
+				return player.buffTime.Any( t => t > 0 );
+			}
+
+			if( !ignoreLife && player.statLifeMax2 != 100 ) {
+				return false;
+			}
+
+			if( !ignoreMana && player.statManaMax2 != 20 ) {
+				return false;
+			}
+
+			if( !ignoreInventory ) {
+				if( !(inventorySlotExceptions?.Contains(0) == true) ) {
+					if( player.inventory[0].type != ItemID.CopperShortsword ) {
+						return false;
+					}
+				}
+				if( !(inventorySlotExceptions?.Contains(1) == true) ) {
+					if( player.inventory[1].type != ItemID.CopperPickaxe ) {
+						return false;
+					}
+				}
+				if( !(inventorySlotExceptions?.Contains(2) == true) ) {
+					if( player.inventory[2].type != ItemID.CopperAxe ) {
+						return false;
+					}
+				}
+				for( int i=3; i<player.inventory.Length; i++ ) {
+					if( inventorySlotExceptions?.Contains(i) == true ) {
+						continue;
+					}
+					if( player.inventory[i]?.active == true ) {
+						return true;
+					}
+				}
+			}
+
+			if( !ignoreEquips ) {
+				for( int i=3; i<player.armor.Length; i++ ) {
+					if( equipSlotExceptions?.Contains(i) == true ) {
+						continue;
+					}
+					if( player.armor[i]?.active == true ) {
+						return true;
+					}
+				}
+			}
+
+			if( !ignoreBanks ) {
+				for( int i=3; i<player.bank.item.Length; i++ ) {
+					if( player.bank.item[i]?.active == true ) {
+						return true;
+					}
+				}
+				for( int i=3; i<player.bank2.item.Length; i++ ) {
+					if( player.bank2.item[i]?.active == true ) {
+						return true;
+					}
+				}
+				for( int i=3; i<player.bank3.item.Length; i++ ) {
+					if( player.bank3.item[i]?.active == true ) {
+						return true;
+					}
+				}
+			}
+
+			return true;
 		}
 	}
 }
