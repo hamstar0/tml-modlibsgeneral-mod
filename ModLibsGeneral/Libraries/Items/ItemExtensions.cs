@@ -21,12 +21,15 @@ namespace ModLibsGeneral.Libraries.Items {
 					int minStack = 1,
 					int maxStack = int.MaxValue ) {
 			if( !itemType.HasValue ) {
-				return self.active && self.stack >= minStack && self.stack <= maxStack;
+				return self.active
+					&& self.type > 0
+					&& self.stack >= minStack
+					&& self.stack <= maxStack;
 			} else {
 				return self.active
+					&& self.type == itemType.Value
 					&& self.stack >= minStack
-					&& self.stack <= maxStack
-					&& self.type == itemType.Value;
+					&& self.stack <= maxStack;
 			}
 		}
 	}
