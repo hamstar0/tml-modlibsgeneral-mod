@@ -8,18 +8,25 @@ namespace ModLibsGeneral.Libraries.Items {
 	/// </summary>
 	public static class ItemExtensions {
 		/// <summary>
-		/// Self explanatory.
+		/// A standardized way to check an item's existential nature. Avoids subtle debugging woes.
 		/// </summary>
 		/// <param name="self"></param>
 		/// <param name="itemType"></param>
 		/// <param name="minStack"></param>
 		/// <param name="maxStack"></param>
 		/// <returns></returns>
-		public static bool Is( this Item self, int itemType = -1, int minStack = 1, int maxStack = int.MaxValue ) {
-			if( itemType == -1 ) {
+		public static bool Is(
+					this Item self,
+					int? itemType = null,
+					int minStack = 1,
+					int maxStack = int.MaxValue ) {
+			if( !itemType.HasValue ) {
 				return self.active && self.stack >= minStack && self.stack <= maxStack;
 			} else {
-				return self.active && self.stack >= minStack && self.stack <= maxStack && self.type == itemType;
+				return self.active
+					&& self.stack >= minStack
+					&& self.stack <= maxStack
+					&& self.type == itemType.Value;
 			}
 		}
 	}
