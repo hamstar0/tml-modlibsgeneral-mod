@@ -1,1 +1,1 @@
-Supplies a broad library of helpful (`public static`) methods and "services" for general use.
+Supplies a broad library of helpful reusable classes, common-purpose self-contained (`public static`) methods, and "services" for assorted stateful features.
