@@ -9,70 +9,13 @@ namespace ModLibsGeneral.Libraries.UI {
 	/// </summary>
 	public class UIZoomLibraries {
 		/// <summary>
-		/// Gets the current screen size according to the given scales.
-		/// </summary>
-		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <returns></returns>
-		public static (float Width, float Height) GetScreenSize( bool? uiZoomState, bool? gameZoomState ) {
-			float width = UIZoomLibraries.ApplyZoom( Main.screenWidth, uiZoomState, gameZoomState );
-			float height = UIZoomLibraries.ApplyZoom( Main.screenHeight, uiZoomState, gameZoomState );
-
-			return (width, height);
-		}
-
-		/// <summary>
-		/// Gets the world position and range of the screen, according to the given zoom parameters.
-		/// </summary>
-		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <returns></returns>
-		public static Rectangle GetWorldFrameOfScreen( bool? uiZoomState, bool? gameZoomState ) {
-			float width = UIZoomLibraries.ApplyZoom( Main.screenWidth, uiZoomState, gameZoomState );
-			float height = UIZoomLibraries.ApplyZoom( Main.screenHeight, uiZoomState, gameZoomState );
-
-			int scrX = (int)Main.screenPosition.X;
-			scrX += (int)( ((float)Main.screenWidth - width) * 0.5f );
-			int scrY = (int)Main.screenPosition.Y;
-			scrY += (int)( ((float)Main.screenHeight - height) * 0.5f );
-
-			return new Rectangle( scrX, scrY, (int)width, (int)height );
-		}
-
-
-		////////////////
-
-		/// <summary>
-		/// Gets the screen-space coordinates of the given world coordinates.
-		/// </summary>
-		/// <param name="worldCoords"></param>
-		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <returns></returns>
-		public static Vector2 ConvertToScreenPosition( Vector2 worldCoords, bool? uiZoomState, bool? gameZoomState ) {
-			var wldScrFrame = UIZoomLibraries.GetWorldFrameOfScreen( uiZoomState, gameZoomState );
-			var wldScrPos = new Vector2( wldScrFrame.X, wldScrFrame.Y );
-
-			return worldCoords - wldScrPos;
-		}
-
-
-		////////////////
-
-		/// <summary>
 		/// Applies the given zoom parameters to the given float.
 		/// </summary>
 		/// <param name="value"></param>
-		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
+		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.GameZoomTarget`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.GameZoomTarget`).</param>
+		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.UIScale`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.UIScale`).</param>
 		/// <returns></returns>
 		public static float ApplyZoom( float value, bool? uiZoomState, bool? gameZoomState ) {
 			if( uiZoomState.HasValue ) {
@@ -97,10 +40,10 @@ namespace ModLibsGeneral.Libraries.UI {
 		/// Applies the given zoom parameters to the given Vector2.
 		/// </summary>
 		/// <param name="value"></param>
-		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
+		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.GameZoomTarget`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.GameZoomTarget`).</param>
+		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.UIScale`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.UIScale`).</param>
 		/// <returns></returns>
 		public static Vector2 ApplyZoom(
 					Vector2 value,
@@ -124,14 +67,16 @@ namespace ModLibsGeneral.Libraries.UI {
 			return value;
 		}
 
+		////
+
 		/// <summary>
 		/// Applies the given zoom parameters to the given Vector2.
 		/// </summary>
 		/// <param name="value"></param>
-		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
-		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it. `false` assumes it has been
-		/// removed, and applies it.</param>
+		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.GameZoomTarget`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.GameZoomTarget`).</param>
+		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.UIScale`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.UIScale`).</param>
 		/// <param name="uiZoomStateForCenterOffset"></param>
 		/// <param name="gameZoomStateForCenterOffset"></param>
 		/// <returns></returns>
@@ -142,11 +87,81 @@ namespace ModLibsGeneral.Libraries.UI {
 					bool? uiZoomStateForCenterOffset,
 					bool? gameZoomStateForCenterOffset ) {
 			var scrMid = new Vector2( Main.screenWidth, Main.screenHeight ) * 0.5f;
-			value -= UIZoomLibraries.ApplyZoom( scrMid, uiZoomStateForCenterOffset, gameZoomStateForCenterOffset );
-			value = UIZoomLibraries.ApplyZoom( value, uiZoomState, gameZoomState );
-			value += scrMid;
+			var scrMidZoomed = UIZoomLibraries.ApplyZoom(
+				scrMid,
+				uiZoomStateForCenterOffset,
+				gameZoomStateForCenterOffset
+			);
 
-			return value;
+			//
+
+			Vector2 offsetOfValueOnCenterZoomedScreen = value - scrMidZoomed;
+
+			Vector2 offsetOfValueOnZoomedScreen = UIZoomLibraries.ApplyZoom(
+				offsetOfValueOnCenterZoomedScreen,
+				uiZoomState,
+				gameZoomState
+			);
+
+			return offsetOfValueOnZoomedScreen + scrMid;
+		}
+
+
+		////////////////
+
+		/// <summary>
+		/// Gets the current screen size according to the given scales.
+		/// </summary>
+		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.GameZoomTarget`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.GameZoomTarget`).</param>
+		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.UIScale`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.UIScale`).</param>
+		/// <returns></returns>
+		public static (float Width, float Height) GetScreenSize( bool? uiZoomState, bool? gameZoomState ) {
+			float width = UIZoomLibraries.ApplyZoom( Main.screenWidth, uiZoomState, gameZoomState );
+			float height = UIZoomLibraries.ApplyZoom( Main.screenHeight, uiZoomState, gameZoomState );
+
+			return (width, height);
+		}
+
+		/// <summary>
+		/// Gets the world position and range of the screen, according to the given zoom parameters.
+		/// </summary>
+		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.GameZoomTarget`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.GameZoomTarget`).</param>
+		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.UIScale`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.UIScale`).</param>
+		/// <returns></returns>
+		public static Rectangle GetWorldFrameOfScreen( bool? uiZoomState, bool? gameZoomState ) {
+			float width = UIZoomLibraries.ApplyZoom( Main.screenWidth, uiZoomState, gameZoomState );
+			float height = UIZoomLibraries.ApplyZoom( Main.screenHeight, uiZoomState, gameZoomState );
+			
+			float xCenterOffset = ((float)Main.screenWidth - width) * 0.5f;
+			float yCenterOffset = ((float)Main.screenHeight - height) * 0.5f;
+
+			int scrX = (int)Main.screenPosition.X + (int)xCenterOffset;
+			int scrY = (int)Main.screenPosition.Y + (int)yCenterOffset;
+
+			return new Rectangle( scrX, scrY, (int)width, (int)height );
+		}
+
+
+		////////////////
+
+		/// <summary>
+		/// Gets the screen-space coordinates of the given world coordinates.
+		/// </summary>
+		/// <param name="worldCoords"></param>
+		/// <param name="uiZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.GameZoomTarget`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.GameZoomTarget`).</param>
+		/// <param name="gameZoomState">If `true`, assumes zoom is applied, and removes it (`/= Main.UIScale`).
+		/// `false` assumes it has been removed, and applies it (`*= Main.UIScale`).</param>
+		/// <returns></returns>
+		public static Vector2 ConvertToScreenPosition( Vector2 worldCoords, bool? uiZoomState, bool? gameZoomState ) {
+			var wldScrFrame = UIZoomLibraries.GetWorldFrameOfScreen( uiZoomState, gameZoomState );
+			var wldScrPos = new Vector2( wldScrFrame.X, wldScrFrame.Y );
+
+			return worldCoords - wldScrPos;
 		}
 	}
 }
