@@ -38,6 +38,8 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 				return (false, true);
 			}
 
+			//
+
 			bool isModified = false;
 			ChestFillDefinition self = this;
 

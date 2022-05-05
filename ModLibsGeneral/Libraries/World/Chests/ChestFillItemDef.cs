@@ -38,9 +38,12 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 
 		/// <summary></summary>
 		public Item CreateItem() {
+			int stack = WorldGen.genRand.Next( this.MinQuantity, this.MaxQuantity + 1 );
+
 			var item = new Item();
 			item.SetDefaults( this.ItemType, true );
-			item.stack = WorldGen.genRand.Next( this.MinQuantity, this.MaxQuantity );
+			item.stack = stack;
+
 			return item;
 		}
 

@@ -44,7 +44,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 			Vector2 newpos;
 			if( applyZoom ) {
 				//newpos = UILibraries.ConvertToScreenPosition( pos );
-				newpos = UIZoomLibraries.ApplyZoomFromScreenCenter( pos - Main.screenPosition, null, false, null, null );
+				newpos = UIZoomLibraries.ApplyZoomFromScreenCenter( pos - Main.screenPosition, null, false );
 			} else {
 				newpos = pos - Main.screenPosition;
 			}
