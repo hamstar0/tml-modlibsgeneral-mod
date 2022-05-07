@@ -41,12 +41,28 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 
 
 		////////////////
+		
+		/// <summary></summary>
+		public static void ResetMessage() {
+			SimpleMessage.MessageDuration = 0;
+			SimpleMessage.Message = "";
+			SimpleMessage.SubMessage = "";
+			SimpleMessage.IsBordered = false;
+			SimpleMessage.Color = Color.White;
+			SimpleMessage.Left = new StyleDimension( 0f, 0.5f );
+			SimpleMessage.Top = new StyleDimension( 0f, 0.5f );
+		}
+
+
+		////////////////
 
 		/// <summary></summary>
 		/// <param name="msg"></param>
 		/// <param name="submsg"></param>
 		/// <param name="duration">Tick duration.</param>
 		public static void PostMessage( string msg, string submsg, int duration ) {
+			SimpleMessage.ResetMessage();
+
 			SimpleMessage.MessageDuration = duration;
 			SimpleMessage.Message = msg;
 			SimpleMessage.SubMessage = submsg;
@@ -67,6 +83,8 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 					int duration,
 					bool isBordered,
 					Color color ) {
+			SimpleMessage.ResetMessage();
+
 			SimpleMessage.MessageDuration = duration;
 			SimpleMessage.Message = msg;
 			SimpleMessage.SubMessage = submsg;
@@ -77,9 +95,7 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 		/// <summary></summary>
 		/// <param name="left"></param>
 		/// <param name="top"></param>
-		public static void SetMessagePosition(
-					StyleDimension left,
-					StyleDimension top ) {
+		public static void SetMessagePosition( StyleDimension left, StyleDimension top ) {
 			SimpleMessage.Left = left;
 			SimpleMessage.Top = top;
 		}
@@ -101,18 +117,42 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 			//
 
 			string msg = SimpleMessage.Message;
-			var pos = new Vector2(
+			string submsg = SimpleMessage.SubMessage;
+
+			var midPos = new Vector2(
 				SimpleMessage.Left.GetValue( Main.screenWidth ),
 				SimpleMessage.Top.GetValue( Main.screenHeight )
 			);
-			var size = SimpleMessage.DrawMessageText( sb, msg, pos, SimpleMessage.IsBordered, SimpleMessage.Color, 2f );
 
-			string submsg = SimpleMessage.SubMessage;
 			if( submsg != "" ) {
-				var subpos = pos;
-				subpos.Y += size.Y * 2;
+				midPos.Y -= 56f;
+			}
 
-				SimpleMessage.DrawMessageText( sb, submsg, subpos, SimpleMessage.IsBordered, SimpleMessage.Color * 0.8f, 1f );
+			//
+
+			Vector2 size = SimpleMessage.DrawMessageText(
+				sb: sb,
+				msg: msg,
+				midPos: midPos,
+				isBordered: SimpleMessage.IsBordered,
+				color: SimpleMessage.Color,
+				large: true
+			);
+
+			//
+
+			if( submsg != "" ) {
+				var subMidPos = midPos;
+				subMidPos.Y += size.Y * 1.5f;
+
+				SimpleMessage.DrawMessageText(
+					sb: sb,
+					msg: submsg,
+					midPos: subMidPos,
+					isBordered: SimpleMessage.IsBordered,
+					color: SimpleMessage.Color * 0.8f,
+					large: false
+				);
 			}
 		}
 
@@ -122,36 +162,45 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 		private static Vector2 DrawMessageText(
 					SpriteBatch sb,
 					string msg,
-					Vector2 pos,
+					Vector2 midPos,
 					bool isBordered,
 					Color color,
-					float scale ) {
-			Vector2 size = Main.fontItemStack.MeasureString( msg );
+					bool large ) {
+			if( msg == "" ) {
+				return default;
+			}
 
-			size *= scale;
-			pos -= size / 2f;
+			//
+
+			DynamicSpriteFont font = large ? Main.fontDeathText : Main.fontMouseText;
+
+			Vector2 size = font.MeasureString( msg );
+
+			Vector2 origin = size * 0.5f;
+
+			//
 
 			if( isBordered ) {
 				Utils.DrawBorderStringFourWay(
 					sb: sb,
-					font: Main.fontItemStack,
+					font: font,
 					text: msg,
-					x: pos.X,
-					y: pos.Y,
+					x: midPos.X,
+					y: midPos.Y,
 					textColor: color,
-					borderColor: color * 0.2f,
-					origin: default(Vector2),
-					scale: scale
+					borderColor: Color.Black,
+					origin: origin,
+					scale: 1f
 				);
 			} else {
 				sb.DrawString(
-					spriteFont: Main.fontItemStack,
+					spriteFont: font,
 					text: msg,
-					position: pos,
+					position: midPos,
 					color: color,
 					rotation: 0f,
-					origin: new Vector2( 0f, 0f ),
-					scale: scale,
+					origin: origin,
+					scale: 1f,
 					effects: SpriteEffects.None,
 					layerDepth: 1f
 				);
