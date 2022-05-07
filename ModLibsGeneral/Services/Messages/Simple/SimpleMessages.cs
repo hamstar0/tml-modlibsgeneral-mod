@@ -94,7 +94,11 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 		}
 
 		internal static void DrawMessage( SpriteBatch sb ) { // Called from a Draw function
-			if( SimpleMessage.MessageDuration == 0 ) { return; }
+			if( SimpleMessage.MessageDuration <= 0 ) {
+				return;
+			}
+
+			//
 
 			string msg = SimpleMessage.Message;
 			var pos = new Vector2(

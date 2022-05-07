@@ -6,6 +6,7 @@ using ModLibsCore.Libraries.DotNET.Extensions;
 using ModLibsCore.Libraries.TModLoader;
 using ModLibsGeneral.Libraries.World;
 using ModLibsGeneral.Libraries.Recipes;
+using ModLibsGeneral.Services.Messages.Simple;
 
 
 namespace ModLibsGeneral {
@@ -58,6 +59,8 @@ namespace ModLibsGeneral {
 
 			if( LoadLibraries.IsWorldBeingPlayed() ) {
 				ModContent.GetInstance<WorldStateLibraries>().UpdateUponWorldBeingPlayed();
+
+				SimpleMessage.UpdateMessage();
 			}
 		}
 

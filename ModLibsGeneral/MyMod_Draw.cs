@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Libraries.TModLoader;
 using ModLibsGeneral.Services.Messages.Player;
+using ModLibsGeneral.Services.Messages.Simple;
 
 
 namespace ModLibsGeneral {
@@ -26,6 +27,11 @@ namespace ModLibsGeneral {
 				return true;
 			};
 
+			GameInterfaceDrawMethod simpMsgDrawCallback = () => {
+				SimpleMessage.DrawMessage( Main.spriteBatch );
+				return true;
+			};
+
 			//
 
 			if( LoadLibraries.IsCurrentPlayerInGame() ) {
@@ -33,6 +39,11 @@ namespace ModLibsGeneral {
 					debugDrawCallback,
 					InterfaceScaleType.UI );
 				layers.Insert( idx, debugLayer );
+
+				var simpMsgLayer = new LegacyGameInterfaceLayer( "ModLibsGeneral: Simple Message",
+					simpMsgDrawCallback,
+					InterfaceScaleType.UI );
+				layers.Insert( idx, simpMsgLayer );
 			}
 		}
 	}
