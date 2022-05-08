@@ -124,9 +124,7 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 				SimpleMessage.Top.GetValue( Main.screenHeight )
 			);
 
-			if( submsg != "" ) {
-				midPos.Y -= 56f;
-			}
+			midPos.Y -= 56f;
 
 			//
 
