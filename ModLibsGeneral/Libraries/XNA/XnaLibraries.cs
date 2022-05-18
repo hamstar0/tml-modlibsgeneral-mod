@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using ModLibsCore.Libraries.Debug;
 
@@ -37,6 +38,25 @@ namespace ModLibsGeneral.Libraries.XNA {
 					if( !scanner( i, j ) ) { return; }
 				}
 			}
+		}
+
+
+		/// <summary>
+		/// Applies a pre-multiply pass to the colors of a texture.
+		/// 
+		/// Credit: @Oli
+		/// </summary>
+		/// <param name="texture"></param>
+		public static void PremultiplyTexture( Texture2D texture ) {
+			Color[] buffer = new Color[texture.Width * texture.Height];
+
+			texture.GetData( buffer );
+
+			for( int i = 0; i < buffer.Length; i++ ) {
+				buffer[i] = Color.FromNonPremultiplied( buffer[i].R, buffer[i].G, buffer[i].B, buffer[i].A );
+			}
+
+			texture.SetData( buffer );
 		}
 	}
 }
