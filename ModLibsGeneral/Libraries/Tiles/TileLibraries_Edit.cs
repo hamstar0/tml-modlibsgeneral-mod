@@ -92,7 +92,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				|| (syncIfServer && Main.netMode == NetmodeID.Server);
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
 
-			if( !tile.active() ) {
+			if( !tile.HasTile ) {
 				if( forceSyncIfUnchanged && sync ) {
 					NetMessage.SendData( MessageID.TileChange, -1, -1, null, 4, (float)tileX, (float)tileY, 0f, 0, 0, 0 );
 				}
@@ -103,14 +103,14 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			//
 
 			bool isTileKilled = false;
-			bool isContainer = tile.type == TileID.Containers || tile.type == TileID.Containers2;
+			bool isContainer = tile.TileType == TileID.Containers || tile.TileType == TileID.Containers2;
 
 			try {
 				if( isContainer ) {
 					isTileKilled = TileLibraries.KillContainerTile( tileX, tileY, effectOnly, dropsItem, syncIfClient, syncIfServer );
 				} else {
 					WorldGen.KillTile( tileX, tileY, false, effectOnly, !dropsItem );
-					isTileKilled = effectOnly || !Main.tile[ tileX, tileY ].active();
+					isTileKilled = effectOnly || !Main.tile[ tileX, tileY ].HasTile;
 				}
 			} catch( Exception e ) {
 				if( !suppressErrors ) {
@@ -165,7 +165,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 					bool syncIfClient = false,
 					bool syncIfServer = true ) {
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
-			if( tile.type != TileID.Containers && tile.type != TileID.Containers2 ) {
+			if( tile.TileType != TileID.Containers && tile.TileType != TileID.Containers2 ) {
 				return false;
 			}
 
@@ -173,7 +173,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				|| ( syncIfServer && Main.netMode == NetmodeID.Server );
 
 			int chestIdx = Chest.FindChest( tileX, tileY );
-			int chestType = tile.type == TileID.Containers2 ? 5 : 1;
+			int chestType = tile.TileType == TileID.Containers2 ? 5 : 1;
 
 			if( chestIdx != -1 && Chest.DestroyChest(tileX, tileY) ) {
 				//if( Main.tile[x, y].type >= TileID.Count ) {
@@ -191,7 +191,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 						number3: (float)tileY,
 						number4: 0f,
 						number5: chestIdx,
-						number6: tile.type,
+						number6: tile.TileType,
 						number7: 0
 					);
 					NetMessage.SendTileSquare( -1, tileX, tileY, 3, TileChangeType.None );
@@ -199,7 +199,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			}
 
 			WorldGen.KillTile( tileX, tileY, false, effectOnly, !dropsItem );
-			return effectOnly || !Main.tile[ tileX, tileY ].active();
+			return effectOnly || !Main.tile[ tileX, tileY ].HasTile;
 		}
 
 
@@ -236,41 +236,41 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			toTile.CopyFrom( fromTileCopy );
 
 			if( preserveWall ) {
-				ushort oldToWall = fromTile.wall;
-				fromTile.wall = fromTileCopy.wall;
-				toTile.wall = oldToWall;
+				ushort oldToWall = fromTile.WallType;
+				fromTile.WallType = fromTileCopy.WallType;
+				toTile.WallType = oldToWall;
 			}
 
 			if( preserveWire ) {
-				bool oldToWire = fromTile.wire();
-				fromTile.wire( fromTileCopy.wire() );
-				toTile.wire( oldToWire );
+				bool oldToWire = fromTile.RedWire;
+				fromTile.RedWire = fromTileCopy.RedWire;
+				toTile.RedWire = oldToWire;
 
-				bool oldToWire2 = fromTile.wire2();
-				fromTile.wire2( fromTileCopy.wire2() );
-				toTile.wire2( oldToWire2 );
+				bool oldToWire2 = fromTile.BlueWire;
+				fromTile.BlueWire = fromTileCopy.BlueWire;
+				toTile.BlueWire = oldToWire2;
 
-				bool oldToWire3 = fromTile.wire3();
-				fromTile.wire3( fromTileCopy.wire3() );
-				toTile.wire3( oldToWire3 );
+				bool oldToWire3 = fromTile.GreenWire;
+				fromTile.GreenWire = fromTileCopy.GreenWire;
+				toTile.GreenWire = oldToWire3;
 
-				bool oldToWire4 = fromTile.wire4();
-				fromTile.wire4( fromTileCopy.wire4() );
-				toTile.wire4( oldToWire4 );
+				bool oldToWire4 = fromTile.YellowWire;
+				fromTile.YellowWire = fromTileCopy.YellowWire;
+				toTile.YellowWire = oldToWire4;
 			}
 
 			if( preserveLiquid ) {
-				byte oldToLiquid = fromTile.liquid;
-				fromTile.liquid = fromTileCopy.liquid;
-				toTile.liquid = oldToLiquid;
+				byte oldToLiquid = fromTile.LiquidAmount;
+				fromTile.LiquidAmount = fromTileCopy.LiquidAmount;
+				toTile.LiquidAmount = oldToLiquid;
 
-				bool oldToHoney = fromTile.honey();
-				fromTile.honey( fromTileCopy.honey() );
-				toTile.honey( oldToHoney );
+				bool oldToHoney = (fromTile.LiquidType == LiquidID.Honey);
+				fromTile.honey/* tModPorter Suggestion: LiquidType = ... */( (fromTileCopy.LiquidType == LiquidID.Honey) );
+				toTile.honey/* tModPorter Suggestion: LiquidType = ... */( oldToHoney );
 
-				bool oldToLava = fromTile.lava();
-				fromTile.lava( fromTileCopy.lava() );
-				toTile.lava( oldToLava );
+				bool oldToLava = (fromTile.LiquidType == LiquidID.Lava);
+				fromTile.lava/* tModPorter Suggestion: LiquidType = ... */( (fromTileCopy.LiquidType == LiquidID.Lava) );
+				toTile.lava/* tModPorter Suggestion: LiquidType = ... */( oldToLava );
 			}
 
 			if( sync ) {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 
 
 namespace ModLibsGeneral.Libraries.Projectiles {
@@ -15,7 +16,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 		public static Texture2D SafelyGetTexture( int type ) {
 			Main.instance.LoadProjectile( type );
 
-			return Main.projectileTexture[type];
+			return TextureAssets.Projectile[type].Value;
 		}
 	}
 }

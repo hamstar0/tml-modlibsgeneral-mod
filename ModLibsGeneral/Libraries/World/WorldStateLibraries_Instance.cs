@@ -1,7 +1,7 @@
 ﻿using System;
 using Terraria;
 using Terraria.ModLoader.IO;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.TModLoader;
 using ModLibsCore.Libraries.World;
 
@@ -20,13 +20,10 @@ namespace ModLibsGeneral.Libraries.World {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
 		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Unload() { }
 
 		internal void Load( TagCompound tags ) {
 			string id = WorldIdentityLibraries.GetUniqueIdForCurrentWorld( true );

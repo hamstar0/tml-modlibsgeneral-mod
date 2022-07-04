@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Hooks.LoadHooks;
 
@@ -19,7 +19,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() {
+		void ILoadable.Load( Mod mod ) {
 			LoadHooks.AddPostContentLoadHook( () => {
 				this.BannerItemTypesToNpcTypes = new Dictionary<int, ISet<int>>();
 				this.NpcTypesToBannerItemTypes = NPCBannerLibraries.GetNpcToBannerItemTypes();
@@ -36,9 +36,6 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		}
 
 		/// @private
-		void ILoadable.OnPostModsLoad() { }
-
-		/// @private
-		void ILoadable.OnModsUnload() { }
+		void ILoadable.Unload() { }
 	}
 }

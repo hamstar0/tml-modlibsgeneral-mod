@@ -105,18 +105,18 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <summary></summary>
 		/// <param name="tile"></param>
 		public static void FlipSlopeHorizontally( Tile tile ) {
-			switch( tile.slope() ) {
+			switch( tile.Slope ) {
 			case 1:
-				tile.slope( 2 );
+				tile.Slope = 2;
 				break;
 			case 2:
-				tile.slope( 1 );
+				tile.Slope = 1;
 				break;
 			case 3:
-				tile.slope( 4 );
+				tile.Slope = 4;
 				break;
 			case 4:
-				tile.slope( 3 );
+				tile.Slope = 3;
 				break;
 			}
 		}
@@ -124,18 +124,18 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <summary></summary>
 		/// <param name="tile"></param>
 		public static void FlipSlopeVertically( Tile tile ) {
-			switch( tile.slope() ) {
+			switch( tile.Slope ) {
 			case 1:
-				tile.slope( 3 );
+				tile.Slope = 3;
 				break;
 			case 2:
-				tile.slope( 4 );
+				tile.Slope = 4;
 				break;
 			case 3:
-				tile.slope( 1 );
+				tile.Slope = 1;
 				break;
 			case 4:
-				tile.slope( 2 );
+				tile.Slope = 2;
 				break;
 			}
 		}
@@ -156,48 +156,48 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			Tile left = Framing.GetTileSafely( tileX - 1, tileY );
 			Tile right = Framing.GetTileSafely( tileX + 1, tileY );
 
-			bool upSolid = up.active() && up.slope() == 0 && Main.tileSolid[up.type] && !Main.tileSolidTop[up.type];
-			bool downSolid = down.active() && down.slope() == 0 && Main.tileSolid[down.type] && !Main.tileSolidTop[down.type];
-			bool leftSolid = left.active() && left.slope() == 0 && Main.tileSolid[left.type] && !Main.tileSolidTop[left.type];
-			bool rightSolid = right.active() && right.slope() == 0 && Main.tileSolid[right.type] && !Main.tileSolidTop[right.type];
+			bool upSolid = up.HasTile && up.Slope == 0 && Main.tileSolid[up.TileType] && !Main.tileSolidTop[up.TileType];
+			bool downSolid = down.HasTile && down.Slope == 0 && Main.tileSolid[down.TileType] && !Main.tileSolidTop[down.TileType];
+			bool leftSolid = left.HasTile && left.Slope == 0 && Main.tileSolid[left.TileType] && !Main.tileSolidTop[left.TileType];
+			bool rightSolid = right.HasTile && right.Slope == 0 && Main.tileSolid[right.TileType] && !Main.tileSolidTop[right.TileType];
 
 			upSolid = upSolid
-				&& (up.slope() == (byte)TileSlopeType.TopLeftSlope || up.slope() == (byte)TileSlopeType.TopRightSlope);
+				&& (up.Slope == (byte)TileSlopeType.TopLeftSlope || up.Slope == (byte)TileSlopeType.TopRightSlope);
 			downSolid = downSolid
-				&& (down.slope() == (byte)TileSlopeType.BottomLeftSlope || down.slope() == (byte)TileSlopeType.BottomRightSlope );
+				&& (down.Slope == (byte)TileSlopeType.BottomLeftSlope || down.Slope == (byte)TileSlopeType.BottomRightSlope );
 			leftSolid = leftSolid
-				&& (left.slope() == (byte)TileSlopeType.TopRightSlope || left.slope() == (byte)TileSlopeType.BottomRightSlope );
+				&& (left.Slope == (byte)TileSlopeType.TopRightSlope || left.Slope == (byte)TileSlopeType.BottomRightSlope );
 			rightSolid = rightSolid
-				&& ( right.slope() == (byte)TileSlopeType.TopLeftSlope || right.slope() == (byte)TileSlopeType.BottomLeftSlope );
+				&& ( right.Slope == (byte)TileSlopeType.TopLeftSlope || right.Slope == (byte)TileSlopeType.BottomLeftSlope );
 			int changed = 0;
 
 			// Up
 			if( !upSolid && downSolid && leftSolid && !rightSolid ) {
-				mid.slope( (byte)TileSlopeType.TopLeftSlope );
+				mid.Slope = (byte)TileSlopeType.TopLeftSlope;
 				changed = 1;
 			}
 			if( !upSolid && downSolid && !leftSolid && rightSolid ) {
-				mid.slope( (byte)TileSlopeType.TopRightSlope );
+				mid.Slope = (byte)TileSlopeType.TopRightSlope;
 				changed = 1;
 			}
 			if( !upSolid && downSolid && !leftSolid && !rightSolid ) {
-				mid.halfBrick( true );
+				mid.IsHalfBlock = true;
 				changed = 2;
 			}
 
 			// Down
 			if( upSolid && !downSolid && leftSolid && !rightSolid ) {
-				mid.slope( (byte)TileSlopeType.BottomLeftSlope );
+				mid.Slope = (byte)TileSlopeType.BottomLeftSlope;
 				changed = 1;
 			}
 			if( upSolid && !downSolid && !leftSolid && rightSolid ) {
-				mid.slope( (byte)TileSlopeType.BottomRightSlope );
+				mid.Slope = (byte)TileSlopeType.BottomRightSlope;
 				changed = 1;
 			}
 
 			if( isSynced && Main.netMode == NetmodeID.MultiplayerClient ) {
 				if( changed != 0 ) {
-					NetMessage.SendData( MessageID.TileChange, -1, -1, null, (int)TileChangeNetMessageType.SlopeTile, (float)tileX, (float)tileY, (float)mid.slope(), 0, 0, 0 );
+					NetMessage.SendData( MessageID.TileChange, -1, -1, null, (int)TileChangeNetMessageType.SlopeTile, (float)tileX, (float)tileY, (float)mid.Slope, 0, 0, 0 );
 				}
 			}
 

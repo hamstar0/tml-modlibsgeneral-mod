@@ -17,13 +17,13 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <returns></returns>
 		public static Point? PredictTopLeftOfObject( int tileX, int tileY ) {
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
-			TileObjectData tileData = TileObjectData.GetTileData( tile.type, 0, 0 );
+			TileObjectData tileData = TileObjectData.GetTileData( tile.TileType, 0, 0 );
 			if( tileData == null ) {
 				return null;
 			}
 
-			int frameX = tile.frameX;
-			int frameY = tile.frameY;
+			int frameX = tile.TileFrameX;
+			int frameY = tile.TileFrameY;
 			int frameCol = frameX / tileData.CoordinateFullWidth;
 			int frameRow = frameY / tileData.CoordinateFullHeight;
 			int wrap = tileData.StyleWrapLimit == 0
@@ -41,7 +41,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			//	}
 			//}
 
-			tileData = TileObjectData.GetTileData( tile.type, style, alternate + 1 );
+			tileData = TileObjectData.GetTileData( tile.TileType, style, alternate + 1 );
 			int subFrameX = frameX % tileData.CoordinateFullWidth;
 			int subFrameY = frameY % tileData.CoordinateFullHeight;
 			int tileOfFrameX = subFrameX / ( tileData.CoordinateWidth + tileData.CoordinatePadding );

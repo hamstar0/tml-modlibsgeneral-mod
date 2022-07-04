@@ -50,7 +50,7 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 		public static bool IsBreakable( int tileX, int tileY, VanillaTileCuttingContext context = VanillaTileCuttingContext.AttackMelee ) {
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
 
-			return Main.tileCut[tile.type]
+			return Main.tileCut[tile.TileType]
 				&& WorldGen.CanCutTile(tileX, tileY, (TileCuttingContext)context);
 		}
 		
@@ -64,7 +64,7 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 		/// <returns></returns>
 		public static bool IsNotVanillaBombable( int tileX, int tileY ) {
 			Tile tile = Framing.GetTileSafely( tileX, tileY );
-			return !TileLoader.CanExplode( tileX, tileY ) || TileAttributeLibraries.IsNotVanillaBombableType( tile.type );
+			return !TileLoader.CanExplode( tileX, tileY ) || TileAttributeLibraries.IsNotVanillaBombableType( tile.TileType );
 		}
 
 		/// <summary>
@@ -103,22 +103,22 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 			isAbsolute = false;
 			float scale = 0f;
 
-			if( Main.tileNoFail[(int)tile.type] ) {
+			if( Main.tileNoFail[(int)tile.TileType] ) {
 				isAbsolute = true;
 			}
-			if( Main.tileDungeon[(int)tile.type] || tile.type == 25 || tile.type == 58 || tile.type == 117 || tile.type == 203 ) {
+			if( Main.tileDungeon[(int)tile.TileType] || tile.TileType == 25 || tile.TileType == 58 || tile.TileType == 117 || tile.TileType == 203 ) {
 				scale = 1f / 2f;
-			} else if( tile.type == 48 || tile.type == 232 ) {
+			} else if( tile.TileType == 48 || tile.TileType == 232 ) {
 				scale = 1f / 4f;
-			} else if( tile.type == 226 ) {
+			} else if( tile.TileType == 226 ) {
 				scale = 1f / 4f;
-			} else if( tile.type == 107 || tile.type == 221 ) {
+			} else if( tile.TileType == 107 || tile.TileType == 221 ) {
 				scale = 1f / 2f;
-			} else if( tile.type == 108 || tile.type == 222 ) {
+			} else if( tile.TileType == 108 || tile.TileType == 222 ) {
 				scale = 1f / 3f;
-			} else if( tile.type == 111 || tile.type == 223 ) {
+			} else if( tile.TileType == 111 || tile.TileType == 223 ) {
 				scale = 1f / 4f;
-			} else if( tile.type == 211 ) {
+			} else if( tile.TileType == 211 ) {
 				scale = 1f / 5f;
 			} else {
 				int moddedDamage = 0;
@@ -127,44 +127,44 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 				scale = (float)moddedDamage / baseDamage;
 			}
 
-			if( tile.type == 211 && baseDamage < 200 ) {
+			if( tile.TileType == 211 && baseDamage < 200 ) {
 				scale = 0f;
 			}
-			if( ( tile.type == 25 || tile.type == 203 ) && baseDamage < 65 ) {
+			if( ( tile.TileType == 25 || tile.TileType == 203 ) && baseDamage < 65 ) {
 				scale = 0f;
-			} else if( tile.type == 117 && baseDamage < 65 ) {
+			} else if( tile.TileType == 117 && baseDamage < 65 ) {
 				scale = 0f;
-			} else if( tile.type == 37 && baseDamage < 50 ) {
+			} else if( tile.TileType == 37 && baseDamage < 50 ) {
 				scale = 0f;
-			} else if( tile.type == 404 && baseDamage < 65 ) {
+			} else if( tile.TileType == 404 && baseDamage < 65 ) {
 				scale = 0f;
-			} else if( ( tile.type == 22 || tile.type == 204 ) && /*(double)y > Main.worldSurface &&*/ baseDamage < 55 ) {
+			} else if( ( tile.TileType == 22 || tile.TileType == 204 ) && /*(double)y > Main.worldSurface &&*/ baseDamage < 55 ) {
 				scale = 0f;
-			} else if( tile.type == 56 && baseDamage < 65 ) {
+			} else if( tile.TileType == 56 && baseDamage < 65 ) {
 				scale = 0f;
-			} else if( tile.type == 58 && baseDamage < 65 ) {
+			} else if( tile.TileType == 58 && baseDamage < 65 ) {
 				scale = 0f;
-			} else if( ( tile.type == 226 || tile.type == 237 ) && baseDamage < 210 ) {
+			} else if( ( tile.TileType == 226 || tile.TileType == 237 ) && baseDamage < 210 ) {
 				scale = 0f;
-			} else if( Main.tileDungeon[(int)tile.type] && baseDamage < 65 ) {
+			} else if( Main.tileDungeon[(int)tile.TileType] && baseDamage < 65 ) {
 				//if( (double)x < (double)Main.maxTilesX * 0.35 || (double)x > (double)Main.maxTilesX * 0.65 ) {
 				//	scale = 0f;
 				//}
 				scale = 0f;
-			} else if( tile.type == 107 && baseDamage < 100 ) {
+			} else if( tile.TileType == 107 && baseDamage < 100 ) {
 				scale = 0f;
-			} else if( tile.type == 108 && baseDamage < 110 ) {
+			} else if( tile.TileType == 108 && baseDamage < 110 ) {
 				scale = 0f;
-			} else if( tile.type == 111 && baseDamage < 150 ) {
+			} else if( tile.TileType == 111 && baseDamage < 150 ) {
 				scale = 0f;
-			} else if( tile.type == 221 && baseDamage < 100 ) {
+			} else if( tile.TileType == 221 && baseDamage < 100 ) {
 				scale = 0f;
-			} else if( tile.type == 222 && baseDamage < 110 ) {
+			} else if( tile.TileType == 222 && baseDamage < 110 ) {
 				scale = 0f;
-			} else if( tile.type == 223 && baseDamage < 150 ) {
+			} else if( tile.TileType == 223 && baseDamage < 150 ) {
 				scale = 0f;
 			} else {
-				if( TileLoader.GetTile( tile.type ) != null ) {
+				if( TileLoader.GetTile( tile.TileType ) != null ) {
 					int moddedDamage = 0;
 					TileLoader.PickPowerCheck( tile, (int)baseDamage, ref moddedDamage );
 
@@ -174,10 +174,10 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 				}
 			}
 
-			if( tile.type == 147 || tile.type == 0 || tile.type == 40 || tile.type == 53 || tile.type == 57 || tile.type == 59 || tile.type == 123 || tile.type == 224 || tile.type == 397 ) {
+			if( tile.TileType == 147 || tile.TileType == 0 || tile.TileType == 40 || tile.TileType == 53 || tile.TileType == 57 || tile.TileType == 59 || tile.TileType == 123 || tile.TileType == 224 || tile.TileType == 397 ) {
 				scale = 1f;
 			}
-			if( tile.type == 165 || Main.tileRope[(int)tile.type] || tile.type == 199 || Main.tileMoss[(int)tile.type] ) {
+			if( tile.TileType == 165 || Main.tileRope[(int)tile.TileType] || tile.TileType == 199 || Main.tileMoss[(int)tile.TileType] ) {
 				isAbsolute = true;
 			}
 

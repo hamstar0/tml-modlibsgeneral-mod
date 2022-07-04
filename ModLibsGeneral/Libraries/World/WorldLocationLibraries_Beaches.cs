@@ -12,10 +12,10 @@ namespace ModLibsGeneral.Libraries.World {
 
 			for( y = WorldLocationLibraries.SkyLayerBottomTileY; y < WorldLocationLibraries.SurfaceLayerBottomTileY; y++ ) {
 				Tile tile = Framing.GetTileSafely( x, y );
-				if( tile == null || !tile.active() ) {
+				if( tile == null || !tile.HasTile ) {
 					continue;
 				}
-				if( Main.tile[x, y - 1].liquid != 0 ) {
+				if( Main.tile[x, y - 1].LiquidAmount != 0 ) {
 					break;
 				}
 

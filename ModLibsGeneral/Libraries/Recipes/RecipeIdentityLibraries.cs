@@ -29,7 +29,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			if( recipe1.anyIronBar != recipe2.anyIronBar ) { return false; }
 			if( recipe1.anyWood != recipe2.anyWood ) { return false; }
 
-			if( recipe1.createItem.IsNotTheSameAs( recipe2.createItem ) ) { return false; }
+			if( recipe1.createItem.IsNotSameTypePrefixAndStack( recipe2.createItem ) ) { return false; }
 
 			var reqTile1 = new HashSet<int>( recipe1.requiredTile );
 			var reqTile2 = new HashSet<int>( recipe2.requiredTile );

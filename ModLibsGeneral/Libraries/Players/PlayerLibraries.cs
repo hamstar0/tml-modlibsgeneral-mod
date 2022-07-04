@@ -249,7 +249,7 @@ namespace ModLibsGeneral.Libraries.Players {
 			player.downedDD2EventAnyDifficulty = false;
 			player.taxMoney = 0;
 
-			PlayerHooks.SetStartInventory( player );
+			PlayerLoader.SetStartInventory( player );
 		}
 
 		////

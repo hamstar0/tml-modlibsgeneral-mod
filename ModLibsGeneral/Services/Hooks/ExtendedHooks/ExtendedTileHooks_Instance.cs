@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ObjectData;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.TModLoader;
 using ModLibsCore.Services.Timers;
 
@@ -82,18 +82,14 @@ namespace ModLibsGeneral.Services.Hooks.ExtendedHooks {
 		////
 
 		/// @private
-		void ILoadable.OnModsLoad() {
+		void ILoadable.Load( Mod mod ) {
 			this.OnTick = Timers.MainOnTickGet();
 			Main.OnTick += ExtendedTileHooks._Update;
 		}
 
 		/// @private
-		void ILoadable.OnModsUnload() {
+		void ILoadable.Unload() {
 			Main.OnTick -= ExtendedTileHooks._Update;
-		}
-
-		/// @private
-		void ILoadable.OnPostModsLoad() {
 		}
 
 
@@ -171,21 +167,21 @@ namespace ModLibsGeneral.Services.Hooks.ExtendedHooks {
 			if( tile?.active() != true ) {
 				return false;
 			}
-
+			
 			TileObjectData data = TileObjectData.GetTileData( tile );
 			if( data == null || (data.Width == 0 || data.Height == 0) ) {
 				return false;
 			}
 
-			int frameXOffset = tile.frameX;
-			int frameYOffset = tile.frameY;
+			int frameXOffset = tile.TileFrameX;
+			int frameYOffset = tile.TileFrameY;
 
 			if( data.StyleHorizontal ) {
 				int frameWidth = data.CoordinateWidth + data.CoordinatePadding;
-				frameXOffset = tile.frameX % ( data.Width * frameWidth );
+				frameXOffset = tile.TileFrameX % ( data.Width * frameWidth );
 			} else {
 				int frameHeight = data.CoordinateHeights[0] + data.CoordinatePadding;
-				frameYOffset = tile.frameY % ( data.Height * frameHeight );
+				frameYOffset = tile.TileFrameY % ( data.Height * frameHeight );
 			}
 
 			if( frameXOffset != 0 || frameYOffset != 0 ) {

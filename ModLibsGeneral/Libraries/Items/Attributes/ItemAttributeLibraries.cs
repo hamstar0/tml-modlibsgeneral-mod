@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Classes.DataStructures;
@@ -46,11 +47,11 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 					item.damage > 0 ||
 					item.crit > 0 ||
 					item.knockBack > 0 ||
-					item.melee ||
-					item.magic ||
-					item.ranged ||
-					item.thrown ||
-					item.summon ||
+					item.CountsAsClass(DamageClass.Melee) ||
+					item.CountsAsClass(DamageClass.Magic) ||
+					item.CountsAsClass(DamageClass.Ranged) ||
+					item.CountsAsClass(DamageClass.Throwing) ||
+					item.CountsAsClass(DamageClass.Summon) ||
 					item.pick > 0 ||
 					item.hammer > 0 ||
 					item.axe > 0 )
@@ -94,7 +95,7 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 		/// <param name="item"></param>
 		/// <returns></returns>
 		public static bool IsYoyo( Item item ) {
-			if( item.shoot > ProjectileID.None && item.useStyle == ItemUseStyleID.HoldingOut && item.melee && item.channel ) {
+			if( item.shoot > ProjectileID.None && item.useStyle == ItemUseStyleID.Shoot && item.CountsAsClass(DamageClass.Melee) && item.channel ) {
 				var proj = new Projectile();
 				proj.SetDefaults( item.shoot );
 
@@ -193,7 +194,7 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 				return new ReadOnlySet<int>( itemAttr.PurchasableItems[buyValue] );
 			}
 
-			for( int i = 0; i < Main.itemTexture.Length; i++ ) {
+			for( int i = 0; i < TextureAssets.Item.Value.Length; i++ ) {
 				if( !includeCoins && i == 71 ) { i = 75; }
 
 				Item item = new Item();

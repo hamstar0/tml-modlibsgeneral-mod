@@ -6,7 +6,6 @@ using Terraria.ID;
 using Terraria.Audio;
 using Terraria.ModLoader;
 using ModLibsCore.Classes.Errors;
-using ModLibsCore.Classes.Loadable;
 
 
 namespace ModLibsGeneral.Libraries.Audio {
@@ -62,12 +61,12 @@ namespace ModLibsGeneral.Libraries.Audio {
 		public static void PlaySound( Mod mod, string soundPath, Vector2 position, float volume = 1f ) {
 			if( Main.netMode == NetmodeID.Server ) { return; }
 
-			LegacySoundStyle sound;
+			SoundStyle sound;
 			var sndLibs = ModContent.GetInstance<SoundLibraries>();
 
 			if( sndLibs.Sounds.ContainsKey( soundPath ) ) {
 				sound = sndLibs.Sounds[soundPath];
-				sndLibs.Sounds[soundPath] = sound.WithVolume( volume );
+				sndLibs.Sounds[soundPath] = sound.WithVolumeScale( volume );
 			} else {
 				try {
 					sound = mod.GetLegacySoundSlot(
@@ -81,7 +80,7 @@ namespace ModLibsGeneral.Libraries.Audio {
 				}
 			}
 
-			Main.PlaySound( sound, position );
+			SoundEngine.PlaySound( sound, position );
 		}
 
 		/// <summary>
@@ -91,7 +90,7 @@ namespace ModLibsGeneral.Libraries.Audio {
 		/// <param name="sound"></param>
 		/// <param name="position"></param>
 		/// <param name="volume"></param>
-		public static void PlaySound( string name, LegacySoundStyle sound, Vector2 position, float volume = 1f ) {
+		public static void PlaySound( string name, SoundStyle sound, Vector2 position, float volume = 1f ) {
 			if( Main.netMode == NetmodeID.Server ) { return; }
 
 			var sndLibs = ModContent.GetInstance<SoundLibraries>();
@@ -101,27 +100,26 @@ namespace ModLibsGeneral.Libraries.Audio {
 			}
 
 			try {
-				sound = sound.WithVolume( volume );
+				sound = sound.WithVolumeScale( volume );
 				sndLibs.Sounds[ name ] = sound;
 			} catch( Exception e ) {
 				throw new ModLibsException( "Sound load issue.", e );
 			}
 
-			Main.PlaySound( sound, position );
+			SoundEngine.PlaySound( sound, position );
 		}
 
 
 
 		////////////////
 
-		private IDictionary<string, LegacySoundStyle> Sounds = new Dictionary<string, LegacySoundStyle>();
+		private IDictionary<string, SoundStyle> Sounds = new Dictionary<string, SoundStyle>();
 
 
 
 		////////////////
 
-		void ILoadable.OnModsLoad() { }
-		void ILoadable.OnModsUnload() { }
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
+		void ILoadable.Unload() { }
 	}
 }

@@ -27,27 +27,27 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			byte fColor = 0;
 			byte wColor = 0;
 
-			bits1[0] = tile.active();
-			bits1[2] = tile.wall > 0;
-			bits1[3] = tile.liquid > 0 && Main.netMode == NetmodeID.Server;
-			bits1[5] = tile.halfBrick();
-			bits1[6] = tile.actuator();
-			bits1[7] = tile.inActive();
+			bits1[0] = tile.HasTile;
+			bits1[2] = tile.WallType > 0;
+			bits1[3] = tile.LiquidAmount > 0 && Main.netMode == NetmodeID.Server;
+			bits1[5] = tile.IsHalfBlock;
+			bits1[6] = tile.HasActuator;
+			bits1[7] = tile.IsActuated;
 
-			bits1[4] = tile.wire();
-			bits2[0] = tile.wire2();
-			bits2[1] = tile.wire3();
-			bits2[7] = tile.wire4();
+			bits1[4] = tile.RedWire;
+			bits2[0] = tile.BlueWire;
+			bits2[1] = tile.GreenWire;
+			bits2[7] = tile.YellowWire;
 
-			if( tile.active() && tile.color() > 0 ) {
+			if( tile.HasTile && tile.TileColor > 0 ) {
 				bits2[2] = true;
-				fColor = tile.color();
+				fColor = tile.TileColor;
 			}
-			if( tile.wall > 0 && tile.wallColor() > 0 ) {
+			if( tile.WallType > 0 && tile.WallColor > 0 ) {
 				bits2[3] = true;
-				wColor = tile.wallColor();
+				wColor = tile.WallColor;
 			}
-			bits2 += (byte)(tile.slope() << 4);
+			bits2 += (byte)(tile.Slope << 4);
 
 			writer.Write( (byte)bits1 );
 			writer.Write( (byte)bits2 );
@@ -59,31 +59,31 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				writer.Write( (byte)wColor );
 			}
 
-			if( tile.active() ) {
-				writer.Write( (ushort)tile.type );
+			if( tile.HasTile ) {
+				writer.Write( (ushort)tile.TileType );
 
-				if( forceFrames || Main.tileFrameImportant[(int)tile.type] ) {
-					writer.Write( (short)tile.frameX );
-					writer.Write( (short)tile.frameY );
+				if( forceFrames || Main.tileFrameImportant[(int)tile.TileType] ) {
+					writer.Write( (short)tile.TileFrameX );
+					writer.Write( (short)tile.TileFrameY );
 				}
 			}
 
-			if( tile.wall > 0 ) {
+			if( tile.WallType > 0 ) {
 				if( ModNet.AllowVanillaClients ) {
-					writer.Write( (byte)tile.wall );
+					writer.Write( (byte)tile.WallType );
 				} else {
-					writer.Write( (ushort)tile.wall );
+					writer.Write( (ushort)tile.WallType );
 				}
 
 				if( forceWallFrames ) {
-					writer.Write( (short)tile.wallFrameX() );
-					writer.Write( (short)tile.wallFrameY() );
+					writer.Write( (short)tile.WallFrameX );
+					writer.Write( (short)tile.WallFrameY );
 				}
 			}
 
-			if( forceLiquids || (tile.liquid > 0 && Main.netMode == NetmodeID.Server) ) {
-				writer.Write( (byte)tile.liquid );
-				writer.Write( (byte)tile.liquidType() );
+			if( forceLiquids || (tile.LiquidAmount > 0 && Main.netMode == NetmodeID.Server) ) {
+				writer.Write( (byte)tile.LiquidAmount );
+				writer.Write( (byte)tile.LiquidType );
 			}
 		}
 
@@ -103,43 +103,43 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			BitsByte bits1 = reader.ReadByte();
 			BitsByte bits2 = reader.ReadByte();
 
-			bool wasActive = tile.active();
+			bool wasActive = tile.HasTile;
 
-			tile.active( bits1[0] );
-			tile.wall = (byte)( bits1[2] ? 1 : 0 );
+			tile.HasTile = bits1[0];
+			tile.WallType = (byte)( bits1[2] ? 1 : 0 );
 
 			bool isLiquid = bits1[3];
 			if( forceLiquids || Main.netMode != NetmodeID.Server ) {
-				tile.liquid = (byte)( isLiquid ? 1 : 0 );
+				tile.LiquidAmount = (byte)( isLiquid ? 1 : 0 );
 			}
 
-			tile.halfBrick( bits1[5] );
-			tile.actuator( bits1[6] );
-			tile.inActive( bits1[7] );
+			tile.IsHalfBlock = bits1[5];
+			tile.HasActuator = bits1[6];
+			tile.IsActuated = bits1[7];
 
-			tile.wire( bits1[4] );
-			tile.wire2( bits2[0] );
-			tile.wire3( bits2[1] );
-			tile.wire4( bits2[7] );
+			tile.RedWire = bits1[4];
+			tile.BlueWire = bits2[0];
+			tile.GreenWire = bits2[1];
+			tile.YellowWire = bits2[7];
 
 			if( bits2[2] ) {
-				tile.color( reader.ReadByte() );
+				tile.TileColor = reader.ReadByte();
 			}
 			if( bits2[3] ) {
-				tile.wallColor( reader.ReadByte() );
+				tile.WallColor = reader.ReadByte();
 			}
 
-			if( tile.active() ) {
-				int oldTileType = (int)tile.type;
+			if( tile.HasTile ) {
+				int oldTileType = (int)tile.TileType;
 
-				tile.type = reader.ReadUInt16();
+				tile.TileType = reader.ReadUInt16();
 
-				if( forceFrames || Main.tileFrameImportant[(int)tile.type] ) {
-					tile.frameX = reader.ReadInt16();
-					tile.frameY = reader.ReadInt16();
-				} else if( !wasActive || (int)tile.type != oldTileType ) {
-					tile.frameX = -1;
-					tile.frameY = -1;
+				if( forceFrames || Main.tileFrameImportant[(int)tile.TileType] ) {
+					tile.TileFrameX = reader.ReadInt16();
+					tile.TileFrameY = reader.ReadInt16();
+				} else if( !wasActive || (int)tile.TileType != oldTileType ) {
+					tile.TileFrameX = -1;
+					tile.TileFrameY = -1;
 				}
 
 				byte slope = 0;
@@ -152,23 +152,23 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				if( bits2[6] ) {
 					slope += 4;
 				}
-				tile.slope( slope );
+				tile.Slope = slope;
 			}
 
-			if( tile.wall > 0 ) {
-				tile.wall = ModNet.AllowVanillaClients
+			if( tile.WallType > 0 ) {
+				tile.WallType = ModNet.AllowVanillaClients
 					? reader.ReadByte()
 					: reader.ReadUInt16();
 
 				if( forceWallFrames ) {
-					tile.wallFrameX( (int)reader.ReadInt16() );
-					tile.wallFrameY( (int)reader.ReadInt16() );
+					tile.WallFrameX = (int)reader.ReadInt16();
+					tile.WallFrameY = (int)reader.ReadInt16();
 				}
 			}
 
 			if( isLiquid ) {
-				tile.liquid = reader.ReadByte();
-				tile.liquidType( (int)reader.ReadByte() );
+				tile.LiquidAmount = reader.ReadByte();
+				tile.LiquidType = (int)reader.ReadByte();
 			}
 		}
 	}

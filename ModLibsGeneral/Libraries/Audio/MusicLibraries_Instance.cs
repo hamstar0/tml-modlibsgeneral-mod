@@ -1,9 +1,6 @@
 ﻿using System;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Audio;
-using ModLibsCore.Classes.Loadable;
-using ModLibsCore.Services.Hooks.LoadHooks;
 using ModLibsCore.Services.Timers;
 
 
@@ -24,17 +21,14 @@ namespace ModLibsGeneral.Libraries.Audio {
 		}
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
 		/// @private
-		void ILoadable.OnModsUnload() {
+		void ILoadable.Unload() {
 			try {
 				Main.OnTick -= MusicLibraries._Update;
 			} catch { }
 		}
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
 
 
 		////////////////

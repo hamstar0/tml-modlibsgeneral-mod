@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Chat;
 using Terraria.ID;
 using Terraria.Localization;
 using ModLibsCore.Classes.Errors;
@@ -39,7 +40,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 				Main.NewText( Language.GetTextValue( "Announcement.HasArrived", npc.FullName ), 50, 125, 255, false );
 			} else if( Main.netMode == NetmodeID.Server ) {
 				var msg = NetworkText.FromKey( "Announcement.HasArrived", new object[] { npc.GetFullNetName() } );
-				NetMessage.BroadcastChatMessage( msg, new Color( 50, 125, 255 ), -1 );
+				ChatHelper.BroadcastChatMessage( msg, new Color( 50, 125, 255 ), -1 );
 			}
 
 			//AchievementsHelper.NotifyProgressionEvent( 8 );
@@ -71,7 +72,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
 					//NetMessage.SendChatMessageFromClient( new ChatMessage( msg ) );
 				} else if( Main.netMode == NetmodeID.Server ) {
-					NetMessage.BroadcastChatMessage( NetworkText.FromLiteral( msg ), new Color( 255, 50, 125 ) );
+					ChatHelper.BroadcastChatMessage( NetworkText.FromLiteral( msg ), new Color( 255, 50, 125 ) );
 					//NetMessage.SendData( MessageID.ChatText, -1, -1, NetworkText.FromLiteral( msg ), 255, 50f, 125f, 255f, 0, 0, 0 );
 				}
 			}

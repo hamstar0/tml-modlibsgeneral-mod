@@ -9,13 +9,13 @@ using ModLibsGeneral.Services.Hooks.ExtendedHooks;
 namespace ModLibsGeneral {
 	/// @private
 	partial class ModLibsGeneralNPC : GlobalNPC {
-		public override bool PreNPCLoot( NPC npc ) {
+		public override bool PreKill( NPC npc ) {
 			ExtendedItemHooks.BeginScanningForLootDrops( npc );
 
-			return base.PreNPCLoot( npc );
+			return base.PreKill( npc );
 		}
 
-		public override void NPCLoot( NPC npc ) {
+		public override void OnKill( NPC npc ) {
 			ExtendedItemHooks.FinishScanningForLootDropsAndThenRunHooks();
 
 			if( npc.lastInteraction >= 0 && npc.lastInteraction < Main.player.Length ) {

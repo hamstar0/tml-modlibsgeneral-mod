@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using ModLibsGeneral.Libraries.UI;
 
@@ -30,7 +31,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 					float scale,
 					Color color,
 					bool applyZoom = false ) {
-			Texture2D tex = Main.npcTexture[npc.type];
+			Texture2D tex = TextureAssets.Npc[npc.type].Value;
 			int frameCount = Main.npcFrameCount[npc.type];
 			int texHeight = tex.Height / frameCount;
 

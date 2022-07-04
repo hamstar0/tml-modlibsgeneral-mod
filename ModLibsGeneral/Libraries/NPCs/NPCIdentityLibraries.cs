@@ -24,7 +24,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 			}
 
 			var modNPC = NPCLoader.GetNPC( type );
-			return Tuple.Create( modNPC.mod.Name, modNPC.Name );
+			return Tuple.Create( modNPC.Mod.Name, modNPC.Name );
 		}
 
 

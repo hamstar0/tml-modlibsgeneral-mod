@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Hooks.LoadHooks;
 using ModLibsCore.Services.Timers;
@@ -29,9 +29,7 @@ namespace ModLibsGeneral.Services.AnimatedTexture {
 
 		////
 
-		void ILoadable.OnModsLoad() { }
-
-		void ILoadable.OnPostModsLoad() {
+		void ILoadable.Load( Mod mod ) {
 			if( !Main.dedServ ) {
 				LoadHooks.AddWorldUnloadEachHook( () => {
 					this.Animations.Clear();
@@ -42,7 +40,7 @@ namespace ModLibsGeneral.Services.AnimatedTexture {
 			}
 		}
 
-		void ILoadable.OnModsUnload() { }
+		void ILoadable.Unload() { }
 
 
 		////////////////

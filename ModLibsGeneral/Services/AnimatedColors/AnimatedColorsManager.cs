@@ -5,7 +5,6 @@ using Terraria;
 using Terraria.ModLoader;
 using ModLibsCore.Services.Hooks.LoadHooks;
 using ModLibsCore.Services.Timers;
-using ModLibsCore.Classes.Loadable;
 
 
 namespace ModLibsGeneral.Services.AnimatedColor {
@@ -57,19 +56,16 @@ namespace ModLibsGeneral.Services.AnimatedColor {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
-
-		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() {
-			if( !Main.dedServ ) {
+		void ILoadable.Load( Mod mod ) {
+			if (!Main.dedServ) {
 				LoadHooks.AddModUnloadHook( () => {
 					Main.OnTick -= AnimatedColorsManager._Update;
 				} );
 			}
 		}
+
+		/// @private
+		void ILoadable.Unload() { }
 
 
 		////////////////

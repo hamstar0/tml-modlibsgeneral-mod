@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using ModLibsGeneral.Libraries.Players;
+using Terraria.ModLoader;
 
 
 namespace ModLibsGeneral.Libraries.Items {
@@ -181,7 +182,7 @@ namespace ModLibsGeneral.Libraries.Items {
 			int useTime;
 
 			// No exact science for this one (Note: No accommodations made for other mods' non-standard use of useTime!)
-			if( item.melee || item.useTime == 0 ) {
+			if( item.CountsAsClass(DamageClass.Melee) || item.useTime == 0 ) {
 				useTime = item.useAnimation;
 			} else {
 				useTime = item.useTime;

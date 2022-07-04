@@ -40,7 +40,7 @@ namespace ModLibsGeneral.Libraries.Tiles.Walls.Attributes {
 				return false;
 			}
 
-			isLihzahrd = tile.wall == (ushort)WallID.LihzahrdBrickUnsafe; /*|| tile.wall == (ushort)WallID.LihzahrdBrick*/
+			isLihzahrd = tile.WallType == (ushort)WallID.LihzahrdBrickUnsafe; /*|| tile.wall == (ushort)WallID.LihzahrdBrick*/
 
 			// Lihzahrd Brick Wall
 			if( isLihzahrd ) {
@@ -48,15 +48,15 @@ namespace ModLibsGeneral.Libraries.Tiles.Walls.Attributes {
 			}
 			// Dungeon Walls
 			//if( (tile.wall >= 7 && tile.wall <= 9) || (tile.wall >= 94 && tile.wall <= 99) ) {
-			if( tile.wall == (ushort)WallID.BlueDungeonSlabUnsafe ||
-				tile.wall == (ushort)WallID.GreenDungeonSlabUnsafe ||
-				tile.wall == (ushort)WallID.PinkDungeonSlabUnsafe ||
-				tile.wall == (ushort)WallID.BlueDungeonTileUnsafe ||
-				tile.wall == (ushort)WallID.GreenDungeonTileUnsafe ||
-				tile.wall == (ushort)WallID.PinkDungeonTileUnsafe ||
-				tile.wall == (ushort)WallID.BlueDungeonUnsafe ||
-				tile.wall == (ushort)WallID.GreenDungeonUnsafe ||
-				tile.wall == (ushort)WallID.PinkDungeonUnsafe ) {
+			if( tile.WallType == (ushort)WallID.BlueDungeonSlabUnsafe ||
+				tile.WallType == (ushort)WallID.GreenDungeonSlabUnsafe ||
+				tile.WallType == (ushort)WallID.PinkDungeonSlabUnsafe ||
+				tile.WallType == (ushort)WallID.BlueDungeonTileUnsafe ||
+				tile.WallType == (ushort)WallID.GreenDungeonTileUnsafe ||
+				tile.WallType == (ushort)WallID.PinkDungeonTileUnsafe ||
+				tile.WallType == (ushort)WallID.BlueDungeonUnsafe ||
+				tile.WallType == (ushort)WallID.GreenDungeonUnsafe ||
+				tile.WallType == (ushort)WallID.PinkDungeonUnsafe ) {
 				return true;
 			}
 			return false;

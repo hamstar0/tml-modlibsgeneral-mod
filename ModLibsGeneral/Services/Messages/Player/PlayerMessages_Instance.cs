@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ReLogic.Graphics;
 using Terraria;
 
@@ -19,13 +19,10 @@ namespace ModLibsGeneral.Services.Messages.Player {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
 		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Unload() { }
 
 
 		////////////////

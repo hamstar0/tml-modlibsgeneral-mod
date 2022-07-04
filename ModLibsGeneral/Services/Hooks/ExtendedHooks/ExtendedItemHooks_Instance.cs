@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Terraria;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.TModLoader;
 
 
@@ -77,12 +77,9 @@ namespace ModLibsGeneral.Services.Hooks.ExtendedHooks {
 		////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
 		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Unload() { }
 	}
 }

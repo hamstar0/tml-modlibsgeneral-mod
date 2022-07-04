@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 
 
 namespace ModLibsGeneral.Libraries.Entities {
@@ -87,7 +88,7 @@ namespace ModLibsGeneral.Libraries.Entities {
 		public static IDictionary<int, IDictionary<string, object>> GetAllNpcInfo() {
 			var data = new Dictionary<int, IDictionary<string, object>>();
 
-			for( int i = 0; i < Main.npcTexture.Length; i++ ) {
+			for( int i = 0; i < TextureAssets.Npc.Value.Length; i++ ) {
 				data[i] = EntityInfoLibraries.GetNpcInfo( i );
 			}
 			return data;
@@ -100,7 +101,7 @@ namespace ModLibsGeneral.Libraries.Entities {
 		public static IDictionary<int, IDictionary<string, object>> GetAllItemInfo() {
 			var data = new Dictionary<int, IDictionary<string, object>>();
 
-			for( int i = 0; i < Main.itemTexture.Length; i++ ) {
+			for( int i = 0; i < TextureAssets.Item.Value.Length; i++ ) {
 				data[i] = EntityInfoLibraries.GetItemInfo( i );
 			}
 			return data;
@@ -113,7 +114,7 @@ namespace ModLibsGeneral.Libraries.Entities {
 		public static IDictionary<int, IDictionary<string, object>> GetAllProjectileInfo() {
 			var data = new Dictionary<int, IDictionary<string, object>>();
 
-			for( int i = 0; i < Main.projectileTexture.Length; i++ ) {
+			for( int i = 0; i < TextureAssets.Projectile.Value.Length; i++ ) {
 				data[i] = EntityInfoLibraries.GetProjectileInfo( i );
 			}
 			return data;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 
 
 namespace ModLibsGeneral.Services.AnimatedColor {

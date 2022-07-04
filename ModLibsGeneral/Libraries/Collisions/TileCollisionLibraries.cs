@@ -107,7 +107,7 @@ namespace ModLibsGeneral.Libraries.Collisions {
 				if( chartedTiles.Contains(point) ) { return false; }
 
 				Tile tile = Framing.GetTileSafely( point.x, point.y );
-				if( tile.active() && Main.tileSolid[tile.type] ) { return false; }
+				if( tile.HasTile && Main.tileSolid[tile.TileType] ) { return false; }
 
 				distSqr = getDistSqr( point, tilePointB );
 				return true;

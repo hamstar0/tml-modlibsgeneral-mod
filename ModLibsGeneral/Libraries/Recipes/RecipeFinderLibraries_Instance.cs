@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Libraries.DotNET.Extensions;
 
@@ -24,13 +24,10 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
 		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Unload() { }
 
 
 		////////////////
@@ -56,7 +53,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 						continue;
 					}
 
-					for( int j=0; j<recipe.requiredItem.Length; j++ ) {
+					for( int j=0; j<recipe.requiredItem.Capacity; j++ ) {
 						Item item = recipe.requiredItem[j];
 						if( item == null || item.IsAir ) {
 							break;

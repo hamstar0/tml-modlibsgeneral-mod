@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.UI;
 
@@ -100,7 +101,7 @@ if( !(!notShowingMouseIcon || !plr.showItemIcon) ) { Main.NewText( "showItemIcon
 				(!playerNotWieldingItem || (plr.itemTime == 0 && plr.itemAnimation == 0)) &&
 				(!noFullscreenMap || !Main.mapFullscreen) &&
 				(!notShowingMouseIcon || !Main.HoveringOverAnNPC) &&
-				(!notShowingMouseIcon || !plr.showItemIcon);
+				(!notShowingMouseIcon || !plr.cursorItemIconEnabled);
 		}
 
 
@@ -112,7 +113,7 @@ if( !(!notShowingMouseIcon || !plr.showItemIcon) ) { Main.NewText( "showItemIcon
 		/// <param name="str"></param>
 		/// <returns></returns>
 		public static Vector2 GetHoverTipPosition( string str ) {
-			Vector2 dim = Main.fontMouseText.MeasureString( str );
+			Vector2 dim = FontAssets.MouseText.Value.MeasureString( str );
 			Vector2 pos = new Vector2( Main.mouseX + 10f, Main.mouseY + 10f );
 
 			if( ( pos.X + dim.X ) > Main.screenWidth ) {

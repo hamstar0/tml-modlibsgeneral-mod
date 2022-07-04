@@ -104,13 +104,13 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 
 			foreach( (int? tileType, int? frame) in this.AnyOfTiles ) {
 				if( tileType.HasValue ) {
-					if( tile.type != tileType.Value ) {
+					if( tile.TileType != tileType.Value ) {
 						return false;
 					}
 				}
 
 				if( frame.HasValue ) {
-					if( (tile.frameX / 36) == frame.Value ) {
+					if( (tile.TileFrameX / 36) == frame.Value ) {
 						return true;
 					}
 				}

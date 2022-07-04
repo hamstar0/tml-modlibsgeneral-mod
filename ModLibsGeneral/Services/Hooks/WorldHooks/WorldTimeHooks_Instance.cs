@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 using ModLibsCore.Libraries.TModLoader;
 
 
@@ -19,13 +19,10 @@ namespace ModLibsGeneral.Services.Hooks.WorldHooks {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
 		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Unload() { }
 
 
 		////////////////

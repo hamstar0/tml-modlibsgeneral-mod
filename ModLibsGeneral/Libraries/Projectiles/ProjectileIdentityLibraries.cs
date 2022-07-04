@@ -23,7 +23,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 			}
 
 			var modProjectile = ProjectileLoader.GetProjectile( projType );
-			return Tuple.Create( modProjectile.mod.Name, modProjectile.Name );
+			return Tuple.Create( modProjectile.Mod.Name, modProjectile.Name );
 		}
 
 

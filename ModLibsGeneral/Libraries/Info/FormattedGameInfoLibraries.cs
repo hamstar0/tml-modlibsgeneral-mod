@@ -42,7 +42,7 @@ namespace ModLibsGeneral.Libraries.Info {
 			string netmode = Main.netMode == NetmodeID.SinglePlayer ? "single-player" : "multiplayer";
 			bool autopause = Main.autoPause;
 			bool autosave = Main.autoSave;
-			int lighting = Lighting.lightMode;
+			int lighting = Lighting.LegacyEngine.Mode;
 			int lightingThreads = Lighting.LightingThreads;
 			int frameSkipMode = Main.FrameSkipMode;
 			bool isMaximized = Main.screenMaximized;

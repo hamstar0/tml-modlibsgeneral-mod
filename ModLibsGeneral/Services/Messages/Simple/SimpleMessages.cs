@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.UI;
 
 
@@ -170,7 +171,7 @@ namespace ModLibsGeneral.Services.Messages.Simple {
 
 			//
 
-			DynamicSpriteFont font = large ? Main.fontDeathText : Main.fontMouseText;
+			DynamicSpriteFont font = large ? FontAssets.DeathText.Value : FontAssets.MouseText.Value;
 
 			Vector2 size = font.MeasureString( msg );
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using ModLibsCore.Libraries.Debug;
 using ModLibsGeneral.Libraries.Items.Attributes;
@@ -120,7 +121,7 @@ namespace ModLibsGeneral.Libraries.Players {
 			item.noGrabDelay = noGrabDelay;
 			item.favorited = false;
 			item.newAndShiny = false;
-			item.owner = player.whoAmI;
+			item.playerIndexTheItemIsReservedFor = player.whoAmI;
 
 			if( Main.netMode != NetmodeID.SinglePlayer && noGrabDelay > 0 ) {
 				item.ownIgnore = player.whoAmI;
@@ -277,7 +278,7 @@ namespace ModLibsGeneral.Libraries.Players {
 
 			// Accessory
 			for( int i = 0; i < accRange; i++ ) {
-				if( !player.armor[i].IsAir && ( !player.hideVisual[3] || ( player.hideVisual[3] && !canHide ) ) ) {
+				if( !player.armor[i].IsAir && ( !player.hideVisibleAccessory[3] || ( player.hideVisibleAccessory[3] && !canHide ) ) ) {
 					return false;
 				}
 			}
@@ -289,7 +290,7 @@ namespace ModLibsGeneral.Libraries.Players {
 				}
 				// Vanity Accessory
 				for( int i = accRange + 3; i < 20; i++ ) {
-					if( !player.armor[i].IsAir && ( !player.hideVisual[i] || ( player.hideVisual[i] && !canHide ) ) ) {
+					if( !player.armor[i].IsAir && ( !player.hideVisibleAccessory[i] || ( player.hideVisibleAccessory[i] && !canHide ) ) ) {
 						return false;
 					}
 				}
@@ -346,8 +347,8 @@ namespace ModLibsGeneral.Libraries.Players {
 		public static Vector2? TipOfHeldItem( Player player, Item item, int useStyle, Vector2 offset ) {
 			Vector2 pos = player.RotatedRelativePoint( player.MountedCenter, true );
 
-			int wid = Main.itemTexture[ item.type ].Width;
-			int hei = Main.itemTexture[ item.type ].Height;
+			int wid = TextureAssets.Item[ item.type ].Value.Width;
+			int hei = TextureAssets.Item[ item.type ].Value.Height;
 			int length = wid;
 
 			offset = new Vector2(

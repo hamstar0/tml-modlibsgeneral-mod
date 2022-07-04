@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using ModLibsGeneral.Libraries.UI;
+using Terraria.GameContent;
 
 
 namespace ModLibsGeneral.Libraries.Projectiles {
@@ -27,7 +28,7 @@ namespace ModLibsGeneral.Libraries.Projectiles {
 					Color color,
 					float scale,
 					bool applyZoom = false ) {
-			Texture2D tex = Main.projectileTexture[proj.type];
+			Texture2D tex = TextureAssets.Projectile[proj.type].Value;
 			int texHeight = tex.Height / Main.projFrames[proj.type];
 
 			var rect = new Rectangle( 0, proj.frame * texHeight, tex.Width, texHeight );

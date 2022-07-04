@@ -18,12 +18,6 @@ namespace ModLibsGeneral {
 
 		////////////////
 		
-		public bool MouseInterface { get; private set; }
-
-
-
-		////////////////
-
 		public ModLibsGeneralMod() {
 			ModLibsGeneralMod.Instance = this;
 		}
@@ -48,19 +42,6 @@ namespace ModLibsGeneral {
 		public override void AddRecipeGroups() {
 			foreach( (string grpName, RecipeGroup grp) in RecipeCommonGroupsLibraries.Groups ) {
 				RecipeGroup.RegisterGroup( grpName, grp );
-			}
-		}
-
-
-		////////////////
-
-		public override void PostUpdateEverything() {
-			this.MouseInterface = Main.LocalPlayer.mouseInterface;
-
-			if( LoadLibraries.IsWorldBeingPlayed() ) {
-				ModContent.GetInstance<WorldStateLibraries>().UpdateUponWorldBeingPlayed();
-
-				SimpleMessage.UpdateMessage();
 			}
 		}
 

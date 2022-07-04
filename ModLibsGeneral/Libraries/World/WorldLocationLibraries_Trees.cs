@@ -26,7 +26,7 @@ namespace ModLibsGeneral.Libraries.World {
 
 				for( int y = minY; y < maxY; y++ ) {
 					tile = Main.tile[ x, y ];
-					if( tile == null || !tile.active() || (tile.type != TileID.LivingWood && tile.type != TileID.LeafBlock) ) {
+					if( tile == null || !tile.HasTile || (tile.TileType != TileID.LivingWood && tile.TileType != TileID.LeafBlock) ) {
 						continue;
 					}
 
@@ -48,7 +48,7 @@ namespace ModLibsGeneral.Libraries.World {
 
 				for( int y = minY; y < maxY; y++ ) {
 					tile = Main.tile[ x, y ];
-					if( tile == null || !tile.active() || (tile.type != TileID.LivingWood && tile.type != TileID.LeafBlock) ) {
+					if( tile == null || !tile.HasTile || (tile.TileType != TileID.LivingWood && tile.TileType != TileID.LeafBlock) ) {
 						continue;
 					}
 
@@ -101,7 +101,7 @@ namespace ModLibsGeneral.Libraries.World {
 				
 				for( int y=minY; y<maxY; y++ ) {
 					tile = Main.tile[x, y];
-					if( tile == null || !tile.active() || (tile.type != TileID.LivingWood && tile.type != TileID.LeafBlock) ) {
+					if( tile == null || !tile.HasTile || (tile.TileType != TileID.LivingWood && tile.TileType != TileID.LeafBlock) ) {
 						continue;
 					}
 					

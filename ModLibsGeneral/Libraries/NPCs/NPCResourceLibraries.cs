@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 
 
 namespace ModLibsGeneral.Libraries.NPCs {
@@ -14,7 +15,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// <returns></returns>
 		public static Texture2D SafelyGetTexture( int type ) {
 			Main.instance.LoadNPC( type );
-			return Main.npcTexture[type];
+			return TextureAssets.Npc[type].Value;
 		}
 	}
 }

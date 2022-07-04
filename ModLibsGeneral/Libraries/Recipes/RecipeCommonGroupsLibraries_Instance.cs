@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Terraria;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 
 
 namespace ModLibsGeneral.Libraries.Recipes {
@@ -13,10 +13,8 @@ namespace ModLibsGeneral.Libraries.Recipes {
 
 		////////////////
 
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
-		void ILoadable.OnModsUnload() { }
-
-		void ILoadable.OnPostModsLoad() { }
+		void ILoadable.Unload() { }
 	}
 }

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ModLibsCore.Services.Hooks.LoadHooks;
+using System.Collections.Generic;
 using Terraria.ModLoader;
-using ModLibsCore.Classes.Loadable;
+using Terraria.ModLoader;
 
 
 namespace ModLibsGeneral.Libraries.Mods {
@@ -21,20 +22,19 @@ namespace ModLibsGeneral.Libraries.Mods {
 		////////////////
 
 		/// @private
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) {
+			LoadHooks.AddPostModLoadHook( () => {
+				this.GithubMods = new Dictionary<string, Mod>();
 
-		/// @private
-		void ILoadable.OnModsUnload() { }
-
-		/// @private
-		void ILoadable.OnPostModsLoad() {
-			this.GithubMods = new Dictionary<string, Mod>();
-
-			foreach( Mod mod in ModLoader.Mods ) {
-				if( ModMetaDataLibraries.DetectGithub( mod ) ) {
-					this.GithubMods[mod.Name] = mod;
+				foreach (Mod thismod in ModLoader.Mods) {
+					if( ModMetaDataLibraries.DetectGithub(thismod) ) {
+						this.GithubMods[thismod.Name] = thismod;
+					}
 				}
-			}
+			} );
 		}
+
+		/// @private
+		void ILoadable.Unload() { }
 	}
 }

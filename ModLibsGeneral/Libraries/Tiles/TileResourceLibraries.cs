@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 
 
 namespace ModLibsGeneral.Libraries.Tiles {
@@ -14,7 +15,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <returns></returns>
 		public static Texture2D SafelyGetTexture( int type ) {
 			Main.instance.LoadTiles( type );
-			return Main.tileTexture[type];
+			return TextureAssets.Tile[type].Value;
 		}
 	}
 }

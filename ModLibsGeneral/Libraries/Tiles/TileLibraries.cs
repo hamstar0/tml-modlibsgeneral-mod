@@ -14,15 +14,15 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <param name="tile2"></param>
 		/// <returns></returns>
 		public static bool IsEqual( Tile tile1, Tile tile2 ) {
-			return tile1.type == tile2.type
-				&& tile1.wall == tile2.wall
-				&& tile1.frameY == tile2.frameY
-				&& tile1.frameX == tile2.frameX
+			return tile1.TileType == tile2.TileType
+				&& tile1.WallType == tile2.WallType
+				&& tile1.TileFrameY == tile2.TileFrameY
+				&& tile1.TileFrameX == tile2.TileFrameX
 				&& tile1.bTileHeader == tile2.bTileHeader
 				&& tile1.bTileHeader3 == tile2.bTileHeader3
 				&& tile1.bTileHeader2 == tile2.bTileHeader2
 				&& tile1.sTileHeader == tile2.sTileHeader
-				&& tile1.liquid == tile2.liquid;
+				&& tile1.LiquidAmount == tile2.LiquidAmount;
 		}
 
 
@@ -37,13 +37,13 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			if( tile == null ) {
 				return true;
 			}
-			if( tile.active() || tile.wall > 0 ) {/*|| tile.type == 0*/
+			if( tile.HasTile || tile.WallType > 0 ) {/*|| tile.type == 0*/
 				return false;
 			}
 			if( !isWireAir && TileLibraries.IsWire(tile) ) {
 				return false;
 			}
-			if( !isLiquidAir && tile.liquid != 0 ) {
+			if( !isLiquidAir && tile.LiquidAmount != 0 ) {
 				return false;
 			}
 
@@ -60,16 +60,16 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <returns></returns>
 		public static bool IsSolid( Tile tile, bool isPlatformSolid = false, bool isActuatedSolid = false ) {
 			if( TileLibraries.IsAir(tile) ) { return false; }
-			if( !Main.tileSolid[tile.type] || !tile.active() ) { return false; }
+			if( !Main.tileSolid[tile.TileType] || !tile.HasTile ) { return false; }
 
 			if( !isPlatformSolid ) {
-				bool isTopSolid = Main.tileSolidTop[tile.type];
+				bool isTopSolid = Main.tileSolidTop[tile.TileType];
 				if( isTopSolid ) {
 					return false;
 				}
 			}
 
-			if( !isActuatedSolid && tile.inActive() ) {
+			if( !isActuatedSolid && tile.IsActuated ) {
 				return false;
 			}
 
@@ -84,7 +84,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <returns></returns>
 		public static bool IsWire( Tile tile ) {
 			if( tile == null /*|| !tile.active()*/ ) { return false; }
-			return tile.wire() || tile.wire2() || tile.wire3() || tile.wire4();
+			return tile.RedWire || tile.BlueWire || tile.GreenWire || tile.YellowWire;
 		}
 	}
 }

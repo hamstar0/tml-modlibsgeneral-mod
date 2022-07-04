@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
+using Terraria.GameContent;
 using ModLibsCore.Classes.DataStructures;
-using ModLibsCore.Classes.Loadable;
 
 
 namespace ModLibsGeneral.Libraries.Buffs {
@@ -12,11 +13,9 @@ namespace ModLibsGeneral.Libraries.Buffs {
 
 		////////////////
 
-		void ILoadable.OnModsLoad() { }
+		void ILoadable.Load( Mod mod ) { }
 
-		void ILoadable.OnPostModsLoad() { }
-
-		void ILoadable.OnModsUnload() { }
+		void ILoadable.Unload() { }
 
 
 		////////////////
@@ -24,7 +23,7 @@ namespace ModLibsGeneral.Libraries.Buffs {
 		internal void PopulateNames() {
 			var dict = new Dictionary<string, ISet<int>>();
 
-			for( int i = 1; i < Main.buffTexture.Length; i++ ) {
+			for( int i = 1; i < TextureAssets.Buff.Length; i++ ) {
 				string name = BuffAttributesLibraries.GetBuffDisplayName( i );
 
 				if( dict.ContainsKey( name ) ) {

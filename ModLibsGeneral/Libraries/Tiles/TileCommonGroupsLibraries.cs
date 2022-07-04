@@ -12,7 +12,8 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <summary>
 		/// Tile types that typically comprise "earth" (now includes underworld ash).
 		/// </summary>
-		public static IReadOnlySet<int> VanillaEarthTiles { get; } = new ReadOnlySet<int>( new HashSet<int> {
+		public static ModLibsCore.Classes.DataStructures.IReadOnlySet<int> VanillaEarthTiles { get; }
+					= new ReadOnlySet<int>( new HashSet<int> {
 			TileID.Stone,
 			TileID.Dirt,
 			TileID.ClayBlock,
@@ -34,7 +35,7 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			TileID.HallowedGrass,
 			TileID.CorruptGrass,
 			TileID.Crimstone,
-			TileID.FleshGrass,
+			TileID.CrimsonGrass,
 			//
 			TileID.SnowBlock,
 			TileID.IceBlock,
@@ -62,7 +63,8 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <summary>
 		/// Tile types that typically comprise greenery/shrubs.
 		/// </summary>
-		public static IReadOnlySet<int> VanillaShrubTiles { get; } = new ReadOnlySet<int>( new HashSet<int> {
+		public static ModLibsCore.Classes.DataStructures.IReadOnlySet<int> VanillaShrubTiles { get; }
+					= new ReadOnlySet<int>( new HashSet<int> {
 			TileID.Trees,
 			TileID.MushroomTrees,
 			TileID.PalmTree,
@@ -71,8 +73,8 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			TileID.Vines,
 			TileID.CorruptPlants,
 			TileID.CorruptThorns,
-			TileID.FleshWeeds,
-			TileID.CrimtaneThorns,
+			//TileID.FleshWeeds,
+			TileID.CrimsonThorns,
 			TileID.CrimsonVines,
 			TileID.HallowedPlants,
 			TileID.HallowedPlants2,

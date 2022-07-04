@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.World.Generation;
 using ModLibsCore.Libraries.DotNET.Reflection;
+using Terraria.WorldBuilding;
 
 
 namespace ModLibsGeneral.Libraries.World {
