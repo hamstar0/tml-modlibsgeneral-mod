@@ -105,39 +105,25 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <summary></summary>
 		/// <param name="tile"></param>
 		public static void FlipSlopeHorizontally( Tile tile ) {
-			switch( tile.Slope ) {
-			case 1:
-				tile.Slope = 2;
-				break;
-			case 2:
-				tile.Slope = 1;
-				break;
-			case 3:
-				tile.Slope = 4;
-				break;
-			case 4:
-				tile.Slope = 3;
-				break;
-			}
+			tile.Slope = tile.Slope switch {
+				SlopeType.SlopeDownLeft => SlopeType.SlopeDownRight,
+				SlopeType.SlopeDownRight => SlopeType.SlopeDownLeft,
+				SlopeType.SlopeUpLeft => SlopeType.SlopeUpRight,
+				SlopeType.SlopeUpRight => SlopeType.SlopeUpLeft,
+				SlopeType value => value,
+			};
 		}
 
 		/// <summary></summary>
 		/// <param name="tile"></param>
 		public static void FlipSlopeVertically( Tile tile ) {
-			switch( tile.Slope ) {
-			case 1:
-				tile.Slope = 3;
-				break;
-			case 2:
-				tile.Slope = 4;
-				break;
-			case 3:
-				tile.Slope = 1;
-				break;
-			case 4:
-				tile.Slope = 2;
-				break;
-			}
+			tile.Slope = tile.Slope switch {
+				SlopeType.SlopeDownLeft => SlopeType.SlopeUpLeft,
+				SlopeType.SlopeDownRight => SlopeType.SlopeUpRight,
+				SlopeType.SlopeUpLeft => SlopeType.SlopeDownLeft,
+				SlopeType.SlopeUpRight => SlopeType.SlopeDownRight,
+				SlopeType value => value,
+			};
 		}
 
 
@@ -162,22 +148,22 @@ namespace ModLibsGeneral.Libraries.Tiles {
 			bool rightSolid = right.HasTile && right.Slope == 0 && Main.tileSolid[right.TileType] && !Main.tileSolidTop[right.TileType];
 
 			upSolid = upSolid
-				&& (up.Slope == (byte)TileSlopeType.TopLeftSlope || up.Slope == (byte)TileSlopeType.TopRightSlope);
+				&& (up.Slope == SlopeType.SlopeUpLeft || up.Slope == SlopeType.SlopeUpRight);
 			downSolid = downSolid
-				&& (down.Slope == (byte)TileSlopeType.BottomLeftSlope || down.Slope == (byte)TileSlopeType.BottomRightSlope );
+				&& (down.Slope == SlopeType.SlopeDownLeft || down.Slope == SlopeType.SlopeDownRight );
 			leftSolid = leftSolid
-				&& (left.Slope == (byte)TileSlopeType.TopRightSlope || left.Slope == (byte)TileSlopeType.BottomRightSlope );
+				&& (left.Slope == SlopeType.SlopeUpRight || left.Slope == SlopeType.SlopeDownRight );
 			rightSolid = rightSolid
-				&& ( right.Slope == (byte)TileSlopeType.TopLeftSlope || right.Slope == (byte)TileSlopeType.BottomLeftSlope );
+				&& ( right.Slope == SlopeType.SlopeUpLeft || right.Slope == SlopeType.SlopeDownLeft );
 			int changed = 0;
 
 			// Up
 			if( !upSolid && downSolid && leftSolid && !rightSolid ) {
-				mid.Slope = (byte)TileSlopeType.TopLeftSlope;
+				mid.Slope = SlopeType.SlopeUpLeft;
 				changed = 1;
 			}
 			if( !upSolid && downSolid && !leftSolid && rightSolid ) {
-				mid.Slope = (byte)TileSlopeType.TopRightSlope;
+				mid.Slope = SlopeType.SlopeUpRight;
 				changed = 1;
 			}
 			if( !upSolid && downSolid && !leftSolid && !rightSolid ) {
@@ -187,11 +173,11 @@ namespace ModLibsGeneral.Libraries.Tiles {
 
 			// Down
 			if( upSolid && !downSolid && leftSolid && !rightSolid ) {
-				mid.Slope = (byte)TileSlopeType.BottomLeftSlope;
+				mid.Slope = SlopeType.SlopeDownLeft;
 				changed = 1;
 			}
 			if( upSolid && !downSolid && !leftSolid && rightSolid ) {
-				mid.Slope = (byte)TileSlopeType.BottomRightSlope;
+				mid.Slope = SlopeType.SlopeDownRight;
 				changed = 1;
 			}
 

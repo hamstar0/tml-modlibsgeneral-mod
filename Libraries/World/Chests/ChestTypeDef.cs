@@ -87,7 +87,7 @@ namespace ModLibsGeneral.Libraries.World.Chests {
 			}
 
 			Tile tile = Main.tile[tileX, tileY];
-			if( tile?.active() != true ) {
+			if( !tile.HasTile ) {
 				return false;
 			}
 

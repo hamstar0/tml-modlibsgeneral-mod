@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using ModLibsGeneral.Libraries.Items;
 using ModLibsGeneral.Libraries.Items.Attributes;
 using ModLibsGeneral.Internals.NetProtocols;
-
+using System.Reflection;
 
 namespace ModLibsGeneral.Libraries.Players {
 	/// <summary>
@@ -31,7 +31,7 @@ namespace ModLibsGeneral.Libraries.Players {
 		/// <param name="player"></param>
 		/// <returns></returns>
 		public static int ComputeImpendingFallDamage( Player player ) {
-			if( player.mount.CanFly ) {
+			if( player.mount.CanFly() ) {
 				return 0;
 			}
 			if( player.mount.Cart && Minecart.OnTrack( player.position, player.width, player.height ) ) {
@@ -249,7 +249,10 @@ namespace ModLibsGeneral.Libraries.Players {
 			player.downedDD2EventAnyDifficulty = false;
 			player.taxMoney = 0;
 
-			PlayerLoader.SetStartInventory( player );
+			var getDefaultsMethod = typeof(Player).GetMethod("DropItems_GetDefaults", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			var vanillaItems = (IEnumerable<Item>)getDefaultsMethod.Invoke(player, null);
+
+			PlayerLoader.SetStartInventory( player, PlayerLoader.GetStartingItems(player, vanillaItems.Where(i => !i.IsAir) ) );
 		}
 
 		////

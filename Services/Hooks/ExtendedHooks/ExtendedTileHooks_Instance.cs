@@ -84,12 +84,12 @@ namespace ModLibsGeneral.Services.Hooks.ExtendedHooks {
 		/// @private
 		void ILoadable.Load( Mod mod ) {
 			this.OnTick = Timers.MainOnTickGet();
-			Main.OnTick += ExtendedTileHooks._Update;
+			Main.OnTickForInternalCodeOnly += ExtendedTileHooks._Update;
 		}
 
 		/// @private
 		void ILoadable.Unload() {
-			Main.OnTick -= ExtendedTileHooks._Update;
+			Main.OnTickForInternalCodeOnly -= ExtendedTileHooks._Update;
 		}
 
 
@@ -164,7 +164,7 @@ namespace ModLibsGeneral.Services.Hooks.ExtendedHooks {
 
 		internal bool CanCallKillMultiTileHooks( int i, int j ) {
 			Tile tile = Main.tile[i, j];
-			if( tile?.active() != true ) {
+			if( !tile.HasTile ) {
 				return false;
 			}
 			

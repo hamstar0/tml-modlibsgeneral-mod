@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using ModLibsGeneral.Libraries.Players;
 using Terraria.ModLoader;
-
+using Terraria.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Items {
 	/// <summary>
@@ -26,27 +26,6 @@ namespace ModLibsGeneral.Libraries.Items {
 				}
 			}
 			return list;
-		}
-
-
-		////////////////
-
-		/// <summary>
-		/// Creates a world item and ensures it syncs.
-		/// </summary>
-		/// <param name="pos"></param>
-		/// <param name="type"></param>
-		/// <param name="stack"></param>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <param name="prefix"></param>
-		/// <returns></returns>
-		public static int CreateItem( Vector2 pos, int type, int stack, int width, int height, int prefix = 0 ) {
-			int idx = Item.NewItem( (int)pos.X, (int)pos.Y, width, height, type, stack, false, prefix, true, false );
-			if( idx >= 0 && Main.netMode != NetmodeID.SinglePlayer ) {
-				NetMessage.SendData( MessageID.SyncItem, -1, -1, null, idx, 1f, 0f, 0f, 0, 0, 0 );
-			}
-			return idx;
 		}
 
 		////////////////
@@ -211,7 +190,7 @@ namespace ModLibsGeneral.Libraries.Items {
 		/// <param name="amount"></param>
 		/// <param name="position"></param>
 		/// <returns>List of item `whoAmI` values of each coin.</returns>
-		public static int[] CreateCoins( long amount, Vector2 position ) {
+		public static int[] CreateCoins( IEntitySource source, long amount, Vector2 position ) {
 			var coins = new List<int>( 4 );
 
 			long plat = amount / 1000000L;
@@ -223,16 +202,16 @@ namespace ModLibsGeneral.Libraries.Items {
 			long copp = amount;
 
 			if( plat > 0 ) {
-				coins.Add( Item.NewItem(position, ItemID.PlatinumCoin, (int)plat) );
+				coins.Add( Item.NewItem( source, position, ItemID.PlatinumCoin, (int)plat) );
 			}
 			if( gold > 0 ) {
-				coins.Add( Item.NewItem(position, ItemID.GoldCoin, (int)gold ) );
+				coins.Add( Item.NewItem( source, position, ItemID.GoldCoin, (int)gold ) );
 			}
 			if( silv > 0 ) {
-				coins.Add( Item.NewItem(position, ItemID.SilverCoin, (int)silv ) );
+				coins.Add( Item.NewItem( source, position, ItemID.SilverCoin, (int)silv ) );
 			}
 			if( copp > 0 ) {
-				coins.Add( Item.NewItem(position, ItemID.CopperCoin, (int)copp ) );
+				coins.Add( Item.NewItem( source, position, ItemID.CopperCoin, (int)copp ) );
 			}
 
 			return coins.ToArray();

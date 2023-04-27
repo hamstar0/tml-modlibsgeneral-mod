@@ -83,7 +83,7 @@ namespace ModLibsGeneral.Libraries.Net {
 						};
 
 						client.Headers.Add( HttpRequestHeader.ContentType, "application/json" );
-						client.Headers.Add( HttpRequestHeader.UserAgent, "tModLoader " + ModLoader.version.ToString() );
+						client.Headers.Add( HttpRequestHeader.UserAgent, ModLoader.versionedName );
 						//client.Headers["UserAgent"] = "tModLoader " + ModLoader.version.ToString();
 						client.UploadStringAsync( new Uri(url), "POST", jsonData );//UploadValuesAsync( new Uri( url ), "POST", values );
 						client.UploadStringCompleted += (sender, e) => {
@@ -135,7 +135,7 @@ namespace ModLibsGeneral.Libraries.Net {
 						ServicePointManager.ServerCertificateValidationCallback =
 							( sender, certificate, chain, policyErrors ) => { return true; };
 
-						client.Headers.Add( HttpRequestHeader.UserAgent, "tModLoader " + ModLoader.version.ToString() );
+						client.Headers.Add( HttpRequestHeader.UserAgent, ModLoader.versionedName );
 						client.DownloadStringAsync( new Uri( url ) );
 						client.DownloadStringCompleted += ( sender, e ) => {
 							if( token.IsCancellationRequested ) { return; }

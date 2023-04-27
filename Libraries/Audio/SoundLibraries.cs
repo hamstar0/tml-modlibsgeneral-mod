@@ -12,7 +12,7 @@ namespace ModLibsGeneral.Libraries.Audio {
 	/// <summary>
 	/// Assorted static library functions pertaining to sounds.
 	/// </summary>
-	public class SoundLibraries : ILoadable {
+	public class SoundLibraries : ModSystem {
 		/// <summary>
 		/// Gets volume and pan data for a sound that would play at a given point.
 		/// </summary>
@@ -46,80 +46,5 @@ namespace ModLibsGeneral.Libraries.Audio {
 
 			return (vol, pan);
 		}
-
-
-		////////////////
-
-		/// <summary>
-		/// A more flexible variant of `Main.PlaySound` to allow adjusting volume and position, in particular for
-		/// currently-playing sounds.
-		/// </summary>
-		/// <param name="mod"></param>
-		/// <param name="soundPath"></param>
-		/// <param name="position"></param>
-		/// <param name="volume"></param>
-		public static void PlaySound( Mod mod, string soundPath, Vector2 position, float volume = 1f ) {
-			if( Main.netMode == NetmodeID.Server ) { return; }
-
-			SoundStyle sound;
-			var sndLibs = ModContent.GetInstance<SoundLibraries>();
-
-			if( sndLibs.Sounds.ContainsKey( soundPath ) ) {
-				sound = sndLibs.Sounds[soundPath];
-				sndLibs.Sounds[soundPath] = sound.WithVolumeScale( volume );
-			} else {
-				try {
-					sound = mod.GetLegacySoundSlot(
-						Terraria.ModLoader.SoundType.Custom,
-						"Sounds/Custom/" + soundPath
-					).WithVolume( volume );
-
-					sndLibs.Sounds[soundPath] = sound;
-				} catch( Exception e ) {
-					throw new ModLibsException( "Sound load issue.", e );
-				}
-			}
-
-			SoundEngine.PlaySound( sound, position );
-		}
-
-		/// <summary>
-		/// A more flexible variant of `Main.PlaySound` to allow adjusting volume and position.
-		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="sound"></param>
-		/// <param name="position"></param>
-		/// <param name="volume"></param>
-		public static void PlaySound( string name, SoundStyle sound, Vector2 position, float volume = 1f ) {
-			if( Main.netMode == NetmodeID.Server ) { return; }
-
-			var sndLibs = ModContent.GetInstance<SoundLibraries>();
-
-			if( sndLibs.Sounds.ContainsKey(name) ) {
-				sound = sndLibs.Sounds[name];
-			}
-
-			try {
-				sound = sound.WithVolumeScale( volume );
-				sndLibs.Sounds[ name ] = sound;
-			} catch( Exception e ) {
-				throw new ModLibsException( "Sound load issue.", e );
-			}
-
-			SoundEngine.PlaySound( sound, position );
-		}
-
-
-
-		////////////////
-
-		private IDictionary<string, SoundStyle> Sounds = new Dictionary<string, SoundStyle>();
-
-
-
-		////////////////
-
-		void ILoadable.Load( Mod mod ) { }
-		void ILoadable.Unload() { }
 	}
 }

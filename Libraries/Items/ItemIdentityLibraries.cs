@@ -49,7 +49,7 @@ namespace ModLibsGeneral.Libraries.Items {
 
 			int hash = EntityIdentityLibraries.GetVanillaSnapshotHash( item, noContext );
 
-			string id = ItemID.GetUniqueKey( item );
+			string id = ItemID.Search.GetName( item.netID );
 
 			hash += ( "id" + id ).GetHashCode() * Pow();
 			hash += ( "prefix" + item.prefix ).GetHashCode() * Pow();
@@ -131,7 +131,7 @@ namespace ModLibsGeneral.Libraries.Items {
 				hash += ( "dye" + item.dye ).GetHashCode() * Pow();
 				hash += ( "wornArmor" + item.wornArmor ).GetHashCode() * Pow();
 				hash += ( "tileWand" + item.tileWand ).GetHashCode() * Pow();
-				hash += ( "spawnTime" + item.spawnTime ).GetHashCode() * Pow();
+				hash += ("timeSinceItemSpawned" + item.timeSinceItemSpawned ).GetHashCode() * Pow();
 				//hash += ("isBeingGrabbed"+item.isBeingGrabbed).GetHashCode()* Pow();
 				//hash += ("beingGrabbed"+item.beingGrabbed).GetHashCode()* Pow();
 				//hash += ("noGrabDelay"+item.noGrabDelay).GetHashCode()* Pow();

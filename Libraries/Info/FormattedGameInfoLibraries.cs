@@ -11,7 +11,8 @@ using ModLibsCore.Libraries.DotNET.Formatting;
 using ModLibsGeneral.Libraries.Items;
 using ModLibsGeneral.Libraries.NPCs;
 using ModLibsGeneral.Libraries.World;
-
+using System.Threading;
+using Terraria.Enums;
 
 namespace ModLibsGeneral.Libraries.Info {
 	/// <summary>
@@ -38,13 +39,13 @@ namespace ModLibsGeneral.Libraries.Info {
 			int activeNpcs = NPCLibraries.GetActive().Count;
 			//string[] playerInfos = InfoLibraries.GetCurrentPlayerInfo().ToArray();
 			//string[] playerEquips = InfoLibraries.GetCurrentPlayerEquipment().ToArray();
-			int activePlayers = Main.ActivePlayersCount;
+			int activePlayers = Main.CurrentFrameFlags.ActivePlayersCount;
 			string netmode = Main.netMode == NetmodeID.SinglePlayer ? "single-player" : "multiplayer";
 			bool autopause = Main.autoPause;
 			bool autosave = Main.autoSave;
 			int lighting = Lighting.LegacyEngine.Mode;
-			int lightingThreads = Lighting.LightingThreads;
-			int frameSkipMode = Main.FrameSkipMode;
+			int numCores = Environment.ProcessorCount;
+			FrameSkipMode frameSkipMode = Main.FrameSkipMode;
 			bool isMaximized = Main.screenMaximized;
 			int windowWid = Main.screenWidth;
 			int windowHei = Main.screenHeight;
@@ -54,7 +55,7 @@ namespace ModLibsGeneral.Libraries.Info {
 			float gameZoom = Main.GameZoomTarget;
 			float uiZoom = Main.UIScale;
 
-			list.Add( "tModLoader version: " + ModLoader.version.ToString() );
+			list.Add( ModLoader.versionedName );
 			list.Add( FormattedGameInfoLibraries.RenderMarkdownModTable( modsList ) );
 			list.Add( FormattedGameInfoLibraries.RenderMarkdownPlayersTable() );
 
@@ -75,7 +76,7 @@ namespace ModLibsGeneral.Libraries.Info {
 			list.Add( "Autopause: " + autopause );
 			list.Add( "Autosave: " + autosave );
 			list.Add( "Lighting mode: " + lighting );
-			list.Add( "Lighting threads: " + lightingThreads );
+			list.Add( "Processor cores: " + numCores );
 			list.Add( "Frame skip mode: " + frameSkipMode );
 			list.Add( "Is screen maximized: " + isMaximized );
 			list.Add( "Screen resolution: " + windowWid + " " + windowHei );

@@ -73,7 +73,7 @@ namespace ModLibsGeneral.Libraries.Players {
 
 			bool wingFly = !player.pulley && player.grappling[0] == -1 && !player.tongued &&
 				player.controlJump && player.wingTime > 0f && (
-				(player.wingsLogic > 0 && !player.jumpAgainCloud && player.jump == 0 && player.velocity.Y != 0f) ||
+				(player.wingsLogic > 0 && !player.canJumpAgain_Cloud && player.jump == 0 && player.velocity.Y != 0f) ||
 				(player.controlDown && (
 					player.wingsLogic == 22 ||
 					player.wingsLogic == 28 ||
@@ -91,7 +91,7 @@ namespace ModLibsGeneral.Libraries.Players {
 				player.controlJump &&
 				player.canRocket &&
 				player.rocketRelease &&
-				!player.jumpAgainCloud &&
+				!player.canJumpAgain_Cloud &&
 				player.rocketTime > 0;
 
 			return wingFly || rocketFly;
@@ -121,12 +121,12 @@ namespace ModLibsGeneral.Libraries.Players {
 				return false;
 			}
 
-			return player.jumpAgainCloud ||
-				player.jumpAgainSandstorm ||
-				player.jumpAgainBlizzard ||
-				player.jumpAgainFart ||
-				player.jumpAgainSail ||
-				player.jumpAgainUnicorn ||
+			return player.canJumpAgain_Cloud ||
+				player.canJumpAgain_Sandstorm ||
+				player.canJumpAgain_Blizzard ||
+				player.canJumpAgain_Fart ||
+				player.canJumpAgain_Sail ||
+				player.canJumpAgain_Unicorn ||
 				PlayerMovementLibraries.IsOnFloor( player ) ||
 				(player.mount.Active && player.mount.Type == MountID.Slime && player.wetSlime > 0) ||
 				(player.wet && player.accFlipper && (!player.mount.Active || !player.mount.Cart));
@@ -168,8 +168,8 @@ namespace ModLibsGeneral.Libraries.Players {
 			float wind = 0f;
 
 			if( player.windPushed && (!player.mount.Active || player.velocity.Y != 0f) ) {
-				wind = Math.Sign( Main.windSpeed ) * 0.07f;
-				if( Math.Abs( Main.windSpeed ) > 0.5f ) {
+				wind = Math.Sign( Main.windSpeedCurrent ) * 0.07f;
+				if( Math.Abs( Main.windSpeedCurrent ) > 0.5f ) {
 					wind *= 1.37f;
 				}
 				if( player.velocity.Y != 0f ) {

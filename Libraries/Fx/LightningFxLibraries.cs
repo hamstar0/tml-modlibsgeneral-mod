@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Libraries.TModLoader;
-
+using Terraria.GameContent;
 
 namespace ModLibsGeneral.Libraries.Fx {
 	/// <summary>
@@ -72,7 +72,7 @@ namespace ModLibsGeneral.Libraries.Fx {
 		////
 
 		private static void DrawLightningBeam( Vector2 screenStartPos, Vector2 screenEndPos, float scale, Color color ) {
-			Texture2D tex = Main.extraTexture[33];
+			Texture2D tex = TextureAssets.Extra[33].Value;
 
 			DelegateMethods.c_1 = color;
 			DelegateMethods.f_1 = 1f;

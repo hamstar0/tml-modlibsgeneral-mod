@@ -6,7 +6,7 @@ using ModLibsCore.Services.Timers;
 
 namespace ModLibsGeneral.Libraries.Audio {
 	/// @private
-	public partial class MusicLibraries : ILoadable {
+	public partial class MusicLibraries : ModSystem {
 		private float Scale = 1f;
 
 		private Func<bool> OnTickGet;
@@ -17,18 +17,20 @@ namespace ModLibsGeneral.Libraries.Audio {
 
 		internal MusicLibraries() {
 			this.OnTickGet = Timers.MainOnTickGet();
-			Main.OnTick += MusicLibraries._Update;
 		}
 
 		/// @private
-		void ILoadable.Load( Mod mod ) { }
+		public override void Load() {
+			Main.OnTickForInternalCodeOnly += MusicLibraries._Update;
+		}
 
 		/// @private
-		void ILoadable.Unload() {
+		public override void Unload() {
 			try {
-				Main.OnTick -= MusicLibraries._Update;
+				Main.OnTickForInternalCodeOnly -= MusicLibraries._Update;
 			} catch { }
 		}
+
 
 
 		////////////////
@@ -46,10 +48,10 @@ namespace ModLibsGeneral.Libraries.Audio {
 		internal void Update() {
 			if( this.Scale == 1f ) { return; }
 
-			Music music = Main.music[ Main.curMusic ];
 			float fade = Main.musicFade[ Main.curMusic ];
+			bool isPlaying = Main.audioSystem.IsTrackPlaying( Main.curMusic );
 
-			if( music != null && music.IsPlaying ) {
+			if( isPlaying ) {
 				if( fade > this.Scale ) {
 					Main.musicFade[ Main.curMusic ] = Math.Max( 0f, fade - 0.01f );
 				} else {

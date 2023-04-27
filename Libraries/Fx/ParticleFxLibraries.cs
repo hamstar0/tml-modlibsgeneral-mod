@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using ModLibsGeneral.Libraries.Dusts;
-
+using Terraria.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Fx {
 	/// <summary>
@@ -16,13 +16,13 @@ namespace ModLibsGeneral.Libraries.Fx {
 		/// <param name="quantity">Dust particles.</param>
 		/// <param name="sprayAmount">Outward spray velocity.</param>
 		/// <param name="scale"></param>
-		public static void MakeDustCloud( Vector2 position, int quantity, float sprayAmount=0.3f, float scale=1f ) {
+		public static void MakeDustCloud( IEntitySource source, Vector2 position, int quantity, float sprayAmount=0.3f, float scale=1f ) {
 			float offset = 10f * scale;
 			var pos = new Vector2( position.X - offset, position.Y - offset );
 
 			for( int i = 0; i < quantity; i++ ) {
 				int goreType = Main.rand.Next( 61, 64 );
-				int goreIdx = Gore.NewGore( pos, default(Vector2), goreType, scale );
+				int goreIdx = Gore.NewGore( source, pos, default, goreType, scale );
 				Gore gore = Main.gore[goreIdx];
 				
 				gore.velocity *= sprayAmount;

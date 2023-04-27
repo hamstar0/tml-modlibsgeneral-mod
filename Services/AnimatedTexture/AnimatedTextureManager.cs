@@ -23,7 +23,7 @@ namespace ModLibsGeneral.Services.AnimatedTexture {
 
 			if( !Main.dedServ ) {
 				this.OnTickGet = Timers.MainOnTickGet();
-				Main.OnTick += AnimatedTextureManager._Update;
+				Main.OnTickForInternalCodeOnly += AnimatedTextureManager._Update;
 			}
 		}
 
@@ -35,7 +35,7 @@ namespace ModLibsGeneral.Services.AnimatedTexture {
 					this.Animations.Clear();
 				} );
 				LoadHooks.AddModUnloadHook( () => {
-					Main.OnTick -= AnimatedTextureManager._Update;
+					Main.OnTickForInternalCodeOnly -= AnimatedTextureManager._Update;
 				} );
 			}
 		}

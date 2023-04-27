@@ -29,9 +29,9 @@ namespace ModLibsGeneral.Libraries.Collisions {
 		/// <param name="isSightClear"></param>
 		/// <returns></returns>
 		public static bool SimpleLineOfSight( Vector2 start, Vector2 end, IsSightClear isSightClear ) {
-			var trace = new Utils.PerLinePoint( delegate ( int tileX, int tileY ) {
+			Utils.TileActionAttempt trace = delegate ( int tileX, int tileY ) {
 				return !isSightClear( tileX, tileY );
-			} );
+			};
 			return Utils.PlotTileLine( start, end, 1, trace );
 		}
 

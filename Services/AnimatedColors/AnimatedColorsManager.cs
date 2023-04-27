@@ -46,7 +46,7 @@ namespace ModLibsGeneral.Services.AnimatedColor {
 
 			if( !Main.dedServ ) {
 				this.OnTickGet = Timers.MainOnTickGet();
-				Main.OnTick += AnimatedColorsManager._Update;
+				Main.OnTickForInternalCodeOnly += AnimatedColorsManager._Update;
 			}
 		}
 
@@ -59,7 +59,7 @@ namespace ModLibsGeneral.Services.AnimatedColor {
 		void ILoadable.Load( Mod mod ) {
 			if (!Main.dedServ) {
 				LoadHooks.AddModUnloadHook( () => {
-					Main.OnTick -= AnimatedColorsManager._Update;
+					Main.OnTickForInternalCodeOnly -= AnimatedColorsManager._Update;
 				} );
 			}
 		}

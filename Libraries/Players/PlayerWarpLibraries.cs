@@ -43,7 +43,7 @@ namespace ModLibsGeneral.Libraries.Players {
 			bool immune = player.immune;
 			int immuneTime = player.immuneTime;
 
-			player.Spawn();
+			player.Spawn(PlayerSpawnContext.RecallFromItem);
 			player.immune = immune;
 			player.immuneTime = immuneTime;
 		}
@@ -62,7 +62,7 @@ namespace ModLibsGeneral.Libraries.Players {
 			bool isImmune = player.immune;
 			int immuneTime = player.immuneTime;
 
-			player.Spawn();
+			player.Spawn(PlayerSpawnContext.RecallFromItem);
 			player.immune = isImmune;
 			player.immuneTime = immuneTime;
 

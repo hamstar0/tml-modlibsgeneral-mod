@@ -89,7 +89,7 @@ namespace ModLibsGeneral.Libraries.Draw {
 			Color color = new Color( (int)Main.mouseTextColor, (int)Main.mouseTextColor, (int)Main.mouseTextColor, 255 );
 
 			Utils.DrawBorderStringFourWay( sb, FontAssets.MouseText.Value, text, pos.X, pos.Y, color, Color.Black, default( Vector2 ), scale );
-			//ChatManager.DrawColorCodedStringWithShadow( sb, Main.fontMouseText, text, pos, Color.White, 0f, default( Vector2 ), new Vector2( scale, scale ) );
+			//ChatManager.DrawColorCodedStringWithShadow( sb, FontAssets.MouseText.Value, text, pos, Color.White, 0f, default( Vector2 ), new Vector2( scale, scale ) );
 		}
 	}
 }

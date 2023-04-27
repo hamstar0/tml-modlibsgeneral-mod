@@ -253,7 +253,7 @@ namespace ModLibsGeneral.Libraries.Tiles.Attributes {
 			default:
 				if( TileID.Sets.BasicChest[tileType] ) {
 					return 100;
-				} else if( TileLoader.IsDresser( tileType ) ) {
+				} else if( TileID.Sets.BasicDresser[ tileType ] ) {
 					return 102;
 				}
 				break;

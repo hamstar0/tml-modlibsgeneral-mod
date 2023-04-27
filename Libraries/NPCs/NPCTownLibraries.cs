@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.Debug;
-
+using Terraria.DataStructures;
 
 namespace ModLibsGeneral.Libraries.NPCs {
 	/// <summary>
@@ -19,8 +19,8 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		/// <param name="townNpcType"></param>
 		/// <param name="tileX"></param>
 		/// <param name="tileY"></param>
-		public static void Spawn( int townNpcType, int tileX, int tileY ) {
-			int npcWho = NPC.NewNPC( tileX * 16, tileY * 16, townNpcType, 1, 0f, 0f, 0f, 0f, 255 );
+		public static void Spawn( IEntitySource source, int townNpcType, int tileX, int tileY ) {
+			int npcWho = NPC.NewNPC( source, tileX * 16, tileY * 16, townNpcType, 1, 0f, 0f, 0f, 0f, 255 );
 			NPC npc = Main.npc[ npcWho ];
 
 			Main.townNPCCanSpawn[ townNpcType ] = false;
@@ -37,7 +37,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 			npc.netUpdate = true;
 
 			if( Main.netMode == NetmodeID.SinglePlayer ) {
-				Main.NewText( Language.GetTextValue( "Announcement.HasArrived", npc.FullName ), 50, 125, 255, false );
+				Main.NewText( Language.GetTextValue( "Announcement.HasArrived", npc.FullName ), new Color(50, 125, 255) );
 			} else if( Main.netMode == NetmodeID.Server ) {
 				var msg = NetworkText.FromKey( "Announcement.HasArrived", new object[] { npc.GetFullNetName() } );
 				ChatHelper.BroadcastChatMessage( msg, new Color( 50, 125, 255 ), -1 );
@@ -68,7 +68,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 				string msg = Main.npc[whoami].GivenName + " the " + Main.npc[whoami].TypeName + " " + Lang.misc[35];
 
 				if( Main.netMode == NetmodeID.SinglePlayer ) {
-					Main.NewText( msg, 50, 125, 255, false );
+					Main.NewText( msg, new Color(50, 125, 255) );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
 					//NetMessage.SendChatMessageFromClient( new ChatMessage( msg ) );
 				} else if( Main.netMode == NetmodeID.Server ) {

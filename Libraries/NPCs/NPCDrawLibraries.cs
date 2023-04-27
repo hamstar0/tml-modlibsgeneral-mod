@@ -38,7 +38,7 @@ namespace ModLibsGeneral.Libraries.NPCs {
 			Rectangle frameRect = new Rectangle( 0, frame * texHeight, tex.Width, texHeight );
 
 			float yOffset = 0.0f;
-			float heightOffset = Main.NPCAddHeight( npc.whoAmI );
+			float heightOffset = Main.NPCAddHeight( npc );
 			Vector2 origin = new Vector2( (float)( tex.Width / 2 ), (float)( ( tex.Height / frameCount ) / 2 ) );
 
 			if( npc.type == NPCID.Wizard || npc.type == NPCID.Mechanic ) {

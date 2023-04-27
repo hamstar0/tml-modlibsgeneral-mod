@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 using ReLogic.Graphics;
 using Terraria;
-
+using Terraria.GameContent;
 
 namespace ModLibsGeneral.Services.Messages.Player {
 	/// <summary>
@@ -79,9 +79,9 @@ namespace ModLibsGeneral.Services.Messages.Player {
 						color.B = (byte)( (float)color.B * scale );
 						color.A = (byte)( (float)color.A * scale );
 					}
-					pos.X -= ( Main.fontItemStack.MeasureString( txt.Text ).X * 1.5f ) / 2f;
+					pos.X -= ( FontAssets.ItemStack.Value.MeasureString( txt.Text ).X * 1.5f ) / 2f;
 
-					sb.DrawString( Main.fontItemStack, txt.Text, pos, color, 0f, default(Vector2), 1.5f, SpriteEffects.None, 1f );
+					sb.DrawString( FontAssets.ItemStack.Value, txt.Text, pos, color, 0f, default(Vector2), 1.5f, SpriteEffects.None, 1f );
 				}
 			}
 		}

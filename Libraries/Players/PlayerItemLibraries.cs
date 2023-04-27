@@ -101,7 +101,8 @@ namespace ModLibsGeneral.Libraries.Players {
 				return -1;
 			}
 
-			int itemIdx = Item.NewItem( (int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, -1, false, false );
+			var entitySource = player.GetSource_DropAsItem();
+			int itemIdx = Item.NewItem( entitySource, (int)player.position.X, (int)player.position.Y, player.width, player.height, item.type, item.stack, false, -1, false, false );
 			Item protoNewItem = Main.item[itemIdx];
 
 			item.position.X = protoNewItem.position.X;
@@ -157,7 +158,8 @@ namespace ModLibsGeneral.Libraries.Players {
 
 			player.armor[slot] = new Item();
 
-			int itemIdx = Item.NewItem( player.position, item.width, item.height, item.type, item.stack, false, item.prefix, false, false );
+			var source = player.GetSource_DropAsItem();
+			int itemIdx = Item.NewItem( source, player.position, item.width, item.height, item.type, item.stack, false, item.prefix, false, false );
 
 			item.position = Main.item[itemIdx].position;
 			item.noGrabDelay = noGrabDelay;
@@ -187,7 +189,8 @@ namespace ModLibsGeneral.Libraries.Players {
 
 			player.miscEquips[slot] = new Item();
 
-			int itemIdx = Item.NewItem( player.position, item.width, item.height, item.type, item.stack, false, item.prefix, false, false );
+			var source = player.GetSource_DropAsItem( nameof(DropEquippedMiscItem) );
+			int itemIdx = Item.NewItem( source, player.position, item.width, item.height, item.type, item.stack, false, item.prefix, false, false );
 
 			item.position = Main.item[ itemIdx ].position;
 			item.noGrabDelay = noGrabDelay;

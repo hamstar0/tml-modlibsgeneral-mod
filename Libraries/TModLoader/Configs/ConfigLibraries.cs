@@ -43,7 +43,7 @@ namespace ModLibsGeneral.Libraries.TModLoader.Configs {
 				requestChanges.Write( "ConfigLibraries.SyncConfig syncing..." );
 			}
 
-			requestChanges.Write( config.mod.Name );
+			requestChanges.Write( config.Mod.Name );
 			requestChanges.Write( config.Name );
 			requestChanges.Write( json );
 

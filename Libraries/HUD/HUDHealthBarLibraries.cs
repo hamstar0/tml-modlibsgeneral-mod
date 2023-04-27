@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using Terraria;
-
+using Terraria.GameContent;
 
 namespace ModLibsGeneral.Libraries.HUD {
 	/// <summary>
@@ -78,7 +78,7 @@ namespace ModLibsGeneral.Libraries.HUD {
 		/// <param name="text"></param>
 		/// <returns></returns>
 		public static Vector2 MeasureHealthText( string text ) {
-			return Main.fontItemStack.MeasureString( text ) * 0.75f;
+			return FontAssets.ItemStack.Value.MeasureString( text ) * 0.75f;
 		}
 
 
@@ -97,8 +97,8 @@ namespace ModLibsGeneral.Libraries.HUD {
 			Vector2 pos = new Vector2( x - offsetX, y - 4 );
 			//Color color = new Color( c, c, c, c );
 
-			sb.DrawString( Main.fontItemStack, hp.ToString(), pos, Color.Black, 0f, new Vector2( -1f, -1f ), 0.85f, SpriteEffects.None, 1f );
-			sb.DrawString( Main.fontItemStack, hp.ToString(), pos, color, 0f, new Vector2( 0f, 0f ), 0.82f, SpriteEffects.None, 1f );
+			sb.DrawString( FontAssets.ItemStack.Value, hp.ToString(), pos, Color.Black, 0f, new Vector2( -1f, -1f ), 0.85f, SpriteEffects.None, 1f );
+			sb.DrawString( FontAssets.ItemStack.Value, hp.ToString(), pos, color, 0f, new Vector2( 0f, 0f ), 0.82f, SpriteEffects.None, 1f );
 		}
 
 
@@ -132,35 +132,35 @@ namespace ModLibsGeneral.Libraries.HUD {
 			if( ratioLarge < 34 ) {
 				if( ratioLarge < 36 ) {
 					pos = new Vector2( offsetX + (float)ratioLarge * scale, offsetY );
-					rect = new Rectangle?( new Rectangle( 2, 0, 2, Main.hbTexture2.Height ) );
-					sb.Draw( Main.hbTexture2, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
+					rect = new Rectangle?( new Rectangle( 2, 0, 2, TextureAssets.Hb2.Value.Height ) );
+					sb.Draw( TextureAssets.Hb2.Value, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
 				}
 				if( ratioLarge < 34 ) {
 					pos = new Vector2( offsetX + (float)(ratioLarge + 2) * scale, offsetY );
-					rect = new Rectangle?( new Rectangle( ratioLarge + 2, 0, 36 - ratioLarge - 2, Main.hbTexture2.Height ) );
-					sb.Draw( Main.hbTexture2, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
+					rect = new Rectangle?( new Rectangle( ratioLarge + 2, 0, 36 - ratioLarge - 2, TextureAssets.Hb2.Value.Height ) );
+					sb.Draw( TextureAssets.Hb2.Value, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
 				}
 				if( ratioLarge > 2 ) {
 					pos = new Vector2( offsetX, offsetY );
-					rect = new Rectangle?( new Rectangle( 0, 0, ratioLarge - 2, Main.hbTexture1.Height ) );
-					sb.Draw( Main.hbTexture1, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
+					rect = new Rectangle?( new Rectangle( 0, 0, ratioLarge - 2, TextureAssets.Hb1.Value.Height ) );
+					sb.Draw( TextureAssets.Hb1.Value, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
 				}
 
 				pos = new Vector2( offsetX + (float)(ratioLarge - 2) * scale, offsetY );
-				rect = new Rectangle?( new Rectangle( 32, 0, 2, Main.hbTexture1.Height ) );
-				sb.Draw( Main.hbTexture1, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
+				rect = new Rectangle?( new Rectangle( 32, 0, 2, TextureAssets.Hb1.Value.Height ) );
+				sb.Draw( TextureAssets.Hb1.Value, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
 				return;
 			}
 
 			if( ratioLarge < 36 ) {
 				pos = new Vector2( offsetX + (float)ratioLarge * scale, offsetY );
-				rect = new Rectangle?( new Rectangle( ratioLarge, 0, 36 - ratioLarge, Main.hbTexture2.Height ) );
-				sb.Draw( Main.hbTexture2, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
+				rect = new Rectangle?( new Rectangle( ratioLarge, 0, 36 - ratioLarge, TextureAssets.Hb2.Value.Height ) );
+				sb.Draw( TextureAssets.Hb2.Value, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
 			}
 
 			pos = new Vector2( offsetX, offsetY );
-			rect = new Rectangle?( new Rectangle( 0, 0, ratioLarge, Main.hbTexture1.Height ) );
-			sb.Draw( Main.hbTexture1, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
+			rect = new Rectangle?( new Rectangle( 0, 0, ratioLarge, TextureAssets.Hb1.Value.Height ) );
+			sb.Draw( TextureAssets.Hb1.Value, pos, rect, color, 0f, new Vector2( 0f, 0f ), scale, SpriteEffects.None, depth );
 		}
 	}
 }

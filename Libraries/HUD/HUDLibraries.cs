@@ -10,6 +10,6 @@ namespace ModLibsGeneral.Libraries.HUD {
 		/// <summary>
 		/// Indicates if `Main.LocalPlayer.mouseInterface` was true at the end of the previous tick.
 		/// </summary>
-		public static bool IsMouseInterfacingWithUI => ModLibsGeneralMod.Instance.MouseInterface;
+		public static bool IsMouseInterfacingWithUI => ModLibsGeneralModSystem.MouseInterface;
 	}
 }

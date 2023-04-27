@@ -33,7 +33,7 @@ namespace ModLibsGeneral.Libraries.Players {
 			var weaponOutLiteMod = ModLoader.GetMod( "WeaponOutLite" );
 
 			if( wingSlotMod != null && !exemptMods.Contains("WingSlot") ) {
-				ModPlayer modplayer = player.GetModPlayer( wingSlotMod, "WingSlotPlayer" );
+				ModPlayer modplayer = player.GetModPlayer( ModContent.Find<ModPlayer>(wingSlotMod.Name, "WingSlotPlayer") );
 
 				PlayerModLibraries.RemoveWingSlotProperty( modplayer, "EquipSlot" );
 				PlayerModLibraries.RemoveWingSlotProperty( modplayer, "VanitySlot" );
@@ -41,21 +41,21 @@ namespace ModLibsGeneral.Libraries.Players {
 			}
 
 			if( thoriumMod != null && !exemptMods.Contains("ThoriumMod") ) {
-				ModPlayer modplayer = player.GetModPlayer( thoriumMod, "ThoriumPlayer" );
+				ModPlayer modplayer = player.GetModPlayer( ModContent.Find<ModPlayer>(thoriumMod.Name, "ThoriumPlayer") );
 
 				// "Inspiration" resets to the recommended default:
 				ReflectionLibraries.Set( modplayer, "bardResource", 8 );
 			}
 
 			if( weaponOutMod != null && !exemptMods.Contains("WeaponOut") ) {
-				ModPlayer modplayer = player.GetModPlayer( weaponOutMod, "PlayerFX" );
+				ModPlayer modplayer = player.GetModPlayer( ModContent.Find<ModPlayer>(weaponOutMod.Name, "PlayerFX") );
 
 				// "Frenzy Heart" resets:
 				ReflectionLibraries.Set( modplayer, "demonBlood", false );
 			}
 
 			if( weaponOutLiteMod != null && !exemptMods.Contains("WeaponOutLite") ) {
-				ModPlayer modplayer = player.GetModPlayer( weaponOutLiteMod, "PlayerFX" );
+				ModPlayer modplayer = player.GetModPlayer( ModContent.Find<ModPlayer>(weaponOutLiteMod.Name, "PlayerFX") );
 
 				// "Frenzy Heart" resets:
 				ReflectionLibraries.Set( modplayer, "demonBlood", false );

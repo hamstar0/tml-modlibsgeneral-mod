@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using ModLibsCore.Libraries.Debug;
-
+using Terraria.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Tiles {
 	/// <summary>
@@ -42,7 +42,10 @@ namespace ModLibsGeneral.Libraries.Tiles {
 					number7: 0 );
 				int itemSpawn = Chest.chestItemSpawn[placeStyle];//b8 < 100 ?  : TileLoader.GetTile( tileType ).chestDrop;
 				if( itemSpawn > 0 ) {
-					Item.NewItem( tileX<<4, tileY<<4, 32, 32, itemSpawn, 1, true, 0, false, false );
+					// Should this be EntitySource_TileBreak instead?
+					var itemSource = new EntitySource_TileUpdate( tileX, tileY );
+
+					Item.NewItem( itemSource, tileX<<4, tileY<<4, 32, 32, itemSpawn, 1, true, 0, false, false );
 				}
 			} else if( !WorldGen.PlaceTile( tileX, tileY, tileType, muted, forced, plrWho, placeStyle ) ) {
 				return false;
@@ -264,13 +267,9 @@ namespace ModLibsGeneral.Libraries.Tiles {
 				fromTile.LiquidAmount = fromTileCopy.LiquidAmount;
 				toTile.LiquidAmount = oldToLiquid;
 
-				bool oldToHoney = (fromTile.LiquidType == LiquidID.Honey);
-				fromTile.honey/* tModPorter Suggestion: LiquidType = ... */( (fromTileCopy.LiquidType == LiquidID.Honey) );
-				toTile.honey/* tModPorter Suggestion: LiquidType = ... */( oldToHoney );
-
-				bool oldToLava = (fromTile.LiquidType == LiquidID.Lava);
-				fromTile.lava/* tModPorter Suggestion: LiquidType = ... */( (fromTileCopy.LiquidType == LiquidID.Lava) );
-				toTile.lava/* tModPorter Suggestion: LiquidType = ... */( oldToLava );
+				int oldToLiquidType = fromTile.LiquidType;
+				fromTile.LiquidType = fromTileCopy.LiquidType;
+				toTile.LiquidType = oldToLiquidType;
 			}
 
 			if( sync ) {

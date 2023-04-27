@@ -1,4 +1,10 @@
-﻿using System.IO;
+﻿// Mirsario:
+// Removed due to being a horrible idea.
+// Instead, use Main.tile.GetData<T> to get a reference to the array containing all tile data,
+// then cast that to a byte* pointer and write it to streams using non-interleaved chunked copy/write operations, whenever possible.
+
+/*
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -173,3 +179,4 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		}
 	}
 }
+*/

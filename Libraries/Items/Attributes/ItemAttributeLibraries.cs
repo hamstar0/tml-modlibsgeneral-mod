@@ -156,7 +156,7 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 		public static string GetVanillaContainerContext( Item item ) {
 			if( ( item.type >= ItemID.KingSlimeBossBag && item.type <= ItemID.MoonLordBossBag )
 					|| item.type == ItemID.BossBagBetsy || item.type == ItemID.BossBagDarkMage || item.type == ItemID.BossBagOgre
-					|| ItemLoader.IsModBossBag( item ) ) {
+					|| ItemID.Sets.BossBag[item.type] ) {
 				return "bossBag";
 			}
 			if( ( item.type >= ItemID.WoodenCrate && item.type <= ItemID.GoldenCrate )
@@ -194,7 +194,7 @@ namespace ModLibsGeneral.Libraries.Items.Attributes {
 				return new ReadOnlySet<int>( itemAttr.PurchasableItems[buyValue] );
 			}
 
-			for( int i = 0; i < TextureAssets.Item.Value.Length; i++ ) {
+			for( int i = 0; i < TextureAssets.Item.Length; i++ ) {
 				if( !includeCoins && i == 71 ) { i = 75; }
 
 				Item item = new Item();

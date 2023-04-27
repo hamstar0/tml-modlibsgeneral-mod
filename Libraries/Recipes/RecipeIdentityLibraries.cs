@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using ModLibsCore.Classes.Errors;
 using ModLibsCore.Libraries.Debug;
-
+using System.Linq;
 
 namespace ModLibsGeneral.Libraries.Recipes {
 	/// <summary>
@@ -17,17 +17,9 @@ namespace ModLibsGeneral.Libraries.Recipes {
 		/// <param name="recipe2"></param>
 		/// <returns></returns>
 		public static bool Equals( Recipe recipe1, Recipe recipe2 ) {
-			if( recipe1.needHoney != recipe2.needHoney ) { return false; }
-			if( recipe1.needLava != recipe2.needLava ) { return false; }
-			if( recipe1.needSnowBiome != recipe2.needSnowBiome ) { return false; }
-			if( recipe1.needWater != recipe2.needWater ) { return false; }
-
-			if( recipe1.alchemy != recipe2.alchemy ) { return false; }
-			if( recipe1.anyFragment != recipe2.anyFragment ) { return false; }
-			if( recipe1.anySand != recipe2.anySand ) { return false; }
-			if( recipe1.anyPressurePlate != recipe2.anyPressurePlate ) { return false; }
-			if( recipe1.anyIronBar != recipe2.anyIronBar ) { return false; }
-			if( recipe1.anyWood != recipe2.anyWood ) { return false; }
+			if( !recipe1.Conditions.SequenceEqual( recipe2.Conditions ) ) {
+				return false;
+			}
 
 			if( recipe1.createItem.IsNotSameTypePrefixAndStack( recipe2.createItem ) ) { return false; }
 

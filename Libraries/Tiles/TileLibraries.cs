@@ -1,4 +1,5 @@
-﻿using ModLibsCore.Libraries.Debug;
+﻿using System.Runtime.CompilerServices;
+using ModLibsCore.Libraries.Debug;
 using Terraria;
 
 
@@ -14,15 +15,15 @@ namespace ModLibsGeneral.Libraries.Tiles {
 		/// <param name="tile2"></param>
 		/// <returns></returns>
 		public static bool IsEqual( Tile tile1, Tile tile2 ) {
+			ref var stateData1 = ref tile1.Get<TileWallWireStateData>();
+			ref var stateData2 = ref tile2.Get<TileWallWireStateData>();
+
 			return tile1.TileType == tile2.TileType
 				&& tile1.WallType == tile2.WallType
-				&& tile1.TileFrameY == tile2.TileFrameY
-				&& tile1.TileFrameX == tile2.TileFrameX
-				&& tile1.bTileHeader == tile2.bTileHeader
-				&& tile1.bTileHeader3 == tile2.bTileHeader3
-				&& tile1.bTileHeader2 == tile2.bTileHeader2
-				&& tile1.sTileHeader == tile2.sTileHeader
-				&& tile1.LiquidAmount == tile2.LiquidAmount;
+				&& Unsafe.As<TileWallWireStateData, ulong>( ref stateData1 ) == Unsafe.As<TileWallWireStateData, ulong>( ref stateData2 )
+				&& tile1.LiquidType == tile2.LiquidType
+				&& tile1.LiquidAmount == tile2.LiquidAmount
+			;
 		}
 
 

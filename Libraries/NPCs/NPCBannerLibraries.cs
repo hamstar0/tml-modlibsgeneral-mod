@@ -19,12 +19,12 @@ namespace ModLibsGeneral.Libraries.NPCs {
 		public static IDictionary<int, int> GetNpcToBannerItemTypes() {
 			IDictionary<int, int> npcTypesToBannerItemTypes = new Dictionary<int, int>();
 
-			for( int npcType = 0; npcType < TextureAssets.Npc.Value.Length; npcType++ ) {
+			for( int npcType = 0; npcType < TextureAssets.Npc.Length; npcType++ ) {
 				int bannerType = Item.NPCtoBanner( npcType );
 				if( bannerType == 0 ) { continue; }
 
 				int bannerItemType = Item.BannerToItem( bannerType );
-				if( bannerItemType >= TextureAssets.Item.Value.Length || bannerItemType <= 0 ) { continue; }
+				if( bannerItemType >= TextureAssets.Item.Length || bannerItemType <= 0 ) { continue; }
 
 				try {
 					Item item = new Item();

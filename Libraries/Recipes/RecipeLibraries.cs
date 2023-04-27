@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -8,6 +9,7 @@ using ModLibsGeneral.Libraries.Players;
 
 
 namespace ModLibsGeneral.Libraries.Recipes {
+
 	/// <summary></summary>
 	[Flags]
 	public enum RecipeCraftFailReason {
@@ -76,7 +78,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			}
 
 			// Tiles
-			for( int i=0; i < recipe.requiredTile.Length; i++ ) {
+			for( int i=0; i < recipe.requiredTile.Count; i++ ) {
 				int reqTileType = recipe.requiredTile[i];
 				if( reqTileType == -1 ) { break; }
 
@@ -87,7 +89,7 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			}
 
 			// Items
-			for( int i = 0; i < recipe.requiredItem.Length; i++ ) {
+			for( int i = 0; i < recipe.requiredItem.Count; i++ ) {
 				Item reqItem = recipe.requiredItem[i];
 				if( reqItem == null || reqItem.type == ItemID.None ) { break; }
 
@@ -99,11 +101,11 @@ namespace ModLibsGeneral.Libraries.Recipes {
 					int itemStack = kv.Value;
 
 					if( recipe.useWood( itemType, reqItem.type )
-							|| recipe.useSand( itemType, reqItem.type )
-							|| recipe.useIronBar( itemType, reqItem.type )
-							|| recipe.useFragment( itemType, reqItem.type )
-							|| recipe.usePressurePlate( itemType, reqItem.type )
-							|| recipe.AcceptedByItemGroups( itemType, reqItem.type ) ) {
+					|| recipe.useSand( itemType, reqItem.type )
+					|| recipe.useIronBar( itemType, reqItem.type )
+					|| recipe.useFragment( itemType, reqItem.type )
+					|| recipe.usePressurePlate( itemType, reqItem.type )
+					|| recipe.AcceptedByItemGroups( itemType, reqItem.type ) ) {
 						reqStack -= itemStack;
 						hasCheckedGroups = true;
 					}
@@ -136,4 +138,6 @@ namespace ModLibsGeneral.Libraries.Recipes {
 			return reason;
 		}
 	}
+
 }
+*/
