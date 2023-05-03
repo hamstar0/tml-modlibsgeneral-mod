@@ -7,15 +7,15 @@ using ModLibsCore.Classes.DataStructures;
 
 namespace ModLibsGeneral.Libraries.Buffs {
 	/// @private
-	public partial class BuffAttributesLibraries : ILoadable {
+	public partial class BuffAttributesLibraries : ModSystem {
 		private ReadOnlyDictionaryOfSets<string, int> _NamesToIds = null;
 
 
 		////////////////
 
-		void ILoadable.Load( Mod mod ) { }
-
-		void ILoadable.Unload() { }
+		public override void PostSetupContent() {
+			this.PopulateNames();
+		}
 
 
 		////////////////
@@ -23,7 +23,7 @@ namespace ModLibsGeneral.Libraries.Buffs {
 		internal void PopulateNames() {
 			var dict = new Dictionary<string, ISet<int>>();
 
-			for( int i = 1; i < TextureAssets.Buff.Length; i++ ) {
+			for( int i = 1; i < BuffLoader.BuffCount; i++ ) {
 				string name = BuffAttributesLibraries.GetBuffDisplayName( i );
 
 				if( dict.ContainsKey( name ) ) {
