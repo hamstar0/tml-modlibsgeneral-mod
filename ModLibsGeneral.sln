@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModLibsGeneral", "ModLibsGeneral\ModLibsGeneral.csproj", "{BF3874F0-B772-4740-B7FD-842A3E2B70D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModLibsGeneral", "ModLibsGeneral.csproj", "{BF3874F0-B772-4740-B7FD-842A3E2B70D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
